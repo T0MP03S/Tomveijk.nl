@@ -1,0 +1,44 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: SITE_NAME
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/prod.db
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=https://DOMAIN.COM
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-info@tomveijk.nl}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    volumes:
+      - sqlite-data:/app/data
+      - uploads-data:/app/data/uploads
+    networks:
+      - traefik-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.SITE_NAME.rule=Host(`DOMAIN.COM`)"
+      - "traefik.http.routers.SITE_NAME.entrypoints=websecure"
+      - "traefik.http.routers.SITE_NAME.tls.certresolver=letsencrypt"
+      - "traefik.http.services.SITE_NAME.loadbalancer.server.port=3000"
+      # Redirect HTTP to HTTPS
+      - "traefik.http.routers.SITE_NAME-http.rule=Host(`DOMAIN.COM`)"
+      - "traefik.http.routers.SITE_NAME-http.entrypoints=web"
+      - "traefik.http.routers.SITE_NAME-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  traefik-network:
+    external: true
+
+volumes:
+  sqlite-data:
+  uploads-data:

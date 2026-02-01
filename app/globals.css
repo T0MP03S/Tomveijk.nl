@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 63% 2%;
+    --foreground: 0 0% 100%;
+    --card: 240 47% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 47% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 146 100% 42%;
+    --primary-foreground: 240 63% 2%;
+    --secondary: 263 100% 63%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 33% 12%;
+    --muted-foreground: 240 20% 65%;
+    --accent: 146 100% 42%;
+    --accent-foreground: 240 63% 2%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 33% 12%;
+    --input: 240 33% 12%;
+    --ring: 146 100% 42%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .gradient-bg {
+    background: linear-gradient(180deg, #00005B 0%, #001E36 35%, #030310 60%, #00D752 100%);
+  }
+  
+  .gradient-bg-hero {
+    background: linear-gradient(180deg, #00005B 0%, #001E36 50%, #030310 100%);
+  }
+  
+  .gradient-bg-skills {
+    background: linear-gradient(180deg, #030310 0%, #001E36 50%, #00005B 100%);
+  }
+  
+  .gradient-bg-portfolio {
+    background: linear-gradient(180deg, #00005B 0%, #001E36 40%, #00D752 100%);
+  }
+}

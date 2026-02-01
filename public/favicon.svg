@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1087)"><rect width="1000" height="1000" fill="#000000"></rect><g transform="matrix(1.00999899000101,0,0,1.00999899000101,200,313.05928694071304)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="594.06" height="370.18"><svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 594.06 370.18">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="12.32" y1="-53.94" x2="582.68" y2="370.12" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00e93c"></stop>
+      <stop offset=".5" stop-color="#0252f4"></stop>
+      <stop offset="1" stop-color="#b54aff"></stop>
+    </linearGradient>
+  <clipPath id="SvgjsClipPath1087"><rect width="1000" height="1000" x="0" y="0" rx="350" ry="350"></rect></clipPath></defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <path class="cls-1" d="M562.99.13c-.7-.04-1.41-.06-2.12-.07-1.62-.04-3.24-.06-4.88-.06s-3.22.02-4.82.06c-11.19.3-22.13,1.57-32.75,3.75-33.39,6.89-63.47,22.76-87.6,45.02-12.43,11.47-31.49,11.68-43.94.22C354.6,19.32,311.79.93,264.97.06v-.06H32.25C14.44,0,0,14.44,0,32.25v11.13c0,17.81,14.44,32.25,32.25,32.25h9.12c17.81,0,32.25,14.44,32.25,32.25v230.05c0,17.81,14.44,32.25,32.25,32.25h155.58c1.18,0,2.34-.01,3.51-.04,58.41-1.09,110.55-29.44,143.84-72.92,23.82-31.05,37.99-69.81,37.99-111.88,0-16.09,3.61-31.49,10.06-45.4,14.56-31.4,61.56-21.13,61.56,13.48v184.49c0,17.81,14.44,32.25,32.25,32.25h11.13c17.81,0,32.25-14.44,32.25-32.25V32.36c0-17.23-13.54-31.56-30.75-32.22-.11,0-.21,0-.32-.01ZM261.46,294.54c-59.6,0-109.19-49.58-109.19-109.19s49.59-109.7,109.19-109.7,108.2,50.1,108.2,109.7-48.57,109.19-108.2,109.19Z"></path>
+    <path d="M297.03,327.53v.03h-2.97c1,0,1.98-.01,2.97-.03Z"></path>
+  </g>
+</svg></svg></g></g></svg>

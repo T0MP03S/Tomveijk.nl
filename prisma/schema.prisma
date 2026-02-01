@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Skill {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  color       String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([order])
+}
+
+model PortfolioItem {
+  id          String              @id @default(cuid())
+  title       String
+  description String
+  thumbnail   String
+  type        String              @default("PROJECT")
+  embedUrl    String?
+  slug        String              @unique
+  published   Boolean             @default(false)
+  order       Int                 @default(0)
+  projectDate DateTime?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  media       PortfolioMedia[]
+  blocks      ContentBlock[]
+  
+  @@index([published, order])
+  @@index([slug])
+}
+
+model PortfolioMedia {
+  id              String        @id @default(cuid())
+  portfolioItemId String
+  portfolioItem   PortfolioItem @relation(fields: [portfolioItemId], references: [id], onDelete: Cascade)
+  type            String
+  url             String
+  caption         String?
+  order           Int           @default(0)
+  createdAt       DateTime      @default(now())
+
+  @@index([portfolioItemId, order])
+}
+
+model ContentBlock {
+  id              String        @id @default(cuid())
+  portfolioItemId String
+  portfolioItem   PortfolioItem @relation(fields: [portfolioItemId], references: [id], onDelete: Cascade)
+  type            String
+  order           Int           @default(0)
+  content         String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([portfolioItemId, order])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([read, createdAt])
+}
