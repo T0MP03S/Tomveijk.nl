@@ -19,8 +19,11 @@ export function PersonJsonLd() {
       'Adobe InDesign'
     ],
     sameAs: [
-      'https://www.linkedin.com/in/tomvaneijk',
-      'https://www.instagram.com/tomveijk'
+      'https://www.linkedin.com/in/tomveijknl/',
+      'https://www.instagram.com/tompoeso',
+      'https://www.tiktok.com/@tompoeso',
+      'https://www.twitch.tv/t0mp03s',
+      'https://www.youtube.com/@Tompoeso'
     ],
     worksFor: {
       '@type': 'Organization',
