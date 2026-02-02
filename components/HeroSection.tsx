@@ -95,7 +95,7 @@ export default function HeroSection() {
               >
                 <img
                   src="/logo-animation.gif"
-                  alt="Tom Veijk Logo"
+                  alt="tomveijk Logo"
                   className="w-full max-w-2xl h-auto"
                 />
               </motion.div>

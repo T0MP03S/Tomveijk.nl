@@ -57,10 +57,10 @@ export default async function PortfolioDetailPage({ params }: { params: { slug: 
                     <Tag className="w-3.5 h-3.5 inline mr-1.5" />
                     {typeLabels[item.type] || item.type}
                   </span>
-                  {(item.projectDate || item.createdAt) && (
+                  {item.createdAt && (
                     <span className="text-white/40 text-sm flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
-                      {new Date(item.projectDate || item.createdAt).toLocaleDateString('nl-NL', { 
+                      {new Date((item as any).projectDate || item.createdAt).toLocaleDateString('nl-NL', { 
                         year: 'numeric', 
                         month: 'long' 
                       })}
@@ -135,7 +135,7 @@ export default async function PortfolioDetailPage({ params }: { params: { slug: 
 
           {/* Footer */}
           <footer className="py-12 text-center text-white/40 text-sm border-t border-white/5">
-            <p>&copy; 2025 Tom Veijk. Alle rechten voorbehouden.</p>
+            <p>&copy; {new Date().getFullYear()} Tom van Eijk. Alle rechten voorbehouden.</p>
           </footer>
         </main>
       </div>

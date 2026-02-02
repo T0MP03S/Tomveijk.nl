@@ -28,7 +28,7 @@ export default function AboutSection() {
             <div className="relative aspect-square rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-transparent">
               <Image
                 src="/images/tom-profile.jpg"
-                alt="Tom Veijk"
+                alt="Tom van Eijk"
                 fill
                 className="object-cover"
                 onError={(e) => {
