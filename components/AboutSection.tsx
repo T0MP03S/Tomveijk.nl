@@ -53,11 +53,11 @@ export default function AboutSection() {
           >
             <div className="relative p-8 rounded-3xl border border-white/5 backdrop-blur-sm bg-gradient-to-br from-white/5 to-transparent">
               <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-[#A34BFF] to-[#30A8FF] bg-clip-text text-transparent">
-                Hallo, ik ben Tom.
+                Hallo, ik ben Tom van Eijk
               </h3>
               <div className="space-y-4 text-white/70 leading-relaxed">
                 <p>
-                  Als Grafisch Vormgever met veel ervaring en een passie voor innovatie, heb ik mijn diploma behaald aan het GLU. Mijn ontwerpen kenmerken zich door eenvoud en effectiviteit.
+                  Als <strong className="text-white">Grafisch Vormgever</strong> met veel ervaring en een passie voor innovatie, heb ik mijn diploma behaald aan het GLU. Mijn ontwerpen kenmerken zich door eenvoud en effectiviteit.
                 </p>
                 <p>
                   In mijn portfolio vind je een breed scala aan werk, van logo's tot complete huisstijlen. Heb je vragen of wil je samenwerken? Neem gerust contact met me op.

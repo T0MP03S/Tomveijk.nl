@@ -45,11 +45,14 @@ export default function HeroSection() {
             className="space-y-8"
           >
             <div>
+              <p className="text-sm md:text-base text-[#A34BFF] font-medium uppercase tracking-widest mb-4">
+                Tom van Eijk • Creative Designer
+              </p>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                 Jouw merk, mijn creativiteit!
               </h1>
               <p className="text-base md:text-lg text-white/60 max-w-lg leading-relaxed">
-                Laat mij jouw ideeën tot leven brengen met creatieve designs en websites die écht opvallen. Samen maken we iets bijzonders!
+                Ik ben <strong className="text-white">Tom van Eijk</strong>, grafisch vormgever met passie voor innovatie. Laat mij jouw ideeën tot leven brengen met creatieve designs die écht opvallen.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
