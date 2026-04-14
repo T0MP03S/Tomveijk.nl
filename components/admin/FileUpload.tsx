@@ -1,27 +1,39 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { Upload, X, Image as ImageIcon } from 'lucide-react'
+import { Upload, X, Image as ImageIcon, FileDown } from 'lucide-react'
+import { useToast } from '@/components/ui/toast-notification'
 
-interface FileUploadProps {
+export interface FileUploadProps {
   onUpload: (url: string) => void
   currentImage?: string
   label?: string
+  accept?: string
 }
 
-export default function FileUpload({ onUpload, currentImage, label = 'Upload afbeelding' }: FileUploadProps) {
+export default function FileUpload({ onUpload, currentImage, label = 'Upload afbeelding', accept }: FileUploadProps) {
   const [uploading, setUploading] = useState(false)
   const [preview, setPreview] = useState<string | null>(currentImage || null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const { showToast } = useToast()
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    if (!file.type.startsWith('image/')) {
-      alert('Alleen afbeeldingen zijn toegestaan')
+    const allowedTypes = accept
+      ? accept.split(',').map(t => t.trim())
+      : ['image/*']
+    const isAllowed = allowedTypes.some(t => {
+      if (t.endsWith('/*')) return file.type.startsWith(t.replace('/*', '/'))
+      if (t.startsWith('.')) return file.name.toLowerCase().endsWith(t)
+      return file.type === t
+    })
+    if (!isAllowed) {
+      showToast('Dit bestandstype is niet toegestaan', 'warning')
       return
     }
+    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')
 
     setUploading(true)
 
@@ -39,11 +51,12 @@ export default function FileUpload({ onUpload, currentImage, label = 'Upload afb
       }
 
       const data = await response.json()
-      setPreview(data.medium)
-      onUpload(data.medium)
+      const url = isPdf ? data.original : data.medium
+      setPreview(url)
+      onUpload(url)
     } catch (error) {
       console.error('Upload error:', error)
-      alert('Upload mislukt. Probeer het opnieuw.')
+      showToast('Upload mislukt. Probeer het opnieuw.', 'error')
     } finally {
       setUploading(false)
     }
@@ -63,11 +76,18 @@ export default function FileUpload({ onUpload, currentImage, label = 'Upload afb
       
       {preview ? (
         <div className="relative group">
-          <img
-            src={preview}
-            alt="Preview"
-            className="w-full h-64 object-cover rounded-xl border border-white/10"
-          />
+          {preview.toLowerCase().endsWith('.pdf') ? (
+            <div className="w-full h-32 flex flex-col items-center justify-center rounded-xl border border-white/10 bg-white/5">
+              <FileDown className="w-10 h-10 text-[#30A8FF] mb-2" />
+              <p className="text-white/60 text-sm truncate max-w-[200px]">{preview.split('/').pop()}</p>
+            </div>
+          ) : (
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-full h-48 object-contain rounded-xl border border-white/10 bg-white/5 p-2"
+            />
+          )}
           <button
             type="button"
             onClick={handleRemove}
@@ -99,7 +119,7 @@ export default function FileUpload({ onUpload, currentImage, label = 'Upload afb
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/*"
+        accept={accept || 'image/*'}
         onChange={handleFileSelect}
         className="hidden"
       />

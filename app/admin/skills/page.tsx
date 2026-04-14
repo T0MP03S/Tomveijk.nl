@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Plus, Edit, Trash2, GripVertical } from 'lucide-react'
+import { useToast } from '@/components/ui/toast-notification'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -37,6 +38,7 @@ export default function SkillsPage() {
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [editingSkill, setEditingSkill] = useState<Skill | null>(null)
+  const { showToast } = useToast()
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -85,7 +87,7 @@ export default function SkillsPage() {
       resetForm()
     } catch (error) {
       console.error('Error saving skill:', error)
-      alert('Opslaan mislukt')
+      showToast('Opslaan mislukt', 'error')
     } finally {
       setLoading(false)
     }
@@ -104,7 +106,7 @@ export default function SkillsPage() {
       await fetchSkills()
     } catch (error) {
       console.error('Error deleting skill:', error)
-      alert('Verwijderen mislukt')
+      showToast('Verwijderen mislukt', 'error')
     }
   }
 

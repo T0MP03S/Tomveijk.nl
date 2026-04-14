@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import ContactModal from './ContactModal'
@@ -10,6 +12,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [contactOpen, setContactOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +34,10 @@ export default function Navigation() {
   }, [])
 
   const scrollToSection = (id: string) => {
+    if (pathname !== '/') {
+      window.location.href = `/#${id}`
+      return
+    }
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
@@ -54,10 +61,13 @@ export default function Navigation() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <img
+            <Image
               src="/logo.svg"
               alt="Tom van Eijk"
+              width={120}
+              height={40}
               className="h-10 w-auto transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(163,75,255,0.5)]"
+              priority
             />
           </motion.div>
         </Link>
@@ -71,16 +81,16 @@ export default function Navigation() {
             <span className="relative z-10">over mij</span>
             <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-[#A34BFF] to-[#30A8FF] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </button>
-          <button
-            onClick={() => scrollToSection('portfolio')}
+          <Link
+            href="/portfolio"
             className="relative text-white/70 hover:text-white transition-all duration-300 uppercase tracking-wider font-medium group"
           >
             <span className="relative z-10">portfolio</span>
             <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-[#30A8FF] to-[#00D752] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-          </button>
+          </Link>
           <button
             onClick={() => setContactOpen(true)}
-            className="relative px-6 py-2 rounded-full bg-gradient-to-r from-[#A34BFF] to-[#30A8FF] text-white font-medium uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-[#A34BFF]/50 hover:scale-105"
+            className="relative px-6 py-2 rounded-full bg-gradient-to-r from-[#00D752] via-[#30A8FF] to-[#A34BFF] text-white font-medium uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-[#00D752]/30 hover:scale-105"
           >
             contact
           </button>
@@ -116,21 +126,19 @@ export default function Navigation() {
               >
                 Over mij
               </button>
-              <button
-                onClick={() => {
-                  scrollToSection('portfolio')
-                  setMobileMenuOpen(false)
-                }}
+              <Link
+                href="/portfolio"
+                onClick={() => setMobileMenuOpen(false)}
                 className="text-left text-white/70 hover:text-white transition-colors uppercase tracking-wider font-medium py-2"
               >
                 Portfolio
-              </button>
+              </Link>
               <button
                 onClick={() => {
                   setContactOpen(true)
                   setMobileMenuOpen(false)
                 }}
-                className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[#A34BFF] to-[#30A8FF] text-white font-medium uppercase tracking-wider transition-all duration-300"
+                className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[#00D752] via-[#30A8FF] to-[#A34BFF] text-white font-medium uppercase tracking-wider transition-all duration-300"
               >
                 Contact
               </button>

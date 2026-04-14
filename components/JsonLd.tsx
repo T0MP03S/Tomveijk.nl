@@ -1,11 +1,13 @@
+const siteUrl = process.env.NEXTAUTH_URL || 'https://tomveijk.nl'
+
 export function PersonJsonLd() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Tom van Eijk',
     alternateName: 'tomveijk',
-    url: 'https://tomveijk.nl',
-    image: 'https://tomveijk.nl/images/tom-profile.jpg',
+    url: siteUrl,
+    image: `${siteUrl}/images/tom-profile.jpg`,
     jobTitle: 'Creative Designer',
     description: 'Grafisch vormgever met passie voor innovatie. Gespecialiseerd in logo design, huisstijlen en creatieve designs.',
     knowsAbout: [
@@ -28,7 +30,7 @@ export function PersonJsonLd() {
     worksFor: {
       '@type': 'Organization',
       name: 'tomveijk',
-      url: 'https://tomveijk.nl'
+      url: siteUrl
     }
   }
 
@@ -46,16 +48,11 @@ export function WebsiteJsonLd() {
     '@type': 'WebSite',
     name: 'tomveijk',
     alternateName: 'Tom van Eijk Portfolio',
-    url: 'https://tomveijk.nl',
+    url: siteUrl,
     description: 'Portfolio website van Tom van Eijk - Creative Designer',
     author: {
       '@type': 'Person',
       name: 'Tom van Eijk'
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://tomveijk.nl/?search={search_term_string}',
-      'query-input': 'required name=search_term_string'
     }
   }
 
@@ -73,8 +70,8 @@ export function LocalBusinessJsonLd() {
     '@type': 'ProfessionalService',
     name: 'tomveijk - Tom van Eijk',
     description: 'Grafisch ontwerp en creatieve diensten door Tom van Eijk',
-    url: 'https://tomveijk.nl',
-    image: 'https://tomveijk.nl/images/tom-profile.jpg',
+    url: siteUrl,
+    image: `${siteUrl}/images/tom-profile.jpg`,
     priceRange: '€€',
     address: {
       '@type': 'PostalAddress',

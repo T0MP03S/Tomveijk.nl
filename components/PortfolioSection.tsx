@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Smartphone, Palette } from 'lucide-react'
+import { Smartphone, Palette, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 interface PortfolioItem {
@@ -18,14 +19,20 @@ interface PortfolioItem {
 }
 
 export default function PortfolioSection() {
+  const router = useRouter()
   const [items, setItems] = useState<PortfolioItem[]>([])
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const [totalCount, setTotalCount] = useState(0)
+
   useEffect(() => {
-    fetch('/api/portfolio')
+    fetch('/api/portfolio?limit=6')
       .then(res => res.json())
-      .then(data => setItems(data))
+      .then(data => {
+        setItems(data.items || [])
+        setTotalCount(data.total || 0)
+      })
       .catch(err => console.error('Failed to load portfolio:', err))
   }, [])
 
@@ -34,7 +41,7 @@ export default function PortfolioSection() {
       setSelectedItem(item)
       setIsModalOpen(true)
     } else {
-      window.location.href = `/portfolio/${item.slug}`
+      router.push(`/portfolio/${item.slug}`)
     }
   }
 
@@ -89,6 +96,23 @@ export default function PortfolioSection() {
               <p className="text-xl mb-2">Portfolio items worden binnenkort toegevoegd</p>
               <p className="text-sm text-white/30">Check terug voor nieuwe projecten</p>
             </div>
+          )}
+
+          {totalCount > items.length && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mt-16"
+            >
+              <Link
+                href="/portfolio"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:border-[#A34BFF]/40 hover:bg-white/10 transition-all duration-300"
+              >
+                <span className="text-white font-medium">Bekijk alle projecten</span>
+                <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-[#A34BFF] group-hover:translate-x-1 transition-all duration-300" />
+              </Link>
+            </motion.div>
           )}
         </div>
       </section>

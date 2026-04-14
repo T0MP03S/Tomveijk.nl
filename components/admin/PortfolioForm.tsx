@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Plus, X } from 'lucide-react'
+import { Plus, X, Eye } from 'lucide-react'
+import { useToast } from '@/components/ui/toast-notification'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -29,6 +30,7 @@ interface PortfolioFormProps {
 
 export default function PortfolioForm({ initialData }: PortfolioFormProps) {
   const router = useRouter()
+  const { showToast } = useToast()
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     title: initialData?.title || '',
@@ -106,7 +108,7 @@ export default function PortfolioForm({ initialData }: PortfolioFormProps) {
       router.refresh()
     } catch (error) {
       console.error('Save error:', error)
-      alert('Opslaan mislukt. Probeer het opnieuw.')
+      showToast('Opslaan mislukt. Probeer het opnieuw.', 'error')
     } finally {
       setLoading(false)
     }
@@ -145,7 +147,8 @@ export default function PortfolioForm({ initialData }: PortfolioFormProps) {
               id="type"
               value={formData.type}
               onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value }))}
-              className="w-full px-4 py-2 bg-[#1E1E2E] border border-white/10 rounded-lg text-white"
+              className="w-full px-4 py-2.5 bg-[#0f0a1a] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#A34BFF]/50 focus:border-[#A34BFF]/50 transition-all appearance-none cursor-pointer"
+              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', paddingRight: '40px' }}
             >
               <option value="PROJECT">Project</option>
               <option value="WEBSITE">Website</option>
@@ -215,15 +218,35 @@ export default function PortfolioForm({ initialData }: PortfolioFormProps) {
             />
           </div>
 
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="published"
-              checked={formData.published}
-              onChange={(e) => setFormData(prev => ({ ...prev, published: e.target.checked }))}
-              className="w-4 h-4 rounded"
-            />
-            <Label htmlFor="published" className="cursor-pointer">Publiceren</Label>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              role="switch"
+              aria-checked={formData.published}
+              onClick={() => setFormData(prev => ({ ...prev, published: !prev.published }))}
+              className={`relative inline-flex h-7 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A34BFF]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f0a1a] ${
+                formData.published
+                  ? 'bg-gradient-to-r from-[#00D752] to-[#30A8FF]'
+                  : 'bg-white/10'
+              }`}
+            >
+              <span
+                className={`pointer-events-none inline-block h-6 w-6 transform rounded-full bg-white shadow-lg ring-0 transition-transform duration-200 ease-in-out ${
+                  formData.published ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              />
+            </button>
+            <Label
+              htmlFor="published"
+              className="cursor-pointer select-none"
+              onClick={() => setFormData(prev => ({ ...prev, published: !prev.published }))}
+            >
+              {formData.published ? (
+                <span className="text-green-400 font-medium">Gepubliceerd</span>
+              ) : (
+                <span className="text-white/50">Concept</span>
+              )}
+            </Label>
           </div>
         </div>
 
@@ -263,6 +286,17 @@ export default function PortfolioForm({ initialData }: PortfolioFormProps) {
         >
           {loading ? 'Opslaan...' : initialData?.id ? 'Bijwerken' : 'Aanmaken'}
         </Button>
+        {initialData?.slug && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => window.open(`/portfolio/${initialData.slug}?preview=true`, '_blank')}
+            className="gap-2"
+          >
+            <Eye className="w-4 h-4" />
+            Preview
+          </Button>
+        )}
         <Button
           type="button"
           variant="outline"

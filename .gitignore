@@ -42,6 +42,7 @@ prisma/migrations
 
 # uploads
 /public/uploads
+/data/uploads
 
 # input files
 /00 IN

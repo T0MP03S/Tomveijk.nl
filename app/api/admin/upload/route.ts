@@ -23,11 +23,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 })
     }
 
+    const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json({ error: 'Bestand is te groot. Maximum is 10MB.' }, { status: 400 })
+    }
+
     const fileType = (file as any).type || ''
     const fileName = (file as any).name || 'upload.jpg'
 
-    if (!fileType.startsWith('image/')) {
-      return NextResponse.json({ error: 'Only images are supported' }, { status: 400 })
+    if (!fileType.startsWith('image/') && fileType !== 'application/pdf') {
+      return NextResponse.json({ error: 'Only images and PDFs are supported' }, { status: 400 })
     }
 
     await ensureUploadDir()

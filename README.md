@@ -1,17 +1,34 @@
-# Tom Veijk Portfolio Website
+# Tom van Eijk Portfolio Website
 
 Een moderne, responsive portfolio website gebouwd met Next.js, TypeScript, TailwindCSS en Framer Motion.
 
 ## Features
 
-- Modern design met gradient achtergronden en animaties
+- Modern design met dynamische gradient achtergrond (schaalbaar met paginalengte)
 - Volledig responsive voor alle schermformaten
 - Snelle performance met Next.js 14
 - Smooth animaties met Framer Motion
 - Admin panel met authenticatie voor content management
 - SQLite database voor portfolio items en skills
-- Ondersteuning voor afbeeldingen, video's en website embeds
-- Contact formulier
+- Flexibele content blokken: Foto, Video (YouTube/Vimeo/Shorts), Tekst, Titel, Link, Website embed, Gallerij, Slider, PDF, Visitekaartje (3D)
+- Drag-and-drop volgorde van portfolio items in het admin panel
+- Dedicated /portfolio pagina met alle projecten, homepage toont eerste 6 + "Bekijk alles" knop
+- 3D interactief visitekaartje blok (mouse-tracking, klik om te draaien)
+- Mooie toggle switch voor publiceren in plaats van standaard checkbox
+- YouTube Shorts ondersteuning met verticale aspect ratio (9:16)
+- 1-kolom en 2-kolom layout keuze per content blok
+- Dynamische achtergrond bollen die variëren per pagina (grootte, helderheid, positie)
+- SEO per portfolio pagina (Open Graph, Twitter Cards, auto YouTube thumbnails)
+- Draft preview voor ongepubliceerde items (alleen voor admins)
+- "Meer bekijken?" gerelateerde projecten sectie
+- CTA sectie ("Heb je een project in gedachten?")
+- Uitgebreide footer met socials, navigatie en branding
+- Contact formulier met honeypot spam-bescherming
+- In-site toast notificaties (geen browser popups)
+- Security headers (X-Frame-Options, HSTS, CSP, etc.)
+- Upload bestandsgrootte limiet (max 10MB)
+- Geoptimaliseerde afbeeldingen met Next.js Image component
+- WordPress migratie + import script (19 portfolio projecten: 12 uit WordPress + 7 nieuwe projecten)
 
 ## Tech Stack
 
@@ -166,31 +183,17 @@ docker-compose down -v
 
 ## Deployment op VPS
 
+De aanbevolen manier om te deployen is via **Docker** (zie hierboven). Voor een handmatige installatie:
+
 ### 1. Installeer vereisten op VPS
 
 ```bash
-# Update systeem
 sudo apt update && sudo apt upgrade -y
-
-# Installeer Node.js
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt install -y nodejs
-
-# Installeer PostgreSQL
-sudo apt install postgresql postgresql-contrib
 ```
 
-### 2. Setup PostgreSQL
-
-```bash
-sudo -u postgres psql
-CREATE DATABASE tomveijk_portfolio;
-CREATE USER tomveijk WITH PASSWORD 'jouw-wachtwoord';
-GRANT ALL PRIVILEGES ON DATABASE tomveijk_portfolio TO tomveijk;
-\q
-```
-
-### 3. Clone en configureer project
+### 2. Clone en configureer project
 
 ```bash
 cd /var/www
@@ -199,17 +202,17 @@ cd tomveijk-portfolio
 npm install
 ```
 
-### 4. Configureer productie .env
+### 3. Configureer productie .env
 
 ```env
-DATABASE_URL="postgresql://tomveijk:jouw-wachtwoord@localhost:5432/tomveijk_portfolio?schema=public"
+DATABASE_URL="file:./data/prod.db"
 NEXTAUTH_SECRET="productie-secret-key"
 NEXTAUTH_URL="https://tomveijk.nl"
 ADMIN_EMAIL="info@tomveijk.nl"
 ADMIN_PASSWORD="veilig-productie-wachtwoord"
 ```
 
-### 5. Build en start
+### 4. Build en start
 
 ```bash
 npx prisma migrate deploy
@@ -218,7 +221,7 @@ npm run build
 npm start
 ```
 
-### 6. Setup PM2 (optioneel maar aanbevolen)
+### 5. Setup PM2 (optioneel maar aanbevolen)
 
 ```bash
 sudo npm install -g pm2
@@ -227,7 +230,7 @@ pm2 startup
 pm2 save
 ```
 
-### 7. Setup Nginx reverse proxy
+### 6. Setup Nginx reverse proxy
 
 ```nginx
 server {
@@ -245,7 +248,7 @@ server {
 }
 ```
 
-### 8. SSL met Let's Encrypt
+### 7. SSL met Let's Encrypt
 
 ```bash
 sudo apt install certbot python3-certbot-nginx
@@ -258,9 +261,14 @@ Ga naar `/admin/login` om in te loggen met je admin credentials.
 
 Vanuit het admin panel kun je:
 - Portfolio items toevoegen/bewerken/verwijderen
+- Drag-and-drop herordenen van portfolio items
+- Content blokken beheren (drag & drop volgorde, 1/2-kolom layout toggle)
+- Video embeds toevoegen (YouTube, Vimeo, directe URL)
 - Skills beheren
-- Media uploaden (afbeeldingen, video's)
-- Website embeds toevoegen
+- Media uploaden (afbeeldingen, video's, PDFs)
+- Toggle switch voor publiceren/concept status
+- Draft preview bekijken voordat je publiceert
+- Contact berichten lezen
 
 ## Project Structuur
 
@@ -268,7 +276,7 @@ Vanuit het admin panel kun je:
 ├── app/
 │   ├── api/              # API routes
 │   ├── admin/            # Admin panel
-│   ├── portfolio/        # Portfolio detail pagina's
+│   ├── portfolio/        # Portfolio overzicht + detail pagina's
 │   ├── globals.css       # Global styles
 │   ├── layout.tsx        # Root layout
 │   └── page.tsx          # Homepage
@@ -317,4 +325,4 @@ Voor vragen of problemen, neem contact op via info@tomveijk.nl
 
 ## Licentie
 
-Copyright 2025 - Tom's Webontwikkeling
+Copyright 2026 - Tom van Eijk

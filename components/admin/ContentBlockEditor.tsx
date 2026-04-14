@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus, GripVertical, Trash2, Image, Video, Link as LinkIcon, Type, FileText, Globe, Grid, Layers } from 'lucide-react'
+import { Plus, GripVertical, Trash2, Image, Video, Link as LinkIcon, Type, FileText, Globe, Grid, Layers, Columns, Square, FileDown, CreditCard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -18,12 +18,16 @@ export type BlockType =
   | 'WEBSITE' 
   | 'GALLERY' 
   | 'SLIDER'
+  | 'PDF'
+  | 'BUSINESSCARD'
 
 export interface ContentBlock {
   id?: string
+  uid?: string
   type: BlockType
   order: number
   content: any
+  layout?: 'full' | 'half'
 }
 
 interface ContentBlockEditorProps {
@@ -42,17 +46,33 @@ const blockTypes = [
   { type: 'WEBSITE' as BlockType, icon: Globe, label: 'Website' },
   { type: 'GALLERY' as BlockType, icon: Grid, label: 'Gallerij' },
   { type: 'SLIDER' as BlockType, icon: Layers, label: 'Slider' },
+  { type: 'PDF' as BlockType, icon: FileDown, label: 'PDF' },
+  { type: 'BUSINESSCARD' as BlockType, icon: CreditCard, label: 'Visitekaartje' },
 ]
 
+let uidCounter = 0
+function generateUid() {
+  return `block-${Date.now()}-${uidCounter++}`
+}
+
+function ensureUids(blocks: ContentBlock[]): ContentBlock[] {
+  return blocks.map(b => b.uid ? b : { ...b, uid: generateUid() })
+}
+
 export default function ContentBlockEditor({ portfolioItemId, initialBlocks = [], onChange }: ContentBlockEditorProps) {
-  const [blocks, setBlocks] = useState<ContentBlock[]>(initialBlocks)
+  const [blocks, setBlocks] = useState<ContentBlock[]>(() => ensureUids(initialBlocks))
   const [showAddMenu, setShowAddMenu] = useState(false)
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null)
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
 
   const updateBlocks = (newBlocks: ContentBlock[]) => {
-    setBlocks(newBlocks)
-    onChange?.(newBlocks)
+    // Embed layout into content so it persists in the DB content JSON
+    const withLayout = newBlocks.map(b => ({
+      ...b,
+      content: { ...b.content, layout: b.layout || 'full' },
+    }))
+    setBlocks(withLayout)
+    onChange?.(withLayout)
   }
 
   const handleDragStart = (e: React.DragEvent, index: number) => {
@@ -83,12 +103,20 @@ export default function ContentBlockEditor({ portfolioItemId, initialBlocks = []
 
   const addBlock = (type: BlockType) => {
     const newBlock: ContentBlock = {
+      uid: generateUid(),
       type,
       order: blocks.length,
-      content: getDefaultContent(type)
+      content: getDefaultContent(type),
+      layout: 'full',
     }
     updateBlocks([...blocks, newBlock])
     setShowAddMenu(false)
+  }
+
+  const toggleLayout = (index: number) => {
+    const updated = [...blocks]
+    updated[index].layout = updated[index].layout === 'half' ? 'full' : 'half'
+    updateBlocks(updated)
   }
 
   const updateBlock = (index: number, content: any) => {
@@ -133,6 +161,10 @@ export default function ContentBlockEditor({ portfolioItemId, initialBlocks = []
         return { text: '' }
       case 'WEBSITE':
         return { url: '', type: 'embed' }
+      case 'PDF':
+        return { url: '', title: '' }
+      case 'BUSINESSCARD':
+        return { frontImage: '', backImage: '' }
       case 'GALLERY':
       case 'SLIDER':
         return { images: [] }
@@ -185,7 +217,7 @@ export default function ContentBlockEditor({ portfolioItemId, initialBlocks = []
         <div className="space-y-4">
           {blocks.map((block, index) => (
             <div
-              key={index}
+              key={block.uid || `fallback-${index}`}
               draggable
               onDragStart={(e) => handleDragStart(e, index)}
               onDragOver={(e) => handleDragOver(e, index)}
@@ -212,13 +244,27 @@ export default function ContentBlockEditor({ portfolioItemId, initialBlocks = []
                   />
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => removeBlock(index)}
-                  className="p-2 hover:bg-red-500/10 rounded-lg transition-colors"
-                >
-                  <Trash2 className="w-4 h-4 text-red-400" />
-                </button>
+                <div className="flex flex-col gap-1">
+                  <button
+                    type="button"
+                    onClick={() => toggleLayout(index)}
+                    className={`p-2 rounded-lg transition-colors ${
+                      block.layout === 'half' 
+                        ? 'bg-[#A34BFF]/20 text-[#A34BFF]' 
+                        : 'hover:bg-white/5 text-white/40'
+                    }`}
+                    title={block.layout === 'half' ? 'Halve breedte (2 kolommen)' : 'Volle breedte (1 kolom)'}
+                  >
+                    {block.layout === 'half' ? <Columns className="w-4 h-4" /> : <Square className="w-4 h-4" />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => removeBlock(index)}
+                    className="p-2 hover:bg-red-500/10 rounded-lg transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4 text-red-400" />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -366,11 +412,74 @@ function BlockEditor({ block, onChange }: { block: ContentBlock; onChange: (cont
           <select
             value={content.type || 'embed'}
             onChange={(e) => onChange({ ...content, type: e.target.value })}
-            className="w-full px-4 py-2 bg-[#0f0a1a]/60 border border-white/10 rounded-lg text-white"
+            className="w-full px-4 py-2.5 bg-[#0f0a1a] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#A34BFF]/50 focus:border-[#A34BFF]/50 transition-all appearance-none cursor-pointer"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', paddingRight: '40px' }}
           >
             <option value="embed">Embed</option>
             <option value="popup">Popup</option>
           </select>
+        </div>
+      )
+
+    case 'PDF':
+      return (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-white/60 text-sm">
+            <Icon className="w-4 h-4" />
+            <span>PDF</span>
+          </div>
+          <Input
+            placeholder="PDF titel (optioneel)"
+            value={content.title || ''}
+            onChange={(e) => onChange({ ...content, title: e.target.value })}
+          />
+          <Input
+            placeholder="PDF URL (of upload hieronder)"
+            value={content.url || ''}
+            onChange={(e) => onChange({ ...content, url: e.target.value })}
+          />
+          <FileUpload
+            label="PDF uploaden"
+            currentImage={content.url}
+            onUpload={(url) => onChange({ ...content, url })}
+            accept=".pdf,application/pdf"
+          />
+          {content.url && (
+            <a
+              href={content.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-[#30A8FF] hover:underline"
+            >
+              <FileDown className="w-4 h-4" />
+              Preview PDF
+            </a>
+          )}
+        </div>
+      )
+
+    case 'BUSINESSCARD':
+      return (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-white/60 text-sm">
+            <Icon className="w-4 h-4" />
+            <span>Visitekaartje (3D)</span>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <FileUpload
+              label="Voorkant"
+              currentImage={content.frontImage}
+              onUpload={(url) => onChange({ ...content, frontImage: url })}
+            />
+            <FileUpload
+              label="Achterkant"
+              currentImage={content.backImage}
+              onUpload={(url) => onChange({ ...content, backImage: url })}
+            />
+          </div>
+          <p className="text-xs text-white/40">
+            Bezoekers kunnen de kaart 3D draaien met hun muis en klikken om de achterkant te zien
+          </p>
         </div>
       )
 

@@ -13,3 +13,6 @@ README.md
 .env.development
 prisma/dev.db
 prisma/dev.db-journal
+data/
+*.db
+*.db-journal

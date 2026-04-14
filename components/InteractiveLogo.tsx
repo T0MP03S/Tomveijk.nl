@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 declare global {
   interface Window {
@@ -165,10 +166,13 @@ export default function InteractiveLogo() {
   if (loadError) {
     return (
       <div className="w-full flex items-center justify-center">
-        <img 
+        <Image 
           src="/logo-animation.gif"
           alt="Logo"
+          width={672}
+          height={672}
           className="w-full max-w-2xl h-auto"
+          unoptimized
         />
       </div>
     )
@@ -182,10 +186,13 @@ export default function InteractiveLogo() {
         style={{ minHeight: '400px' }}
       >
         {!isLoaded && (
-          <img 
+          <Image 
             src="/logo-animation.gif"
             alt="Logo"
+            width={672}
+            height={672}
             className="w-full max-w-2xl h-auto"
+            unoptimized
           />
         )}
       </div>

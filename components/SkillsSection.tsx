@@ -132,40 +132,33 @@ export default function SkillsSection() {
           className="mt-32"
         >
           <div className="text-center mb-12">
-            <p className="text-white/40 text-sm uppercase tracking-widest">Samenwerkingen</p>
+            <h3 className="text-2xl md:text-3xl font-bold mb-3">Samenwerkingen</h3>
+            <p className="text-white/40 text-sm uppercase tracking-widest">Merken waar ik mee heb gewerkt</p>
           </div>
-          <div className="relative p-10 rounded-3xl border border-white/5 backdrop-blur-sm overflow-hidden bg-gradient-to-br from-white/5 to-transparent max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-              <div className="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
-                <img 
-                  src="/logos/idtv.svg" 
-                  alt="IDTV" 
-                  className="max-h-16 w-auto object-contain"
-                />
-              </div>
-              <div className="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
-                <img 
-                  src="/logos/defensie.svg" 
-                  alt="Ministerie van Defensie" 
-                  className="max-h-16 w-auto object-contain"
-                />
-              </div>
-              <div className="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
-                <img 
-                  src="/logos/nos.svg" 
-                  alt="NOS" 
-                  className="max-h-9 w-auto object-contain"
-                  style={{ maxHeight: '2.25rem' }}
-                />
-              </div>
-              <div className="flex items-center justify-center h-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
-                <img 
-                  src="/logos/talpa.svg" 
-                  alt="Talpa Network" 
-                  className="max-h-16 w-auto object-contain"
-                />
-              </div>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+            {[
+              { src: '/logos/idtv.svg', alt: 'IDTV' },
+              { src: '/logos/defensie.svg', alt: 'Ministerie van Defensie' },
+              { src: '/logos/nos.svg', alt: 'NOS' },
+              { src: '/logos/talpa.svg', alt: 'Talpa Network' },
+            ].map((logo, i) => (
+              <motion.div
+                key={logo.alt}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group"
+              >
+                <div className="flex items-center justify-center h-28 rounded-2xl border border-white/5 bg-white/[0.03] hover:bg-white/[0.07] hover:border-white/10 transition-all duration-500">
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="max-h-12 w-auto object-contain opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>
