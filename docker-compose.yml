@@ -3,31 +3,48 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=file:/app/data/prod.db
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-your-secret-change-this-in-production}
-      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
+      - 'DATABASE_URL=file:/app/data/prod.db'
+      - 'NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-your-secret-change-this-in-production}'
+      - 'NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}'
       - ADMIN_EMAIL=info@tomveijk.nl
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=${SMTP_PORT:-587}
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASS=${SMTP_PASS}
-      - CONTACT_EMAIL=${CONTACT_EMAIL:-info@tomveijk.nl}
+      - 'ADMIN_PASSWORD=${ADMIN_PASSWORD}'
+      - 'SMTP_HOST=${SMTP_HOST}'
+      - 'SMTP_PORT=${SMTP_PORT:-587}'
+      - 'SMTP_USER=${SMTP_USER}'
+      - 'SMTP_PASS=${SMTP_PASS}'
+      - 'CONTACT_EMAIL=${CONTACT_EMAIL:-info@tomveijk.nl}'
     volumes:
-      - sqlite-data:/app/data
-      - uploads-data:/app/data/uploads
+      - 'sqlite-data:/app/data'
+      - 'uploads-data:/app/data/uploads'
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+      test:
+        - CMD
+        - wget
+        - '--quiet'
+        - '--tries=1'
+        - '--spider'
+        - 'http://localhost:3000'
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
-
+    labels:
+      - coolify.managed=true
+      - coolify.applicationId=2
+      - coolify.type=application
+      - traefik.enable=true
+      - traefik.http.routers.tomveijk.rule=Host(`dev.tomveijk.nl`)
+      - traefik.http.routers.tomveijk.entrypoints=http,https
+      - traefik.http.services.tomveijk.loadbalancer.server.port=3000
+      - traefik.http.routers.tomveijk.tls.certresolver=letsencrypt
+    networks:
+      - coolify
 volumes:
-  sqlite-data:
-  uploads-data:
+  sqlite-data: null
+  uploads-data: null
+networks:
+  coolify:
+    external: true
