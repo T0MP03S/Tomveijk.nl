@@ -36,7 +36,7 @@ services:
       - coolify.applicationId=2
       - coolify.type=application
       - traefik.enable=true
-      - traefik.http.routers.tomveijk.rule=Host(`dev.tomveijk.nl`)
+      - traefik.http.routers.tomveijk.rule=Host(`tomveijk.nl`) || Host(`www.tomveijk.nl`)
       - traefik.http.routers.tomveijk.entrypoints=http,https
       - traefik.http.services.tomveijk.loadbalancer.server.port=3000
       - traefik.http.routers.tomveijk.tls.certresolver=letsencrypt
