@@ -10,7 +10,7 @@ export default async function PortfolioListPage() {
     orderBy: { order: 'asc' },
     include: {
       _count: {
-        select: { media: true }
+        select: { blocks: true }
       }
     }
   })

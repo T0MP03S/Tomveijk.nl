@@ -13,7 +13,7 @@ interface PortfolioItem {
   type: string
   published: boolean
   order: number
-  _count: { media: number }
+  _count: { blocks: number }
 }
 
 interface PortfolioListProps {
@@ -136,7 +136,7 @@ export default function PortfolioList({ initialItems }: PortfolioListProps) {
                   {item.type}
                 </span>
               </td>
-              <td className="p-4 text-white/60">{item._count.media} files</td>
+              <td className="p-4 text-white/60">{item._count.blocks} files</td>
               <td className="p-4">
                 {item.published ? (
                   <span className="flex items-center gap-2 text-green-400">

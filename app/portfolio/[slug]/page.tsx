@@ -197,6 +197,8 @@ export default async function PortfolioDetailPage({
                             alt={media.caption || item.title}
                             fill
                             className="object-cover"
+                            loading="lazy"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1200px"
                           />
                         </div>
                       )}

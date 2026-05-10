@@ -46,3 +46,11 @@ prisma/migrations
 
 # input files
 /00 IN
+
+# database exports (never commit data dumps)
+*.csv
+*.sql
+!prisma/**/*.sql
+
+# one-off migration scripts
+scripts/import-csv-data.js

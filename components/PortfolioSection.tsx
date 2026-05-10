@@ -79,6 +79,8 @@ export default function PortfolioSection() {
                       alt={item.title}
                       fill
                       className="object-cover rounded-3xl"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#2A2A3E] to-[#1A1A2E] rounded-3xl">
