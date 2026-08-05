@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, FolderOpen, Award, Settings, LogOut, Mail } from 'lucide-react'
+import { LayoutDashboard, FolderOpen, Award, Settings, LogOut, Mail, Rocket } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 
 export default function Sidebar() {
@@ -10,6 +10,7 @@ export default function Sidebar() {
 
   const navItems = [
     { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
+    { href: '/admin/demos', icon: Rocket, label: "Demo's" },
     { href: '/admin/portfolio', icon: FolderOpen, label: 'Portfolio' },
     { href: '/admin/skills', icon: Award, label: 'Skills' },
     { href: '/admin/messages', icon: Mail, label: 'Berichten' },

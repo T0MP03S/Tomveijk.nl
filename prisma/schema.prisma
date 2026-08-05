@@ -30,21 +30,21 @@ model Skill {
 }
 
 model PortfolioItem {
-  id          String              @id @default(cuid())
+  id          String           @id @default(cuid())
   title       String
   description String
   thumbnail   String
-  type        String              @default("PROJECT")
+  type        String           @default("PROJECT")
   embedUrl    String?
-  slug        String              @unique
-  published   Boolean             @default(false)
-  order       Int                 @default(0)
+  slug        String           @unique
+  published   Boolean          @default(false)
+  order       Int              @default(0)
   projectDate DateTime?
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   media       PortfolioMedia[]
   blocks      ContentBlock[]
-  
+
   @@index([published, order])
   @@index([slug])
 }
@@ -84,4 +84,64 @@ model ContactMessage {
   createdAt DateTime @default(now())
 
   @@index([read, createdAt])
+}
+
+/// Een bedrijf dat je benadert. Bevat zowel de inhoud van de demopagina als je
+/// verkoopadministratie, omdat er per bedrijf altijd precies één demo is.
+model Prospect {
+  id   String @id @default(cuid())
+  /// Wordt de URL: /demo/<slug>
+  slug String @unique
+
+  // --- Bedrijfsgegevens ---
+  bedrijf     String
+  branche     String
+  plaats      String
+  regio       String
+  huidigeSite String?
+
+  // --- Contactpersoon ---
+  contact  String?
+  email    String?
+  telefoon String?
+
+  // --- Verkoopadministratie ---
+  /// NIEUW | DEMO_KLAAR | GEMAILD | BEKEKEN | GEREAGEERD | GESPREK | KLANT | AFGEWEZEN
+  status       String    @default("NIEUW")
+  /// BASIS | COMPLEET | MAATWERK
+  pakket       String?
+  bedrag       Int?
+  perMaand     Int?
+  gemaildOp    DateTime?
+  opgevolgdOp  DateTime?
+  gereageerdOp DateTime?
+  notitie      String?
+
+  // --- De demopagina ---
+  gepubliceerd Boolean @default(false)
+  /// JSON met alle teksten, kleuren en afbeeldingen van de demo.
+  /// Bewust JSON en geen losse kolommen: de inhoud is diep genest
+  /// (diensten, projecten, reviews) en verschilt per branche.
+  inhoud       String?
+
+  weergaves DemoWeergave[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, updatedAt])
+}
+
+/// Elke keer dat iemand een demopagina opent. Wie zijn demo bekijkt en niet
+/// reageert, is degene die je moet bellen — dat is de hoogste conversie die er is.
+model DemoWeergave {
+  id         String   @id @default(cuid())
+  prospectId String
+  prospect   Prospect @relation(fields: [prospectId], references: [id], onDelete: Cascade)
+  bekekenOp  DateTime @default(now())
+  ip         String?
+  browser    String?
+  verwijzer  String?
+
+  @@index([prospectId, bekekenOp])
 }
