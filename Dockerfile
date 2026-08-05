@@ -56,7 +56,13 @@ COPY --from=builder /app/scripts ./scripts
 # Ensure dependencies for seed script and runtime exist
 COPY --from=deps /app/node_modules/bcryptjs ./node_modules/bcryptjs
 COPY --from=deps /app/node_modules/@prisma/client ./node_modules/@prisma/client
+# Sharp verzorgt de beeldoptimalisatie van next/image.
+# Let op: sinds sharp 0.33 zitten de native binaries NIET meer in
+# node_modules/sharp maar in aparte @img/*-pakketten. Kopieer je alleen de map
+# hieronder, dan krijg je een JS-wrapper zonder motor: sharp laadt niet en Next
+# stuurt stilzwijgend het onbewerkte origineel door. Beide regels zijn nodig.
 COPY --from=builder /app/node_modules/sharp ./node_modules/sharp
+COPY --from=builder /app/node_modules/@img ./node_modules/@img
 
 # Nodemailer for email sending
 COPY --from=deps /app/node_modules/nodemailer ./node_modules/nodemailer

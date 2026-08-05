@@ -2,6 +2,19 @@
 const nextConfig = {
   output: 'standalone',
   images: {
+    // Moderne formaten eerst; de browser krijgt via content-negotiation wat hij aankan.
+    // AVIF is ~40% kleiner dan WebP, WebP ~30% kleiner dan JPEG.
+    formats: ['image/avif', 'image/webp'],
+
+    // Zonder deze regel zet Next `max-age=60` op geoptimaliseerde afbeeldingen.
+    // Elke bezoeker haalde daardoor na een minuut alles opnieuw op, en Cloudflare
+    // cachete het evenmin. De URL bevat al breedte en kwaliteit, dus lang cachen
+    // is veilig: verandert het bronbestand, dan verandert de URL mee.
+    minimumCacheTTL: 31536000, // 1 jaar
+
+    // LET OP: '**' betekent dat je server afbeeldingen van élk https-domein
+    // verkleint. Daarmee kan een willekeurige buitenstaander jouw VPS gebruiken
+    // als gratis image-resizer. Zet hier de domeinen neer die je echt nodig hebt.
     remotePatterns: [
       {
         protocol: 'https',
