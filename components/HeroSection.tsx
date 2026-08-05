@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
+import HeroGlas from './HeroGlas'
 import MorphingButton from './MorphingButton'
 import ContactModal from './ContactModal'
 
@@ -96,13 +97,7 @@ export default function HeroSection() {
                   transformStyle: 'preserve-3d',
                 }}
               >
-                {/* Rustig kleurveld in de merkkleuren. Geen 3D-object: op een
-                    egale donkere achtergrond valt er voor glas niets te breken,
-                    waardoor het als hard plastic oogt in plaats van als glas. */}
-                <div
-                  className="hero-object-terugval w-full max-w-xl aspect-square"
-                  aria-hidden="true"
-                />
+                <HeroGlas className="w-full max-w-xl aspect-square" />
               </motion.div>
             </motion.div>
           </motion.div>
