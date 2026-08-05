@@ -38,6 +38,35 @@
 }
 
 @layer utilities {
+  /* Vult de plek van het 3D-object terwijl three.js laadt, en dient als
+     terugval wanneer WebGL niet beschikbaar is. Puur CSS, kost dus niets. */
+  .hero-object-terugval {
+    background:
+      radial-gradient(circle at 32% 30%, rgb(0 233 60 / 0.30), transparent 58%),
+      radial-gradient(circle at 68% 42%, rgb(2 82 244 / 0.34), transparent 60%),
+      radial-gradient(circle at 50% 72%, rgb(181 74 255 / 0.28), transparent 62%);
+    filter: blur(46px);
+    animation: hero-object-adem 9s ease-in-out infinite;
+  }
+
+  @keyframes hero-object-adem {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.85;
+    }
+    50% {
+      transform: scale(1.07);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-object-terugval {
+      animation: none;
+    }
+  }
+
   .gradient-bg {
     background: linear-gradient(180deg, #00005B 0%, #001E36 35%, #030310 60%, #00D752 100%);
   }

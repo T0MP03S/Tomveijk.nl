@@ -2,9 +2,19 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { LogoAnimation } from './LogoAnimation'
+import dynamic from 'next/dynamic'
 import MorphingButton from './MorphingButton'
 import ContactModal from './ContactModal'
+
+// Three.js weegt zo'n 200 KB. Buiten de server-render houden en pas laden
+// zodra de pagina staat, zodat de tekst en knoppen er meteen zijn. Tot die tijd
+// vult de terugval-gloed de plek, zodat de hero niet zichtbaar verspringt.
+const HeroObject = dynamic(() => import('./HeroObject'), {
+  ssr: false,
+  loading: () => (
+    <div className="hero-object-terugval w-full max-w-2xl aspect-square" aria-hidden="true" />
+  ),
+})
 
 export default function HeroSection() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -97,7 +107,7 @@ export default function HeroSection() {
                   transformStyle: 'preserve-3d',
                 }}
               >
-                <LogoAnimation className="w-full max-w-2xl h-auto" priority />
+                <HeroObject className="w-full max-w-2xl aspect-square" />
               </motion.div>
             </motion.div>
           </motion.div>
