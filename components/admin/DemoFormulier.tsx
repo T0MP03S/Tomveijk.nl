@@ -90,8 +90,10 @@ export default function DemoFormulier({
     telefoon: prospect?.telefoon ?? '',
     status: prospect?.status ?? 'NIEUW',
     pakket: prospect?.pakket ?? '',
-    bedrag: prospect?.bedrag ?? 750,
-    perMaand: prospect?.perMaand ?? 20,
+    // Leeg bij een nieuw prospect: er is nog niets afgesproken, dus een
+    // ingevuld bedrag zou een deal suggereren die niet bestaat.
+    bedrag: prospect?.bedrag ?? '',
+    perMaand: prospect?.perMaand ?? '',
     gemaildOp: prospect?.gemaildOp ? String(prospect.gemaildOp).slice(0, 10) : '',
     opgevolgdOp: prospect?.opgevolgdOp ? String(prospect.opgevolgdOp).slice(0, 10) : '',
     gereageerdOp: prospect?.gereageerdOp ? String(prospect.gereageerdOp).slice(0, 10) : '',
@@ -276,6 +278,20 @@ export default function DemoFormulier({
         </div>
       </Kaart>
 
+      {/*
+        Administratie en verkoopbalk verschijnen pas bij het bewerken. Bij het
+        aanmaken van een prospect is er nog geen gesprek, geen pakket en geen
+        bedrag — die velden dan al tonen vraagt om informatie die niet bestaat.
+      */}
+      {!bewerken && (
+        <p className="px-1 text-sm text-white/40">
+          Status, pakket, bedragen en notities vul je later in, zodra er iets te
+          noteren valt. Dit prospect start op <span className="text-white/70">nieuw</span>.
+        </p>
+      )}
+
+      {bewerken && (
+        <>
       {/* ---------------- Administratie ---------------- */}
       <Kaart titel="Administratie" uitleg="Waar staat het gesprek, en wat heb je afgesproken?">
         <div className="grid gap-4 sm:grid-cols-3">
@@ -406,6 +422,8 @@ export default function DemoFormulier({
           </Veld>
         </div>
       </Kaart>
+        </>
+      )}
 
       {/* ---------------- Opslaan ---------------- */}
       <div className="fixed inset-x-0 bottom-0 border-t border-white/10 bg-[#05050f]/95 backdrop-blur lg:left-64">
