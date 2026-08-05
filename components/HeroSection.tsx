@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import { LogoAnimation } from './LogoAnimation'
 import MorphingButton from './MorphingButton'
 import ContactModal from './ContactModal'
 
@@ -97,15 +97,7 @@ export default function HeroSection() {
                   transformStyle: 'preserve-3d',
                 }}
               >
-                <Image
-                  src="/logo-animation.gif"
-                  alt="tomveijk Logo"
-                  width={672}
-                  height={672}
-                  className="w-full max-w-2xl h-auto"
-                  unoptimized
-                  priority
-                />
+                <LogoAnimation className="w-full max-w-2xl h-auto" priority />
               </motion.div>
             </motion.div>
           </motion.div>
