@@ -36,106 +36,14 @@ export const skillSchema = z.object({
   order: z.number().int().min(0).default(0),
 })
 
+
 /* -------------------------------------------------------------------------
    Demopagina's voor prospects
+
+   De pagina zelf staat als los bestand in demos/<slug>.html — elke demo is een
+   eigen ontwerp, geen ingevuld sjabloon. Hier valideren we alleen het prospect:
+   bedrijfsgegevens, verkoopadministratie en de instellingen van de verkoopbalk.
    ------------------------------------------------------------------------- */
-
-/** Kleuren en typografie, overgenomen van de site van de prospect. */
-const demoThemaSchema = z.object({
-  primair: z.string().regex(/^#[0-9A-F]{6}$/i, 'Gebruik een hexkleur, bijvoorbeeld #3f6b4a'),
-  accent: z.string().regex(/^#[0-9A-F]{6}$/i, 'Gebruik een hexkleur'),
-  donker: z.string().regex(/^#[0-9A-F]{6}$/i, 'Gebruik een hexkleur').default('#111827'),
-  zacht: z.string().regex(/^#[0-9A-F]{6}$/i, 'Gebruik een hexkleur').default('#f6f7f5'),
-  koppen: z.enum(['sans', 'serif']).default('sans'),
-})
-
-/**
- * De volledige inhoud van een demopagina. Wordt als JSON in Prospect.inhoud
- * bewaard: de structuur is diep genest en verschilt per branche, dus losse
- * kolommen zouden hier vijf extra tabellen opleveren zonder dat je er iets
- * mee opzoekt.
- */
-export const demoInhoudSchema = z.object({
-  thema: demoThemaSchema,
-  logo: z.string().optional(),
-
-  hero: z.object({
-    kop: z.string().min(1, 'Kop is verplicht'),
-    tekst: z.string().min(1, 'Tekst is verplicht'),
-    afbeelding: z.string().min(1, 'Een achtergrondfoto is verplicht'),
-    primaireKnop: z.string().default('Vraag een offerte aan'),
-  }),
-
-  usps: z
-    .array(z.object({ titel: z.string(), tekst: z.string() }))
-    .max(3)
-    .default([]),
-
-  diensten: z.object({
-    kop: z.string().default('Wat wij doen'),
-    intro: z.string().optional(),
-    items: z
-      .array(
-        z.object({
-          titel: z.string(),
-          tekst: z.string(),
-          afbeelding: z.string().optional(),
-        }),
-      )
-      .default([]),
-  }),
-
-  projecten: z
-    .object({
-      kop: z.string().default('Ons werk'),
-      intro: z.string().optional(),
-      items: z.array(z.object({ titel: z.string(), afbeelding: z.string() })).default([]),
-    })
-    .optional(),
-
-  over: z
-    .object({
-      kop: z.string().default('Over ons'),
-      tekst: z.array(z.string()).default([]),
-      afbeelding: z.string().optional(),
-    })
-    .optional(),
-
-  reviews: z
-    .array(
-      z.object({
-        naam: z.string(),
-        plaats: z.string().optional(),
-        tekst: z.string(),
-        sterren: z.number().int().min(1).max(5).default(5),
-      }),
-    )
-    .default([]),
-
-  openingstijden: z.array(z.object({ dag: z.string(), tijd: z.string() })).default([]),
-
-  adres: z
-    .object({ straat: z.string(), postcode: z.string(), plaats: z.string() })
-    .optional(),
-  kvk: z.string().optional(),
-
-  contact: z
-    .object({ kop: z.string().default('Neem contact op'), tekst: z.string().optional() })
-    .default({}),
-
-  /** De verkoopbalk onderaan. Zet `actief` uit zodra iemand klant wordt. */
-  pitch: z
-    .object({
-      actief: z.boolean().default(true),
-      prijs: z.number().int().default(750),
-      perMaand: z.number().int().default(20),
-      jouwEmail: z.string().email().default('info@tomveijk.nl'),
-      jouwTelefoon: z.string().default(''),
-    })
-    .default({}),
-})
-
-export type DemoInhoud = z.infer<typeof demoInhoudSchema>
 
 export const PROSPECT_STATUSSEN = [
   'NIEUW',
@@ -148,7 +56,6 @@ export const PROSPECT_STATUSSEN = [
   'AFGEWEZEN',
 ] as const
 
-/** Het prospect zelf: bedrijfsgegevens plus je verkoopadministratie. */
 export const prospectSchema = z.object({
   slug: z
     .string()
@@ -174,5 +81,7 @@ export const prospectSchema = z.object({
   notitie: z.string().optional().or(z.literal('')),
 
   gepubliceerd: z.boolean().default(false),
-  inhoud: demoInhoudSchema.optional().nullable(),
+  pitchActief: z.boolean().default(true),
+  pitchPrijs: z.number().int().nonnegative().default(750),
+  pitchPerMaand: z.number().int().nonnegative().default(20),
 })

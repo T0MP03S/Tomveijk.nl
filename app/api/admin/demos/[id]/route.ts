@@ -73,7 +73,9 @@ export async function PATCH(request: Request, { params }: { params: { id: string
         gereageerdOp: datum(data.gereageerdOp),
         notitie: leegIsNull(data.notitie),
         gepubliceerd: data.gepubliceerd,
-        inhoud: data.inhoud ? JSON.stringify(data.inhoud) : null,
+        pitchActief: data.pitchActief,
+        pitchPrijs: data.pitchPrijs,
+        pitchPerMaand: data.pitchPerMaand,
       },
     })
 

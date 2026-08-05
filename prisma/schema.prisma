@@ -86,8 +86,13 @@ model ContactMessage {
   @@index([read, createdAt])
 }
 
-/// Een bedrijf dat je benadert. Bevat zowel de inhoud van de demopagina als je
-/// verkoopadministratie, omdat er per bedrijf altijd precies één demo is.
+/// Een bedrijf dat je benadert: bedrijfsgegevens plus verkoopadministratie.
+///
+/// De demopagina zelf staat NIET hier, maar als los bestand in demos/<slug>.html.
+/// Elke demo is een eigen ontwerp en geen ingevuld sjabloon — twintig identieke
+/// pagina's in dezelfde regio verraden meteen dat het massawerk is, en dan
+/// verwacht de klant ook een sjabloonsite voor zijn geld. Als bestand in git
+/// kan een demo bovendien nooit kwijtraken en is elke versie terug te halen.
 model Prospect {
   id   String @id @default(cuid())
   /// Wordt de URL: /demo/<slug>
@@ -118,11 +123,13 @@ model Prospect {
   notitie      String?
 
   // --- De demopagina ---
+  /// Staat de link aan? De pagina zelf komt uit demos/<slug>.html.
   gepubliceerd Boolean @default(false)
-  /// JSON met alle teksten, kleuren en afbeeldingen van de demo.
-  /// Bewust JSON en geen losse kolommen: de inhoud is diep genest
-  /// (diensten, projecten, reviews) en verschilt per branche.
-  inhoud       String?
+
+  // --- De verkoopbalk onderaan de demo ---
+  pitchActief   Boolean @default(true)
+  pitchPrijs    Int     @default(750)
+  pitchPerMaand Int     @default(20)
 
   weergaves DemoWeergave[]
 

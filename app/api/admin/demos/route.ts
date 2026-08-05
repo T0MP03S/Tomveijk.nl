@@ -72,7 +72,9 @@ export async function POST(request: Request) {
         gereageerdOp: datum(data.gereageerdOp),
         notitie: leegIsNull(data.notitie),
         gepubliceerd: data.gepubliceerd,
-        inhoud: data.inhoud ? JSON.stringify(data.inhoud) : null,
+        pitchActief: data.pitchActief,
+        pitchPrijs: data.pitchPrijs,
+        pitchPerMaand: data.pitchPerMaand,
       },
     })
 

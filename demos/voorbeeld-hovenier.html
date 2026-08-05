@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoveniersbedrijf De Vries — hovenier in Baarn</title>
+<meta name="description" content="Tuinontwerp, aanleg en onderhoud in Baarn, Soest en Amersfoort. Al 25 jaar, met een vaste prijs vooraf en één aanspreekpunt.">
+
+<style>
+  :root{
+    --groen:#1f4029;
+    --groen-diep:#152b1c;
+    --groen-licht:#4a7c4f;
+    --zand:#f4f1e8;
+    --zand-diep:#e8e2d3;
+    --oker:#c08a3e;
+    --inkt:#1a1a17;
+    --grijs:#6b6b62;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:#fff;color:var(--inkt);
+    font:400 17px/1.65 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    text-wrap:pretty;
+  }
+  h1,h2,h3{margin:0;line-height:1.12;font-weight:400;letter-spacing:-.015em;text-wrap:balance}
+  p{margin:0}
+  a{color:inherit}
+  img{display:block;max-width:100%;height:auto}
+  section[id]{scroll-margin-top:5rem}
+
+  .wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
+  @media(min-width:768px){.wrap{padding:0 40px}}
+  .sectie{padding:88px 0}
+  @media(min-width:768px){.sectie{padding:120px 0}}
+
+  .label{
+    display:inline-block;font-family:ui-sans-serif,system-ui,sans-serif;
+    font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--groen-licht);margin-bottom:18px;
+  }
+  .knop{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    padding:16px 30px;border-radius:2px;text-decoration:none;
+    font-family:ui-sans-serif,system-ui,sans-serif;font-size:15px;font-weight:600;
+    letter-spacing:.01em;transition:background-color .2s,color .2s,transform .2s;
+  }
+  .knop:active{transform:translateY(1px)}
+  .knop--vol{background:var(--groen);color:#fff}
+  .knop--vol:hover{background:var(--groen-diep)}
+  .knop--wit{background:#fff;color:var(--groen-diep)}
+  .knop--wit:hover{background:var(--zand-diep)}
+  .knop--rand{border:1.5px solid rgba(255,255,255,.55);color:#fff}
+  .knop--rand:hover{background:rgba(255,255,255,.12)}
+
+  /* ---------- koptekst ---------- */
+  .kop{position:fixed;inset:0 0 auto 0;z-index:100;transition:background-color .3s,box-shadow .3s}
+  .kop__rij{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 0}
+  .kop__naam{
+    font-size:20px;letter-spacing:-.01em;text-decoration:none;color:#fff;transition:color .3s;
+  }
+  .kop__naam b{font-weight:600}
+  .kop__nav{display:none;gap:34px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:15px}
+  @media(min-width:960px){.kop__nav{display:flex}}
+  .kop__nav a{text-decoration:none;color:rgba(255,255,255,.82);transition:color .3s}
+  .kop__nav a:hover{color:#fff}
+  .kop__tel{
+    display:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:15px;
+    font-weight:600;color:#fff;text-decoration:none;transition:color .3s;
+  }
+  @media(min-width:640px){.kop__tel{display:block}}
+
+  .kop.vast{background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(0,0,0,.07)}
+  .kop.vast .kop__naam,.kop.vast .kop__tel{color:var(--inkt)}
+  .kop.vast .kop__nav a{color:var(--grijs)}
+  .kop.vast .kop__nav a:hover{color:var(--inkt)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:94svh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero__waas{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(10,20,12,.88) 0%,rgba(10,20,12,.45) 45%,rgba(10,20,12,.25) 100%);
+  }
+  .hero__inhoud{position:relative;padding:140px 0 72px;color:#fff;max-width:760px}
+  .hero__plek{
+    font-family:ui-sans-serif,system-ui,sans-serif;font-size:13px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(38px,7vw,74px)}
+  .hero__tekst{margin-top:26px;max-width:540px;font-size:19px;color:rgba(255,255,255,.86)}
+  .hero__knoppen{margin-top:38px;display:flex;flex-wrap:wrap;gap:12px}
+
+  /* ---------- vertrouwensstrip ---------- */
+  .strip{background:var(--zand);border-bottom:1px solid var(--zand-diep)}
+  .strip__grid{display:grid;gap:0}
+  @media(min-width:768px){.strip__grid{grid-template-columns:repeat(3,1fr)}}
+  .strip__item{padding:34px 0;border-bottom:1px solid var(--zand-diep)}
+  @media(min-width:768px){
+    .strip__item{padding:38px 34px;border-bottom:0;border-left:1px solid var(--zand-diep)}
+    .strip__item:first-child{padding-left:0;border-left:0}
+    .strip__item:last-child{padding-right:0}
+  }
+  .strip__item:last-child{border-bottom:0}
+  .strip__getal{font-size:34px;color:var(--groen);line-height:1}
+  .strip__wat{
+    margin-top:10px;font-family:ui-sans-serif,system-ui,sans-serif;
+    font-size:15px;color:var(--grijs);
+  }
+
+  /* ---------- diensten ---------- */
+  .kop2{font-size:clamp(30px,4.2vw,46px);max-width:16ch}
+  .intro{margin-top:22px;max-width:56ch;color:var(--grijs);font-size:18px}
+
+  .diensten__grid{margin-top:56px;display:grid;gap:36px}
+  @media(min-width:768px){.diensten__grid{grid-template-columns:repeat(3,1fr);gap:32px}}
+  .dienst__foto{aspect-ratio:4/3;width:100%;object-fit:cover;border-radius:2px}
+  .dienst h3{margin-top:22px;font-size:23px}
+  .dienst p{margin-top:12px;color:var(--grijs);font-size:16.5px}
+
+  /* ---------- projecten ---------- */
+  .werk{background:var(--groen-diep);color:#fff}
+  .werk .label{color:#9dc48a}
+  .werk .intro{color:rgba(255,255,255,.7)}
+  .werk__grid{margin-top:56px;display:grid;gap:16px}
+  @media(min-width:768px){
+    .werk__grid{grid-template-columns:repeat(2,1fr)}
+    .werk__item:first-child{grid-column:1/-1}
+  }
+  .werk__item{position:relative;overflow:hidden;border-radius:2px}
+  .werk__item img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+  .werk__item:first-child img{aspect-ratio:16/9}
+  .werk__item:hover img{transform:scale(1.04)}
+  .werk__bij{
+    position:absolute;inset:auto 0 0 0;padding:44px 24px 22px;
+    background:linear-gradient(to top,rgba(8,16,10,.85),transparent);
+    font-family:ui-sans-serif,system-ui,sans-serif;font-size:15px;font-weight:600;
+  }
+
+  /* ---------- over ---------- */
+  .over__grid{display:grid;gap:48px;align-items:center}
+  @media(min-width:900px){.over__grid{grid-template-columns:.85fr 1fr;gap:80px}}
+  .over__foto{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+  .over blockquote{
+    margin:32px 0 0;padding-left:24px;border-left:2px solid var(--oker);
+    font-size:20px;font-style:italic;color:var(--inkt);
+  }
+  .over__wie{
+    margin-top:16px;font-family:ui-sans-serif,system-ui,sans-serif;
+    font-size:14px;color:var(--grijs);font-style:normal;
+  }
+
+  /* ---------- reviews ---------- */
+  .reviews{background:var(--zand)}
+  .reviews__grid{margin-top:52px;display:grid;gap:24px}
+  @media(min-width:768px){.reviews__grid{grid-template-columns:repeat(3,1fr)}}
+  .review{background:#fff;padding:32px;border-radius:2px}
+  .review__sterren{color:var(--oker);letter-spacing:3px;font-size:14px}
+  .review p{margin-top:16px;font-size:16.5px}
+  .review__naam{
+    margin-top:20px;font-family:ui-sans-serif,system-ui,sans-serif;
+    font-size:14px;font-weight:600;
+  }
+  .review__naam span{font-weight:400;color:var(--grijs)}
+
+  /* ---------- contact ---------- */
+  .contact__grid{display:grid;gap:52px}
+  @media(min-width:900px){.contact__grid{grid-template-columns:1fr 1.05fr;gap:80px}}
+  .gegevens{margin:36px 0 0;padding:0;list-style:none;font-family:ui-sans-serif,system-ui,sans-serif}
+  .gegevens li{padding:18px 0;border-top:1px solid var(--zand-diep);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .gegevens li:last-child{border-bottom:1px solid var(--zand-diep)}
+  .gegevens dt,.gegevens .wat{font-size:14px;color:var(--grijs)}
+  .gegevens a,.gegevens .waarde{font-size:16px;font-weight:600;text-decoration:none;color:var(--inkt)}
+  .gegevens a:hover{color:var(--groen)}
+
+  .formulier{background:var(--zand);padding:36px;border-radius:2px}
+  @media(min-width:768px){.formulier{padding:44px}}
+  .formulier h3{font-size:24px}
+  .formulier__uitleg{margin-top:10px;color:var(--grijs);font-size:16px}
+  .veldrij{display:grid;gap:18px;margin-top:26px}
+  @media(min-width:600px){.veldrij--2{grid-template-columns:1fr 1fr}}
+  .veld{display:block;font-family:ui-sans-serif,system-ui,sans-serif}
+  .veld span{display:block;font-size:13px;font-weight:600;margin-bottom:8px}
+  .veld input,.veld textarea{
+    width:100%;padding:14px 16px;border:1px solid #d8d2c2;border-radius:2px;
+    background:#fff;font:inherit;font-size:16px;color:var(--inkt);
+  }
+  .veld input:focus,.veld textarea:focus{outline:2px solid var(--groen);outline-offset:-1px;border-color:transparent}
+  .veld textarea{resize:vertical;min-height:120px}
+  .melding{
+    margin-top:18px;padding:14px 16px;background:#fff;border-left:2px solid var(--groen);
+    font-family:ui-sans-serif,system-ui,sans-serif;font-size:15px;
+  }
+  .melding[hidden]{display:none}
+
+  /* ---------- voettekst ---------- */
+  .voet{background:var(--groen-diep);color:rgba(255,255,255,.65);padding:64px 0 32px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:15px}
+  .voet__grid{display:grid;gap:36px}
+  @media(min-width:768px){.voet__grid{grid-template-columns:2fr 1fr 1fr}}
+  .voet__naam{font-family:inherit;font-size:19px;font-weight:600;color:#fff}
+  .voet h4{margin:0 0 16px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+  .voet ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .voet a{text-decoration:none;transition:color .2s}
+  .voet a:hover{color:#fff}
+  .voet__onder{
+    margin-top:52px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  }
+</style>
+</head>
+
+<body>
+
+<header class="kop" id="kop">
+  <div class="wrap">
+    <div class="kop__rij">
+      <a class="kop__naam" href="#">Hoveniersbedrijf <b>De&nbsp;Vries</b></a>
+      <nav class="kop__nav" aria-label="Hoofdmenu">
+        <a href="#diensten">Diensten</a>
+        <a href="#werk">Ons werk</a>
+        <a href="#over">Over ons</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="kop__tel" href="tel:+31351234567">035 &ndash; 123 45 67</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <img class="hero__foto" src="/demos/voorbeeld-hovenier/hero.jpg" alt="" fetchpriority="high">
+    <div class="hero__waas"></div>
+    <div class="wrap">
+      <div class="hero__inhoud">
+        <p class="hero__plek">Hovenier in Baarn, Soest en Amersfoort</p>
+        <h1>Een tuin waar u<br>jarenlang plezier<br>van heeft</h1>
+        <p class="hero__tekst">
+          Van het eerste ontwerp tot het onderhoud jaren later. Wij leggen tuinen aan
+          met eigen mensen, een vaste prijs vooraf en één aanspreekpunt.
+        </p>
+        <div class="hero__knoppen">
+          <a class="knop knop--wit" href="#contact">Vraag een gratis ontwerp aan</a>
+          <a class="knop knop--rand" href="tel:+31351234567">Bel 035 &ndash; 123 45 67</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="wrap">
+      <div class="strip__grid">
+        <div class="strip__item">
+          <p class="strip__getal">25 jaar</p>
+          <p class="strip__wat">Actief in de regio, sinds 2001</p>
+        </div>
+        <div class="strip__item">
+          <p class="strip__getal">800+</p>
+          <p class="strip__wat">Tuinen aangelegd en onderhouden</p>
+        </div>
+        <div class="strip__item">
+          <p class="strip__getal">Vaste prijs</p>
+          <p class="strip__wat">Vooraf afgesproken, geen meerwerk zonder overleg</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie" id="diensten">
+    <div class="wrap">
+      <p class="label">Wat wij doen</p>
+      <h2 class="kop2">Alles voor uw tuin, van ontwerp tot onderhoud</h2>
+      <p class="intro">
+        Wij nemen het hele traject uit handen. Geen aannemers die naar elkaar wijzen —
+        alles gebeurt door ons eigen team, en u heeft van begin tot eind dezelfde
+        contactpersoon.
+      </p>
+
+      <div class="diensten__grid">
+        <article class="dienst">
+          <img class="dienst__foto" src="/demos/voorbeeld-hovenier/ontwerp.jpg" alt="" loading="lazy">
+          <h3>Tuinontwerp</h3>
+          <p>
+            We komen langs, luisteren naar uw wensen en maken een ontwerp op schaal.
+            Inclusief beplantingsplan en een begroting waar u op kunt rekenen.
+          </p>
+        </article>
+        <article class="dienst">
+          <img class="dienst__foto" src="/demos/voorbeeld-hovenier/aanleg.jpg" alt="" loading="lazy">
+          <h3>Tuinaanleg</h3>
+          <p>
+            Bestrating, beplanting, vlonders, schuttingen en verlichting. Alles wordt
+            door ons eigen team uitgevoerd en niet uitbesteed.
+          </p>
+        </article>
+        <article class="dienst">
+          <img class="dienst__foto" src="/demos/voorbeeld-hovenier/onderhoud.jpg" alt="" loading="lazy">
+          <h3>Tuinonderhoud</h3>
+          <p>
+            Van een enkele snoeibeurt tot een jaarcontract waarbij wij uw tuin het
+            hele seizoen verzorgen, op vaste dagen.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie werk" id="werk">
+    <div class="wrap">
+      <p class="label">Ons werk</p>
+      <h2 class="kop2">Recent opgeleverd</h2>
+      <p class="intro">Een greep uit de tuinen die we het afgelopen jaar hebben aangelegd.</p>
+
+      <div class="werk__grid">
+        <figure class="werk__item" style="margin:0">
+          <img src="/demos/voorbeeld-hovenier/project-1.jpg" alt="Achtertuin met vlonderterras in Soest" loading="lazy">
+          <figcaption class="werk__bij">Achtertuin met vlonderterras &mdash; Soest</figcaption>
+        </figure>
+        <figure class="werk__item" style="margin:0">
+          <img src="/demos/voorbeeld-hovenier/project-2.jpg" alt="Voortuin met natuursteen in Baarn" loading="lazy">
+          <figcaption class="werk__bij">Voortuin met natuursteen &mdash; Baarn</figcaption>
+        </figure>
+        <figure class="werk__item" style="margin:0">
+          <img src="/demos/voorbeeld-hovenier/project-3.jpg" alt="Onderhoudsarme tuin in Eemnes" loading="lazy">
+          <figcaption class="werk__bij">Onderhoudsarme tuin &mdash; Eemnes</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie over" id="over">
+    <div class="wrap">
+      <div class="over__grid">
+        <img class="over__foto" src="/demos/voorbeeld-hovenier/over.jpg" alt="Het team van Hoveniersbedrijf De Vries" loading="lazy">
+        <div>
+          <p class="label">Over ons</p>
+          <h2 class="kop2">Een familiebedrijf uit Baarn</h2>
+          <p class="intro">
+            Opgericht in 2001 en inmiddels gerund door de tweede generatie. We zijn
+            bewust klein gebleven: een vast team van zes mensen, zodat u altijd
+            bekende gezichten in uw tuin heeft staan.
+          </p>
+          <blockquote>
+            &ldquo;Een goede tuin begint met een goed gesprek. Daarom komen we altijd
+            eerst kijken en luisteren, voordat er ook maar iets op papier komt.&rdquo;
+            <span class="over__wie">Martijn de Vries &mdash; eigenaar</span>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie reviews">
+    <div class="wrap">
+      <p class="label">Wat klanten zeggen</p>
+      <h2 class="kop2">Beoordeeld met een 9,2</h2>
+
+      <div class="reviews__grid">
+        <blockquote class="review">
+          <p class="review__sterren" aria-label="5 van de 5 sterren">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+          <p>
+            Van het eerste ontwerp tot de oplevering ging alles zoals afgesproken. Het
+            team was netjes, op tijd en dacht goed mee. De tuin is prachtig geworden.
+          </p>
+          <p class="review__naam">Familie Bakker <span>&mdash; Soest</span></p>
+        </blockquote>
+        <blockquote class="review">
+          <p class="review__sterren" aria-label="5 van de 5 sterren">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+          <p>
+            Duidelijke offerte, geen verrassingen achteraf. Precies wat je wilt als je
+            een flinke verbouwing van je tuin laat doen.
+          </p>
+          <p class="review__naam">M. Hendriks <span>&mdash; Baarn</span></p>
+        </blockquote>
+        <blockquote class="review">
+          <p class="review__sterren" aria-label="5 van de 5 sterren">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+          <p>
+            Al drie jaar een onderhoudscontract. Ze komen altijd op de afgesproken dag
+            en laten de tuin netjes achter. Aanrader.
+          </p>
+          <p class="review__naam">J. van Dijk <span>&mdash; Amersfoort</span></p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie" id="contact">
+    <div class="wrap">
+      <div class="contact__grid">
+        <div>
+          <p class="label">Contact</p>
+          <h2 class="kop2">Benieuwd wat er mogelijk is in uw tuin?</h2>
+          <p class="intro">
+            Bel gerust, of laat uw gegevens achter. We komen vrijblijvend langs om te
+            kijken en maken daarna een voorstel met een vaste prijs.
+          </p>
+
+          <ul class="gegevens">
+            <li>
+              <span class="wat">Telefoon</span>
+              <a href="tel:+31351234567">035 &ndash; 123 45 67</a>
+            </li>
+            <li>
+              <span class="wat">E-mail</span>
+              <a href="mailto:info@voorbeeld.nl">info@voorbeeld.nl</a>
+            </li>
+            <li>
+              <span class="wat">Bezoekadres</span>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Eemweg+12%2C+3743+CH+Baarn"
+                 target="_blank" rel="noopener">Eemweg 12, 3743 CH Baarn</a>
+            </li>
+            <li>
+              <span class="wat">Openingstijden</span>
+              <span class="waarde">Ma t/m vr 07:30 &ndash; 17:00</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="formulier">
+          <h3>Vraag een vrijblijvende offerte aan</h3>
+          <p class="formulier__uitleg">
+            Vul het formulier in, dan nemen we binnen één werkdag contact met u op.
+          </p>
+
+          <form id="offerte" novalidate>
+            <div class="veldrij veldrij--2">
+              <label class="veld">
+                <span>Naam</span>
+                <input type="text" name="naam" autocomplete="name">
+              </label>
+              <label class="veld">
+                <span>Telefoon</span>
+                <input type="tel" name="telefoon" autocomplete="tel">
+              </label>
+            </div>
+            <div class="veldrij">
+              <label class="veld">
+                <span>E-mailadres</span>
+                <input type="email" name="email" autocomplete="email">
+              </label>
+            </div>
+            <div class="veldrij">
+              <label class="veld">
+                <span>Waar kunnen we mee helpen?</span>
+                <textarea name="bericht"></textarea>
+              </label>
+            </div>
+            <div class="veldrij">
+              <button type="submit" class="knop knop--vol" style="width:100%">Verstuur aanvraag</button>
+            </div>
+            <p class="melding" id="melding" role="status" hidden>
+              Dit is een voorbeeldpagina — op de echte site komt dit bericht meteen in
+              de mailbox binnen.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="voet">
+  <div class="wrap">
+    <div class="voet__grid">
+      <div>
+        <p class="voet__naam">Hoveniersbedrijf De Vries</p>
+        <p style="margin-top:14px;max-width:34ch">
+          Tuinontwerp, aanleg en onderhoud in Baarn en omstreken. Vakwerk, duidelijke
+          afspraken en een eerlijke prijs.
+        </p>
+      </div>
+      <div>
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#diensten">Diensten</a></li>
+          <li><a href="#werk">Ons werk</a></li>
+          <li><a href="#over">Over ons</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+31351234567">035 &ndash; 123 45 67</a></li>
+          <li><a href="mailto:info@voorbeeld.nl">info@voorbeeld.nl</a></li>
+          <li>Eemweg 12<br>3743 CH Baarn</li>
+        </ul>
+      </div>
+    </div>
+    <div class="voet__onder">
+      <span>&copy; 2026 Hoveniersbedrijf De Vries</span>
+      <span>KvK 12345678</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Koptekst wordt wit zodra je van de hero af scrolt.
+  (function(){
+    var kop = document.getElementById('kop');
+    function bij(){ kop.classList.toggle('vast', window.scrollY > 60); }
+    bij();
+    window.addEventListener('scroll', bij, { passive: true });
+  })();
+
+  // Het formulier heeft nog geen mailkoppeling. Een knop die niets doet leest als
+  // een kapotte site, dus leggen we uit wat er straks gebeurt.
+  (function(){
+    var form = document.getElementById('offerte');
+    var melding = document.getElementById('melding');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      melding.hidden = false;
+    });
+  })();
+</script>
+
+</body>
+</html>

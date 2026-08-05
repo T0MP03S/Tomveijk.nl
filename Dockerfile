@@ -40,6 +40,11 @@ RUN apt-get update \
 
 # Copy necessary files
 COPY --from=builder /app/public ./public
+
+# De demopagina's zijn losse HTML-bestanden die de /demo-route van schijf leest.
+# Ze zitten niet in de Next-build, dus zonder deze regel geeft elke demo een 404
+# in productie terwijl hij lokaal prima werkt.
+COPY --from=builder /app/demos ./demos
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma

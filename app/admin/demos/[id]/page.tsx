@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, Eye } from 'lucide-react'
 
 import { prisma } from '@/lib/prisma'
+import { leesDemo } from '@/lib/demo-bestand'
 import DemoFormulier from '@/components/admin/DemoFormulier'
 
 export const dynamic = 'force-dynamic'
@@ -14,6 +15,8 @@ export default async function DemoBewerkenPagina({ params }: { params: { id: str
   })
 
   if (!prospect) notFound()
+
+  const demoBestaat = (await leesDemo(prospect.slug)) !== null
 
   return (
     <div className="space-y-8">
@@ -48,7 +51,10 @@ export default async function DemoBewerkenPagina({ params }: { params: { id: str
         </section>
       )}
 
-      <DemoFormulier prospect={JSON.parse(JSON.stringify(prospect))} />
+      <DemoFormulier
+        prospect={JSON.parse(JSON.stringify(prospect))}
+        demoBestaat={demoBestaat}
+      />
     </div>
   )
 }
