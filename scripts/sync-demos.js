@@ -63,6 +63,7 @@ async function main() {
 
       // Staat de pagina er al? Dan is de demo klaar om te mailen.
       const heeftPagina = fs.existsSync(path.join(DEMO_MAP, `${slug}.html`))
+      const publiceren = heeftPagina && data.gepubliceerd !== false
 
       await prisma.prospect.create({
         data: {
@@ -76,7 +77,7 @@ async function main() {
           email: data.email || null,
           telefoon: data.telefoon || null,
           status: heeftPagina ? 'DEMO_KLAAR' : 'NIEUW',
-          gepubliceerd: heeftPagina && data.gepubliceerd !== false,
+          gepubliceerd: publiceren,
           pitchActief: data.pitchActief !== false,
           pitchPrijs: Number.isInteger(data.pitchPrijs) ? data.pitchPrijs : 750,
           pitchPerMaand: Number.isInteger(data.pitchPerMaand) ? data.pitchPerMaand : 20,
@@ -84,7 +85,12 @@ async function main() {
       })
 
       aangemaakt++
-      console.log(`  + ${slug} — ${data.bedrijf}${heeftPagina ? ' (gepubliceerd)' : ' (nog geen pagina)'}`)
+      const toestand = !heeftPagina
+        ? 'nog geen pagina'
+        : publiceren
+          ? 'gepubliceerd'
+          : 'pagina klaar, nog niet gepubliceerd'
+      console.log(`  + ${slug} — ${data.bedrijf} (${toestand})`)
     }
 
     console.log(

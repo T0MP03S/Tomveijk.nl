@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baarnsche Broers Hoveniers — aanleg en onderhoud in Baarn</title>
+<meta name="description" content="Twee broers uit Baarn die tuinen aanleggen en onderhouden. Gediplomeerd, met een vast aanspreekpunt van kennismaking tot oplevering. Actief in Baarn, Soest, Eemnes en omstreken.">
+
+<style>
+  :root{
+    --inkt:#0f1310;
+    --inkt-zacht:#1c231d;
+    --groen:#26703a;
+    --groen-diep:#1a5228;
+    --limoen:#8cc152;
+    --wit:#fbfbf8;
+    --grijs:#636b63;
+    --lijn:#e3e5df;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--wit);color:var(--inkt);
+    font:400 17px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    text-wrap:pretty;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{margin:0;line-height:1.05;font-weight:800;letter-spacing:-.03em;text-wrap:balance}
+  p{margin:0}
+  ul{margin:0;padding:0;list-style:none}
+  a{color:inherit}
+  img{display:block;max-width:100%;height:auto}
+  section[id]{scroll-margin-top:5rem}
+
+  .wrap{width:100%;max-width:1240px;margin:0 auto;padding:0 22px}
+  @media(min-width:768px){.wrap{padding:0 44px}}
+  .sectie{padding:80px 0}
+  @media(min-width:768px){.sectie{padding:120px 0}}
+
+  .oogje{
+    display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--groen);margin-bottom:20px;
+  }
+  .oogje::before{content:"";width:26px;height:2px;background:var(--limoen)}
+
+  .knop{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    padding:15px 28px;border-radius:999px;text-decoration:none;
+    font-size:15px;font-weight:700;letter-spacing:-.01em;
+    transition:background-color .2s,color .2s,transform .15s,border-color .2s;
+  }
+  .knop:active{transform:translateY(1px)}
+  .knop--groen{background:var(--groen);color:#fff}
+  .knop--groen:hover{background:var(--groen-diep)}
+  .knop--wit{background:#fff;color:var(--inkt)}
+  .knop--wit:hover{background:#ececea}
+  .knop--rand{border:1.5px solid rgba(255,255,255,.4);color:#fff}
+  .knop--rand:hover{background:rgba(255,255,255,.12);border-color:transparent}
+
+  /* ---------- koptekst ---------- */
+  .kop{position:fixed;inset:0 0 auto 0;z-index:100;transition:background-color .3s,box-shadow .3s}
+  .kop__rij{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
+  .kop__logo{display:flex;align-items:center;text-decoration:none}
+  .kop__logo img{height:38px;width:auto;filter:brightness(0) invert(1);transition:filter .3s}
+  .kop__nav{display:none;gap:32px;font-size:15px;font-weight:600}
+  @media(min-width:980px){.kop__nav{display:flex}}
+  .kop__nav a{text-decoration:none;color:rgba(255,255,255,.85);transition:color .3s}
+  .kop__nav a:hover{color:#fff}
+  .kop__rechts{display:flex;align-items:center;gap:14px}
+  .kop__tel{display:none;font-size:15px;font-weight:700;color:#fff;text-decoration:none;transition:color .3s}
+  @media(min-width:640px){.kop__tel{display:block}}
+
+  .kop.vast{background:rgba(251,251,248,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--lijn)}
+  .kop.vast .kop__logo img{filter:none}
+  .kop.vast .kop__nav a{color:var(--grijs)}
+  .kop.vast .kop__nav a:hover{color:var(--inkt)}
+  .kop.vast .kop__tel{color:var(--inkt)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--inkt)}
+  .hero__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72}
+  .hero__waas{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(10,15,11,.94) 4%,rgba(10,15,11,.5) 46%,rgba(10,15,11,.3) 100%);
+  }
+  .hero__inhoud{position:relative;padding:130px 0 68px;color:#fff;max-width:900px}
+  .hero__plek{
+    display:inline-block;padding:7px 15px;border-radius:999px;
+    background:rgba(140,193,82,.16);border:1px solid rgba(140,193,82,.35);
+    font-size:13px;font-weight:700;letter-spacing:.06em;color:#cfe6ac;margin-bottom:26px;
+  }
+  .hero h1{font-size:clamp(40px,7.6vw,84px)}
+  .hero h1 em{font-style:normal;color:var(--limoen)}
+  .hero__tekst{margin-top:24px;max-width:520px;font-size:19px;color:rgba(255,255,255,.82)}
+  .hero__knoppen{margin-top:36px;display:flex;flex-wrap:wrap;gap:11px}
+
+  /* ---------- werkgebied ---------- */
+  .gebied{background:var(--inkt);color:#fff;padding:30px 0;border-top:1px solid rgba(255,255,255,.08)}
+  .gebied__rij{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+  .gebied__wat{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--limoen)}
+  .gebied__plaatsen{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:16px;color:rgba(255,255,255,.72)}
+
+  /* ---------- diensten ---------- */
+  .titel{font-size:clamp(32px,4.6vw,54px);max-width:15ch}
+  .lead{margin-top:20px;max-width:54ch;color:var(--grijs);font-size:18.5px}
+
+  .dienst{padding:52px 0;border-top:1px solid var(--lijn);display:grid;gap:28px}
+  .dienst:first-of-type{border-top:0;padding-top:44px}
+  @media(min-width:900px){.dienst{grid-template-columns:.34fr .66fr;gap:56px;align-items:start}}
+  .dienst__nr{
+    font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--limoen);
+  }
+  .dienst h3{margin-top:10px;font-size:clamp(26px,3vw,36px)}
+  .dienst__tekst{color:var(--grijs);font-size:17px}
+  .dienst__lijst{
+    margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:9px 24px;font-size:15.5px;
+  }
+  .dienst__lijst li{position:relative;padding-left:20px;color:var(--inkt-zacht)}
+  .dienst__lijst li::before{
+    content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;
+    border-radius:2px;background:var(--limoen);
+  }
+
+  /* ---------- werkwijze ---------- */
+  .werkwijze{background:var(--inkt);color:#fff}
+  .werkwijze .lead{color:rgba(255,255,255,.65)}
+  .stappen{margin-top:56px;display:grid;gap:1px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1)}
+  @media(min-width:768px){.stappen{grid-template-columns:repeat(4,1fr)}}
+  .stap{background:var(--inkt);padding:34px 28px}
+  .stap__nr{
+    display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
+    border-radius:999px;background:var(--groen);font-size:15px;font-weight:800;margin-bottom:20px;
+  }
+  .stap h3{font-size:20px;letter-spacing:-.02em}
+  .stap p{margin-top:10px;font-size:15.5px;color:rgba(255,255,255,.62)}
+
+  /* ---------- over ---------- */
+  .over__grid{display:grid;gap:44px;align-items:center}
+  @media(min-width:960px){.over__grid{grid-template-columns:1fr .9fr;gap:80px}}
+  .over__foto{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}
+  .over p+p{margin-top:18px}
+  .over .lead{max-width:none}
+  .broers{
+    margin-top:32px;display:grid;gap:20px;padding-top:28px;border-top:1px solid var(--lijn);
+  }
+  @media(min-width:560px){.broers{grid-template-columns:1fr 1fr;gap:32px}}
+  .broer h4{margin:0;font-size:17px;font-weight:800}
+  .broer p{margin-top:7px;font-size:15.5px;color:var(--grijs)}
+
+  /* ---------- contact ---------- */
+  .contact{background:#fff;border-top:1px solid var(--lijn)}
+  .contact__grid{display:grid;gap:48px}
+  @media(min-width:960px){.contact__grid{grid-template-columns:1fr 1.05fr;gap:80px}}
+  .gegevens{margin-top:34px}
+  .gegevens li{padding:17px 0;border-bottom:1px solid var(--lijn);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .gegevens li:first-child{border-top:1px solid var(--lijn)}
+  .gegevens .wat{font-size:14px;color:var(--grijs)}
+  .gegevens a,.gegevens .waarde{font-size:16.5px;font-weight:700;text-decoration:none}
+  .gegevens a:hover{color:var(--groen)}
+
+  .formulier{background:var(--wit);border:1px solid var(--lijn);padding:32px;border-radius:4px}
+  @media(min-width:768px){.formulier{padding:42px}}
+  .formulier h3{font-size:25px}
+  .formulier__uitleg{margin-top:9px;color:var(--grijs);font-size:16px}
+  .rij{display:grid;gap:16px;margin-top:24px}
+  @media(min-width:600px){.rij--2{grid-template-columns:1fr 1fr}}
+  .veld span{display:block;font-size:13px;font-weight:700;margin-bottom:7px}
+  .veld input,.veld textarea{
+    width:100%;padding:13px 15px;border:1px solid var(--lijn);border-radius:3px;
+    background:#fff;font:inherit;font-size:16px;color:var(--inkt);
+  }
+  .veld input:focus,.veld textarea:focus{outline:2px solid var(--groen);outline-offset:-1px;border-color:transparent}
+  .veld textarea{resize:vertical;min-height:118px}
+  .melding{
+    margin-top:16px;padding:13px 15px;background:#fff;border-left:3px solid var(--groen);
+    font-size:15px;border-radius:0 3px 3px 0;
+  }
+  .melding[hidden]{display:none}
+
+  /* ---------- voettekst ---------- */
+  .voet{background:var(--inkt);color:rgba(255,255,255,.6);padding:60px 0 28px;font-size:15px}
+  .voet__grid{display:grid;gap:34px}
+  @media(min-width:768px){.voet__grid{grid-template-columns:2fr 1fr 1fr}}
+  .voet__logo{height:34px;width:auto;filter:brightness(0) invert(1)}
+  .voet h4{margin:0 0 14px;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+  .voet ul{display:grid;gap:9px}
+  .voet a{text-decoration:none;transition:color .2s}
+  .voet a:hover{color:#fff}
+  .voet__vacature{
+    margin-top:18px;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;
+    border-radius:999px;background:rgba(140,193,82,.14);border:1px solid rgba(140,193,82,.3);
+    color:#cfe6ac;font-size:14px;font-weight:600;text-decoration:none;
+  }
+  .voet__vacature:hover{background:rgba(140,193,82,.22);color:#fff}
+  .voet__onder{
+    margin-top:46px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:14px;
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  }
+</style>
+</head>
+
+<body>
+
+<header class="kop" id="kop">
+  <div class="wrap">
+    <div class="kop__rij">
+      <a class="kop__logo" href="#"><img src="/demos/baarnsche-broers/logo.webp" alt="Baarnsche Broers Hoveniers"></a>
+      <nav class="kop__nav" aria-label="Hoofdmenu">
+        <a href="#diensten">Diensten</a>
+        <a href="#werkwijze">Werkwijze</a>
+        <a href="#over">Over ons</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="kop__rechts">
+        <a class="kop__tel" href="tel:+31637337735">06 &ndash; 37 33 77 35</a>
+        <a class="knop knop--groen" href="#contact" style="padding:11px 21px;font-size:14px">Offerte aanvragen</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <img class="hero__foto" src="/demos/baarnsche-broers/hero.webp" alt="" fetchpriority="high">
+    <div class="hero__waas"></div>
+    <div class="wrap">
+      <div class="hero__inhoud">
+        <p class="hero__plek">Jong &amp; gediplomeerd hoveniersbedrijf uit Baarn</p>
+        <h1>Uw tuin, aangelegd<br>door <em>twee broers</em><br>uit Baarn</h1>
+        <p class="hero__tekst">
+          Aanleg, onderhoud en boomverzorging. Van het eerste gesprek tot de oplevering
+          heeft u één vast aanspreekpunt &mdash; en dat is een van ons twee.
+        </p>
+        <div class="hero__knoppen">
+          <a class="knop knop--wit" href="#contact">Vraag een offerte aan</a>
+          <a class="knop knop--rand" href="tel:+31637337735">Bel 06 &ndash; 37 33 77 35</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gebied">
+    <div class="wrap">
+      <div class="gebied__rij">
+        <span class="gebied__wat">Wij werken in</span>
+        <ul class="gebied__plaatsen">
+          <li>Baarn</li><li>Soest</li><li>Eemnes</li><li>Huizen</li>
+          <li>Hilversum</li><li>Den Dolder</li><li>De Bilt</li><li>Amersfoort</li>
+        </ul>
+        <span style="font-size:15px;color:rgba(255,255,255,.45)">&mdash; en daarbuiten komen we ook langs</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie" id="diensten">
+    <div class="wrap">
+      <p class="oogje">Wat we doen</p>
+      <h2 class="titel">Alles voor de tuin, door één team</h2>
+      <p class="lead">
+        We hebben de juiste kennis én het juiste gereedschap in huis. Wat we zelf niet
+        doen &mdash; boomverzorging &mdash; besteden we uit aan gediplomeerde
+        boomverzorgers waar we vast mee samenwerken.
+      </p>
+
+      <article class="dienst">
+        <div>
+          <p class="dienst__nr">01</p>
+          <h3>Aanleg</h3>
+        </div>
+        <div>
+          <p class="dienst__tekst">
+            Een tuin aanleggen is niet zomaar iets, daar komt veel bij kijken. We beginnen
+            altijd met een kennismakingsgesprek en gaan pas de grond in als de tekening en
+            de offerte akkoord zijn.
+          </p>
+          <ul class="dienst__lijst">
+            <li>Grondwerk</li><li>Straatwerk</li><li>Beregening</li><li>Gazon</li>
+            <li>Verlichtingsplan</li><li>Beschoeiingen</li><li>Vlonders</li><li>Pergola&rsquo;s</li>
+            <li>Overkappingen</li><li>Beplanting</li><li>Schuttingen</li><li>Vijvers</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="dienst">
+        <div>
+          <p class="dienst__nr">02</p>
+          <h3>Onderhoud</h3>
+        </div>
+        <div>
+          <p class="dienst__tekst">
+            Een tuin heeft onderhoud nodig, voor een optimale groei en bloei. We maken
+            onderhoudscontracten op maat, voor particuliere tuinen en bedrijfstuinen.
+          </p>
+          <ul class="dienst__lijst">
+            <li>Snoeien van haag</li><li>Begeleidingssnoei jonge bomen</li><li>Maaien gazon</li>
+            <li>Borderonderhoud</li><li>Blad ruimen</li><li>Mesten</li><li>Verticuteren</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="dienst">
+        <div>
+          <p class="dienst__nr">03</p>
+          <h3>Boomverzorging</h3>
+        </div>
+        <div>
+          <p class="dienst__tekst">
+            Ook voor boomverzorging kunt u bij ons terecht. We werken nauw samen met
+            gediplomeerde boomverzorgers, zodat u niet zelf op zoek hoeft.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sectie werkwijze" id="werkwijze">
+    <div class="wrap">
+      <p class="oogje" style="color:var(--limoen)">Hoe het gaat</p>
+      <h2 class="titel">Van eerste gesprek tot oplevering</h2>
+      <p class="lead">
+        Geen verrassingen halverwege. U weet vooraf wat er komt te staan, wat het kost
+        en wie u erop kunt aanspreken.
+      </p>
+
+      <div class="stappen">
+        <div class="stap">
+          <span class="stap__nr">1</span>
+          <h3>Kennismaken</h3>
+          <p>We komen langs, kijken rond en maken kennis. Vrijblijvend.</p>
+        </div>
+        <div class="stap">
+          <span class="stap__nr">2</span>
+          <h3>Wensen bespreken</h3>
+          <p>Wat wilt u met de tuin, hoeveel onderhoud past bij u, en wat is haalbaar?</p>
+        </div>
+        <div class="stap">
+          <span class="stap__nr">3</span>
+          <h3>Tekening en offerte</h3>
+          <p>U krijgt een tekening met een offerte erbij, zodat u precies weet waar u ja op zegt.</p>
+        </div>
+        <div class="stap">
+          <span class="stap__nr">4</span>
+          <h3>Uitvoering</h3>
+          <p>Na akkoord gaan we aan de slag, met één vast aanspreekpunt tot de oplevering.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie over" id="over">
+    <div class="wrap">
+      <div class="over__grid">
+        <img class="over__foto" src="/demos/baarnsche-broers/bus.webp" alt="De bus van Baarnsche Broers Hoveniers" loading="lazy">
+        <div>
+          <p class="oogje">Over ons</p>
+          <h2 class="titel" style="max-width:none">Jurgen en Thomas, tweelingbroers uit Baarn</h2>
+          <p class="lead">
+            Geboren en getogen in Baarn, en inmiddels met een eigen hovenierszaak. We zijn
+            jong, gediplomeerd en komen graag bij u thuis langs om te kijken wat er kan.
+          </p>
+
+          <div class="broers">
+            <div class="broer">
+              <h4>Thomas</h4>
+              <p>
+                De jongste. Koos al vroeg voor werken in de tuin in plaats van op kantoor.
+                Na een vakantiebaantje bij een hovenier was hij om: hij volgde de
+                hoveniersopleiding en werkte bij verschillende hoveniers voordat we dit
+                bedrijf startten.
+              </p>
+            </div>
+            <div class="broer">
+              <h4>Jurgen</h4>
+              <p>
+                De oudste, en de perfecte aanvulling. Hij zorgt dat elk project keurig
+                wordt opgeleverd en zet de puntjes op de i.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie contact" id="contact">
+    <div class="wrap">
+      <div class="contact__grid">
+        <div>
+          <p class="oogje">Contact</p>
+          <h2 class="titel">Benieuwd wat er in uw tuin kan?</h2>
+          <p class="lead">
+            Bel of mail gerust. We komen vrijblijvend langs om te kijken, en daarna
+            krijgt u een tekening met een offerte.
+          </p>
+
+          <ul class="gegevens">
+            <li>
+              <span class="wat">Thomas</span>
+              <a href="tel:+31637337735">06 &ndash; 37 33 77 35</a>
+            </li>
+            <li>
+              <span class="wat">E-mail</span>
+              <a href="mailto:info@baarnschebroers.nl">info@baarnschebroers.nl</a>
+            </li>
+            <li>
+              <span class="wat">Adres</span>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Willem+Barentszlaan+86%2C+3742+PR+Baarn"
+                 target="_blank" rel="noopener">Willem Barentszlaan 86, 3742 PR Baarn</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="formulier">
+          <h3>Vraag vrijblijvend een offerte aan</h3>
+          <p class="formulier__uitleg">
+            Laat uw gegevens achter, dan nemen we snel contact met u op.
+          </p>
+
+          <form id="offerte" novalidate>
+            <div class="rij rij--2">
+              <label class="veld"><span>Naam</span><input type="text" name="naam" autocomplete="name"></label>
+              <label class="veld"><span>Telefoon</span><input type="tel" name="telefoon" autocomplete="tel"></label>
+            </div>
+            <div class="rij">
+              <label class="veld"><span>E-mailadres</span><input type="email" name="email" autocomplete="email"></label>
+            </div>
+            <div class="rij">
+              <label class="veld"><span>Waar kunnen we mee helpen?</span><textarea name="bericht"></textarea></label>
+            </div>
+            <div class="rij">
+              <button type="submit" class="knop knop--groen" style="width:100%">Verstuur aanvraag</button>
+            </div>
+            <p class="melding" id="melding" role="status" hidden>
+              Dit is een voorbeeldpagina — op de echte site komt dit bericht meteen in de
+              mailbox van Baarnsche Broers binnen.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="voet">
+  <div class="wrap">
+    <div class="voet__grid">
+      <div>
+        <img class="voet__logo" src="/demos/baarnsche-broers/logo.webp" alt="Baarnsche Broers Hoveniers">
+        <p style="margin-top:16px;max-width:36ch">
+          Aanleg, onderhoud en boomverzorging in Baarn, Soest, Eemnes en omstreken.
+        </p>
+        <a class="voet__vacature" href="#contact">Wij zoeken versterking &rarr;</a>
+      </div>
+      <div>
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#diensten">Diensten</a></li>
+          <li><a href="#werkwijze">Werkwijze</a></li>
+          <li><a href="#over">Over ons</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+31637337735">06 &ndash; 37 33 77 35</a></li>
+          <li><a href="mailto:info@baarnschebroers.nl">info@baarnschebroers.nl</a></li>
+          <li>Willem Barentszlaan 86<br>3742 PR Baarn</li>
+        </ul>
+      </div>
+    </div>
+    <div class="voet__onder">
+      <span>&copy; 2026 Baarnsche Broers Hoveniers</span>
+      <span>Baarn</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var kop = document.getElementById('kop');
+    function bij(){ kop.classList.toggle('vast', window.scrollY > 60); }
+    bij();
+    window.addEventListener('scroll', bij, { passive: true });
+  })();
+
+  (function(){
+    var form = document.getElementById('offerte');
+    var melding = document.getElementById('melding');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      melding.hidden = false;
+    });
+  })();
+</script>
+
+</body>
+</html>
