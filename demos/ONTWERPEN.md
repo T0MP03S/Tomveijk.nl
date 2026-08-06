@@ -14,21 +14,49 @@ hero met foto → smalle strip → diensten → donkere sectie → over ons → 
 Daarom staat hieronder wat er per demo moet variëren, en een register van wat
 al gebruikt is.
 
-## Regel 1: het ontwerp volgt het bedrijf
+## Regel 1: lees hun logo, en volg het
 
-Niet een vorm kiezen uit een lijstje, maar kijken wat het bedrijf ís. Dat geeft
-vanzelf variatie, want de bedrijven verschillen.
+Het logo is het enige stukje vormgeving waar de prospect zelf voor gekozen
+heeft. Daar zitten al beslissingen in. Die overnemen levert twee dingen op:
+elke demo verschilt vanzelf, en de klant herkent zichzelf erin in plaats van
+een stijl die iemand anders hem opdringt.
 
-| Wat je ziet bij de prospect | Wat dat betekent voor het ontwerp |
+Kijk naar de vorm, niet alleen naar de kleur:
+
+| Wat het logo laat zien | Wat je overneemt |
 |---|---|
-| Veel goede foto's van eigen werk | Het werk is de site. Beeld voorop, tekst secundair |
-| Nauwelijks of slechte foto's | Typografisch. Grote letters, kleurvlakken, geen hero-foto |
-| Spoedwerk (loodgieter, dakdekker, slotenmaker) | Telefoonnummer dominant, één scherm, weinig scrollen |
-| Eén man, persoonlijk verhaal | Smalle kolom, leest als een brief. Bijna geen raster |
-| Techniek en precisie (installateur, elektricien) | Strak raster, veel wit, rechte hoeken, zakelijke letter |
-| Sfeer en emotie (trouwlocatie, cateraar) | Rustig, veel wit, schreefletter, grote beelden |
+| Schreefletter in het woordmerk | Schreefkoppen. Klassiek, rustig, veel wit |
+| Geometrische schreefloze letter | Grotesk, strak raster, rechte hoeken |
+| Handgeschreven of penseelletter | Warm, zacht, geen harde rasters, één losse toets |
+| Dunne lijnen, fijne tekening | Lichte letterdiktes, veel lucht, dunne scheidingslijnen |
+| Dikke blokletters, zware vormen | Grote vette koppen, compacte regelafstand, veel contrast |
+| Ronde vormen, cirkels, bogen | Ronde hoeken, pilvormige knoppen, zachte schaduwen |
+| Hoeken, driehoeken, strakke lijnen | Rechte hoeken, zichtbare rasterlijnen, geen schaduw |
+| Twee kleuren | Gebruik precies die twee. Verzin er geen derde bij |
+| Alleen zwart-wit | Je bent vrij in kleur, maar houd het rustig |
+| Geen logo, alleen een naam | Vrij spel. Leid het dan af uit het vak |
 
-## Regel 2: kies een ander skelet
+**Fout uit demo 2, als waarschuwing.** Baarnsche Broers heeft een dunne
+lijntekening van bladeren met een elegante schreefletter in kapitalen: fijn,
+licht, klassiek. Ik gaf ze zware grotesk, limoengroen en bijna-zwart. Dat is
+niet hun identiteit uitbreiden maar er een andere overheen leggen. Had moeten
+zijn: lichte letterdiktes, veel wit, dunne lijnen, ingetogen groen.
+
+## Regel 2: lees de rest van wat ze al hebben
+
+Behalve het logo staat er meer klaar dan je denkt.
+
+| Waar je kijkt | Wat het je vertelt |
+|---|---|
+| Hun bus, werkkleding, bord bij de weg | Vaak de échte huisstijl, sterker dan de site |
+| Overheersende kleur op hun site | Hun kleur, ook als hij lelijk is. Verzachten, niet vervangen |
+| Foto's van henzelf of het team | Persoonlijke toon, gezichten groot in beeld |
+| Schrijven ze "u" of "je" | Neem het letterlijk over |
+| Veel tekst of juist bijna niets | Informatief en dicht, of visueel en luchtig |
+| Hun menu-indeling | Wat zij zelf belangrijk vinden |
+| Hebben ze een slogan | Gebruik hem, of laat 'm bewust weg |
+
+## Regel 3: kies een ander skelet
 
 Zes opbouwvormen die echt van elkaar verschillen. Niet twee keer dezelfde
 achter elkaar, en niet twee keer dezelfde binnen hetzelfde beroep.
@@ -51,7 +79,35 @@ eronder en beknopt. Voor wie veel projecten heeft.
 **F. Direct** Telefoonnummer groot in beeld, alles wat telt op één scherm,
 korte pagina. Voor spoedberoepen.
 
-## Regel 3: draai per demo aan andere knoppen
+## Regel 4: kop en voettekst zijn geen bijzaak
+
+Dit is het eerste en het laatste wat iemand ziet, en juist daar val ik het
+snelst terug in dezelfde vorm. Wissel ze net zo bewust als het skelet.
+
+**Koppen**
+
+1. Logo links, menu rechts. De standaard, dus juist zuinig mee zijn
+2. Logo gecentreerd, menu links en rechts ernaast gesplitst
+3. Logo links, menu weg, alleen een groot telefoonnummer en één knop
+4. Geen balk. Logo gewoon boven de hero, meescrollend
+5. Menu onder het logo op een tweede regel, met een lijn ertussen
+6. Verticale balk aan de zijkant op breed scherm, boven op mobiel
+7. Slanke balk die bij scrollen krimpt en het menu inklapt
+
+**Voetteksten**
+
+1. Meerdere kolommen: menu, contact, openingstijden
+2. Eén gecentreerde regel met naam en KvK, verder niets
+3. Donkere band met de bedrijfsnaam extreem groot als afsluiting
+4. Contact centraal: adres, kaart en openingstijden, geen menu
+5. Herhaling van de belangrijkste knop, daaronder pas de kleine letters
+6. Vrijwel geen voettekst, alleen een dunne lijn met het telefoonnummer
+
+**Kies kop en voettekst niet los van elkaar.** Een gecentreerde kop met een
+kolommenvoettekst voelt als twee sites. Een minimale kop hoort bij een
+minimale voettekst.
+
+## Regel 5: draai per demo aan andere knoppen
 
 Naast het skelet zijn dit de dingen die een bezoeker echt als "andere site"
 ervaart. Varieer ze bewust, en niet allemaal tegelijk dezelfde kant op.
@@ -64,7 +120,7 @@ ervaart. Varieer ze bewust, en niet allemaal tegelijk dezelfde kant op.
 - **Foto's**: uitgesneden tot de rand, ingekaderd, duotoon, of uitgeknipt
 - **Raster**: zichtbaar met lijnen, of onzichtbaar
 
-## Regel 4: verbied jezelf iets
+## Regel 6: verbied jezelf iets
 
 Kies bij elke nieuwe demo één ding dat je de vorige keer wél deed en nu niet
 mag. Dat is de simpelste manier om uit een gewoonte te breken.
@@ -74,10 +130,12 @@ mag. Dat is de simpelste manier om uit een gewoonte te breken.
 Bijhouden wat er gebruikt is, zodat herhaling opvalt vóórdat de mail de deur
 uit gaat.
 
-| Demo | Skelet | Letter | Toon | Kop | Bijzonder |
-|---|---|---|---|---|---|
-| voorbeeld-hovenier | A fotoverhaal | schreef (Iowan/Palatino) | licht, zand | doorzichtig, wordt wit | vertrouwensstrip met getallen |
-| baarnsche-broers | A fotoverhaal | grotesk, zwaar | licht met donkere secties | vast, dichtgeschilderd | werkwijze in vier stappen |
+| Demo | Skelet | Letter | Toon | Kop | Voettekst | Volgt hun logo? |
+|---|---|---|---|---|---|---|
+| voorbeeld-hovenier | A fotoverhaal | schreef | licht, zand | 1 logo links, menu rechts | 1 kolommen | verzonnen bedrijf, n.v.t. |
+| baarnsche-broers | A fotoverhaal | grotesk, zwaar | licht met donkere secties | 1 logo links, menu rechts | 1 kolommen | **nee**, logo is fijn en klassiek |
 
-**Wat opvalt:** twee keer skelet A. De derde demo moet een ander skelet
-krijgen, ongeacht het beroep.
+**Wat opvalt:** twee keer skelet A, twee keer dezelfde kop, twee keer dezelfde
+voettekst, en bij Baarnsche Broers een stijl die tegen hun eigen logo in gaat.
+De derde demo krijgt een ander skelet, een andere kop en een andere voettekst,
+ongeacht het beroep.
