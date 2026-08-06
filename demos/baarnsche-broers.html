@@ -61,7 +61,10 @@
   .kop{position:fixed;inset:0 0 auto 0;z-index:100;transition:background-color .3s,box-shadow .3s}
   .kop__rij{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
   .kop__logo{display:flex;align-items:center;text-decoration:none}
-  .kop__logo img{height:38px;width:auto;filter:brightness(0) invert(1);transition:filter .3s}
+  /* Het logo is wit beeldmateriaal op een doorzichtige achtergrond: op de
+     donkere hero klopt het meteen, en zodra de kop wit wordt maken we het
+     zwart met een filter. */
+  .kop__logo img{height:52px;width:auto;transition:filter .3s}
   .kop__nav{display:none;gap:32px;font-size:15px;font-weight:600}
   @media(min-width:980px){.kop__nav{display:flex}}
   .kop__nav a{text-decoration:none;color:rgba(255,255,255,.85);transition:color .3s}
@@ -71,7 +74,7 @@
   @media(min-width:640px){.kop__tel{display:block}}
 
   .kop.vast{background:rgba(251,251,248,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--lijn)}
-  .kop.vast .kop__logo img{filter:none}
+  .kop.vast .kop__logo img{filter:brightness(0)}
   .kop.vast .kop__nav a{color:var(--grijs)}
   .kop.vast .kop__nav a:hover{color:var(--inkt)}
   .kop.vast .kop__tel{color:var(--inkt)}
@@ -182,7 +185,7 @@
   .voet{background:var(--inkt);color:rgba(255,255,255,.6);padding:60px 0 28px;font-size:15px}
   .voet__grid{display:grid;gap:34px}
   @media(min-width:768px){.voet__grid{grid-template-columns:2fr 1fr 1fr}}
-  .voet__logo{height:34px;width:auto;filter:brightness(0) invert(1)}
+  .voet__logo{height:56px;width:auto}
   .voet h4{margin:0 0 14px;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff}
   .voet ul{display:grid;gap:9px}
   .voet a{text-decoration:none;transition:color .2s}
@@ -262,11 +265,11 @@
   <section class="sectie" id="diensten">
     <div class="wrap">
       <p class="oogje">Wat we doen</p>
-      <h2 class="titel">Alles voor de tuin, door één team</h2>
+      <h2 class="titel">Van eerste spa tot jaarlijkse snoeibeurt</h2>
       <p class="lead">
-        We hebben de juiste kennis én het juiste gereedschap in huis. Wat we zelf niet
-        doen &mdash; boomverzorging &mdash; besteden we uit aan gediplomeerde
-        boomverzorgers waar we vast mee samenwerken.
+        We leggen een tuin compleet aan &mdash; van grondwerk en bestrating tot de
+        laatste plant &mdash; en houden hem daarna bij. Gediplomeerd, met eigen
+        gereedschap en eigen mensen.
       </p>
 
       <article class="dienst">
@@ -312,8 +315,9 @@
         </div>
         <div>
           <p class="dienst__tekst">
-            Ook voor boomverzorging kunt u bij ons terecht. We werken nauw samen met
-            gediplomeerde boomverzorgers, zodat u niet zelf op zoek hoeft.
+            Staat er een boom die aandacht nodig heeft? Dan hoeft u niet zelf op zoek.
+            We werken vast samen met gediplomeerde boomverzorgers en regelen het via
+            hetzelfde aanspreekpunt als de rest van uw tuin.
           </p>
         </div>
       </article>
