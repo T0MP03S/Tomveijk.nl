@@ -109,8 +109,13 @@
 
   /* ---------- diensten: foto links, lijst rechts ---------- */
   .diensten__grid{display:grid;gap:52px;align-items:start}
-  @media(min-width:900px){.diensten__grid{grid-template-columns:.82fr 1.18fr;gap:76px}}
+  @media(min-width:900px){.diensten__grid{grid-template-columns:.9fr 1.1fr;gap:72px}}
+  /* Meeplakken tijdens het scrollen, anders blijft er onder de foto een groot
+     leeg vlak over terwijl de tekstkolom ernaast doorloopt. */
   .diensten__foto{width:100%;aspect-ratio:3/4;object-fit:cover}
+  @media(min-width:900px){
+    .diensten__foto{position:sticky;top:44px;aspect-ratio:auto;height:calc(100vh - 130px);max-height:760px}
+  }
   .titel{font-size:clamp(29px,3.6vw,42px);max-width:17ch}
   .lead{margin-top:22px;max-width:52ch;color:var(--inkt-licht);font-size:18px}
 
@@ -147,9 +152,10 @@
   .stap p{margin-top:8px;color:var(--inkt-licht);font-size:16.5px;max-width:52ch}
 
   /* ---------- over ons: tekst links, foto rechts ---------- */
-  .over__grid{display:grid;gap:52px;align-items:center}
+  .over__grid{display:grid;gap:52px;align-items:stretch}
   @media(min-width:900px){.over__grid{grid-template-columns:1.05fr .95fr;gap:76px}}
   .over__foto{width:100%;aspect-ratio:4/3;object-fit:cover}
+  @media(min-width:900px){.over__foto{aspect-ratio:auto;height:100%;min-height:100%}}
   .over blockquote{
     margin:34px 0 0;padding:0 0 0 26px;border-left:1px solid var(--groen);
     font-size:21px;font-style:italic;line-height:1.55;
