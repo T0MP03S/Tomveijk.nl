@@ -30,7 +30,7 @@ function lees(bestand) {
 
 async function main() {
   if (!fs.existsSync(DEMO_MAP)) {
-    console.log('Geen demos-map gevonden — niets te synchroniseren.')
+    console.log('Geen demos-map gevonden, niets te synchroniseren.')
     return
   }
 
@@ -51,7 +51,7 @@ async function main() {
       if (!data) continue
 
       if (!data.bedrijf || !data.branche || !data.plaats || !data.regio) {
-        console.error(`  ! ${naam} mist bedrijf/branche/plaats/regio — overgeslagen`)
+        console.error(`  ! ${naam} mist bedrijf/branche/plaats/regio, overgeslagen`)
         continue
       }
 
@@ -90,7 +90,7 @@ async function main() {
         : publiceren
           ? 'gepubliceerd'
           : 'pagina klaar, nog niet gepubliceerd'
-      console.log(`  + ${slug} — ${data.bedrijf} (${toestand})`)
+      console.log(`  + ${slug}: ${data.bedrijf} (${toestand})`)
     }
 
     console.log(

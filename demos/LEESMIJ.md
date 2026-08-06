@@ -14,7 +14,7 @@ De bestandsnaam is de slug, en dus de URL: `/demo/hoveniersbedrijf-jansen`.
 
 1. Stuur de website van het bedrijf naar Claude Code
 2. De drie onderdelen hierboven worden aangemaakt
-3. `git push` — Coolify bouwt en zet het online
+3. `git push`, dan bouwt Coolify en zet het online
 4. Bij het opstarten maakt de container het prospect automatisch aan
 
 Daarna staat het bedrijf in `/admin/demos` en is de link bereikbaar. Meer hoef
@@ -23,7 +23,7 @@ je niet te doen.
 ## Waarom losse bestanden en geen sjabloon
 
 Met één template krijgen twintig hoveniers in dezelfde regio exact dezelfde
-pagina. Dat verraadt meteen dat het massawerk is — en als de demo er
+pagina. Dat verraadt meteen dat het massawerk is, en als de demo er
 sjabloonmatig uitziet, gaat de klant ervan uit dat de site van €750 dat ook
 wordt. De demo ís het verkooppraatje.
 
@@ -57,7 +57,7 @@ Zet `"gepubliceerd": false` als de link nog niet bereikbaar mag zijn.
 
 `scripts/sync-demos.js` draait bij het opstarten van de container en maakt
 prospects aan die nog niet bestaan. **Bestaande prospects worden nooit
-overschreven** — status, notities en datums zijn handwerk in de admin, en die
+overschreven**: status, notities en datums zijn handwerk in de admin, en die
 mag een deploy niet wissen.
 
 Lokaal draaien kan met:
@@ -71,17 +71,17 @@ npm run demos:sync
 Download ze en zet ze in `public/demos/<slug>/`. Nooit rechtstreeks naar de
 foto's op hun eigen server linken: veel hosts blokkeren dat, en dan ziet de
 prospect kapotte plaatjes zonder dat jij het merkt. Bovendien maken foto's van
-hun trage hosting jouw demo net zo traag als hun eigen site — terwijl snelheid
+hun trage hosting jouw demo net zo traag als hun eigen site, terwijl snelheid
 precies is wat je verkoopt.
 
 ## De verkoopbalk
 
 Zit niet in de pagina zelf; die wordt er bij het serveren in geplakt (zie
 `lib/demo-bestand.ts`), met een eigen klasse-prefix zodat hij nooit botst met
-het ontwerp eromheen. Per prospect aan of uit te zetten in de admin — uit dus,
+het ontwerp eromheen. Per prospect aan of uit te zetten in de admin. Uit dus,
 zodra iemand klant wordt.
 
 ## Handmatig een prospect toevoegen
 
 `/admin/demos/nieuw` bestaat nog voor bedrijven die je wilt bijhouden zonder
-dat er (al) een demo van is — bijvoorbeeld een warme tip uit je netwerk.
+dat er (al) een demo van is, bijvoorbeeld een warme tip uit je netwerk.

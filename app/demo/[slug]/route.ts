@@ -9,8 +9,8 @@ import { bouwPagina, leesDemo } from '@/lib/demo-bestand'
 /**
  * Serveert een demopagina als losstaand HTML-document.
  *
- * Bewust een route handler en geen React-pagina: zo erft de demo niets van
- * deze site — geen Tailwind, geen donker thema, geen lettertypes die
+ * Bewust een route handler en geen React-pagina. Zo erft de demo niets van
+ * deze site: geen Tailwind, geen donker thema, geen lettertypes die
  * doorlekken. Elke demo is een eigen ontwerp en moet dat ook echt kunnen zijn.
  */
 
@@ -21,7 +21,7 @@ export const runtime = 'nodejs'
  * Legt vast dat de demo bekeken is.
  *
  * Wie zijn demo opent maar niet reageert, is precies degene die je moet bellen
- * — dat is de hoogste conversie in het hele traject. Eigen bezoeken slaan we
+ * en dat is de hoogste conversie in het hele traject. Eigen bezoeken slaan we
  * over, anders loopt de lijst binnen een dag vol met je eigen controles.
  */
 async function legWeergaveVast(prospectId: string) {

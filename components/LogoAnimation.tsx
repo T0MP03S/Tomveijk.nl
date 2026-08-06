@@ -10,7 +10,7 @@
  *
  * De animatie: een brede band met jouw merkkleuren schuift diagonaal door het
  * logo heen, bijgesneden op de logovorm. Omdat de gradiënt op `repeat` staat en
- * we precies één kleurperiode opschuiven, is de lus naadloos — je ziet nooit
+ * we precies één kleurperiode opschuiven, is de lus naadloos: je ziet nooit
  * een sprong.
  *
  * Kosten: ~2 KB, geen netwerkverzoek, en de animatie draait op de GPU.

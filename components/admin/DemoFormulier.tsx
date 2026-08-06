@@ -10,7 +10,7 @@ import { PROSPECT_STATUSSEN } from '@/lib/validation'
  * Beheer van één prospect.
  *
  * De demopagina zelf staat als los bestand in demos/<slug>.html en wordt niet
- * hier bewerkt — elke demo is een eigen ontwerp. Dit formulier gaat over de
+ * hier bewerkt, want elke demo is een eigen ontwerp. Dit formulier gaat over de
  * bedrijfsgegevens, je verkoopadministratie en de verkoopbalk.
  */
 
@@ -148,7 +148,7 @@ export default function DemoFormulier({
       router.push('/admin/demos')
       router.refresh()
     } catch {
-      setFout('Opslaan mislukt — controleer je verbinding')
+      setFout('Opslaan mislukt, controleer je verbinding')
     } finally {
       setBezig(false)
     }
@@ -281,7 +281,7 @@ export default function DemoFormulier({
       {/*
         Administratie en verkoopbalk verschijnen pas bij het bewerken. Bij het
         aanmaken van een prospect is er nog geen gesprek, geen pakket en geen
-        bedrag — die velden dan al tonen vraagt om informatie die niet bestaat.
+        bedrag. Die velden dan al tonen vraagt om informatie die niet bestaat.
       */}
       {!bewerken && (
         <p className="px-1 text-sm text-white/40">
@@ -315,7 +315,7 @@ export default function DemoFormulier({
               onChange={(e) => zet({ pakket: e.target.value })}
             >
               <option value="" className="bg-[#0b0b18]">
-                —
+                Geen
               </option>
               <option value="BASIS" className="bg-[#0b0b18]">
                 Basis
@@ -387,7 +387,7 @@ export default function DemoFormulier({
       {/* ---------------- Verkoopbalk ---------------- */}
       <Kaart
         titel="Verkoopbalk"
-        uitleg="De balk onderaan de demo met je aanbod. Zet 'm uit zodra iemand klant wordt — dan is het een gewone site."
+        uitleg="De balk onderaan de demo met je aanbod. Zet 'm uit zodra iemand klant wordt, dan is het een gewone site."
       >
         <div className="grid gap-4 sm:grid-cols-3">
           <Veld label="Actief">
@@ -436,7 +436,7 @@ export default function DemoFormulier({
               className="h-4 w-4 accent-[#00D752]"
             />
             Publiceren
-            <span className="text-white/35">— pas dan is de link bereikbaar</span>
+            <span className="text-white/35">pas dan is de link bereikbaar</span>
           </label>
 
           <div className="flex items-center gap-3">

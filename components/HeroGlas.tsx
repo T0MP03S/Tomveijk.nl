@@ -7,7 +7,7 @@ import type { CSSProperties } from 'react'
  * Matglas over een gekleurde gloed.
  *
  * De kleurvelden staan achter het glas, zodat `backdrop-filter` iets heeft om
- * te vervagen — dat is wat het als glas laat lezen. Bij de eerdere three.js-
+ * te vervagen, en dat is wat het als glas laat lezen. Bij de eerdere three.js-
  * poging ontbrak precies dat: daar had het glas een egale donkere achtergrond
  * en dus niets om te breken.
  *

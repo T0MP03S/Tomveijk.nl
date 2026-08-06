@@ -8,7 +8,7 @@ import path from 'path'
  * dezelfde regio met exact dezelfde pagina verraden meteen dat het massawerk
  * is, en dan gaat de klant ervan uit dat de site van €750 dat ook wordt.
  *
- * Als los document erft de pagina bovendien niets van deze site — geen
+ * Als los document erft de pagina bovendien niets van deze site: geen
  * Tailwind, geen donker thema, geen lettertypes die doorlekken. Volledige
  * vrijheid per ontwerp.
  */
@@ -56,11 +56,11 @@ function ontsnap(tekst: string): string {
  *
  * Bewust een balk en geen pop-up: het moment dat iemand overtuigd raakt is
  * terwijl hij de pagina bekijkt, niet later in zijn inbox. Volledig
- * zelfstandig — eigen stijlen met een eigen prefix, zodat hij nooit botst met
- * het ontwerp van de pagina eromheen.
+ * zelfstandig, met eigen stijlnamen onder een eigen prefix, zodat hij nooit
+ * botst met het ontwerp van de pagina eromheen.
  */
 export function pitchBalk(p: PitchInstellingen): string {
-  const onderwerp = `Ja, ik wil deze website — ${p.bedrijf}`
+  const onderwerp = `Ja, ik wil deze website voor ${p.bedrijf}`
   const bericht = `Hoi Tom,
 
 Ik heb het voorbeeld voor ${p.bedrijf} bekeken en wil graag verder.
@@ -79,8 +79,8 @@ Groet,`
   <div class="tve-pitch__binnen">
     <p class="tve-pitch__tekst">
       <strong>Dit is een voorbeeld</strong> dat ik voor ${ontsnap(p.bedrijf)} heb gemaakt.
-      <span class="tve-pitch__meer">De complete site &mdash; klaar binnen een week &mdash;
-      kost <strong>&euro;${p.prijs} eenmalig</strong>, daarna &euro;${p.perMaand} per maand
+      <span class="tve-pitch__meer">De complete site, klaar binnen een week, kost
+      <strong>&euro;${p.prijs} eenmalig</strong>, daarna &euro;${p.perMaand} per maand
       voor hosting en onderhoud.</span>
     </p>
     <div class="tve-pitch__knoppen">

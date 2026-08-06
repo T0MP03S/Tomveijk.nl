@@ -40,7 +40,7 @@ export const skillSchema = z.object({
 /* -------------------------------------------------------------------------
    Demopagina's voor prospects
 
-   De pagina zelf staat als los bestand in demos/<slug>.html — elke demo is een
+   De pagina zelf staat als los bestand in demos/<slug>.html. Elke demo is een
    eigen ontwerp, geen ingevuld sjabloon. Hier valideren we alleen het prospect:
    bedrijfsgegevens, verkoopadministratie en de instellingen van de verkoopbalk.
    ------------------------------------------------------------------------- */

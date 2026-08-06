@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Baarnsche Broers Hoveniers — aanleg en onderhoud in Baarn</title>
+<title>Baarnsche Broers Hoveniers | aanleg en onderhoud in Baarn</title>
 <meta name="description" content="Twee broers uit Baarn die tuinen aanleggen en onderhouden. Gediplomeerd, met een vast aanspreekpunt van kennismaking tot oplevering. Actief in Baarn, Soest, Eemnes en omstreken.">
 
 <style>
@@ -58,35 +58,31 @@
   .knop--rand:hover{background:rgba(255,255,255,.12);border-color:transparent}
 
   /* ---------- koptekst ---------- */
-  .kop{position:fixed;inset:0 0 auto 0;z-index:100;transition:background-color .3s,box-shadow .3s}
-  .kop__rij{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
+  /* Altijd zichtbaar en dichtgeschilderd. Een doorzichtige kop over de foto
+     werkt niet met dit logo: het is wit beeldmateriaal en valt weg zodra er
+     een lichte plek in de foto achter zit. Sticky in plaats van fixed, zodat
+     de kop ruimte inneemt en de hero er netjes onder begint. */
+  .kop{position:sticky;top:0;z-index:100;background:var(--wit);border-bottom:1px solid var(--lijn);transition:box-shadow .25s}
+  .kop.vast{box-shadow:0 6px 24px -16px rgba(0,0,0,.4)}
+  .kop__rij{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:11px 0}
   .kop__logo{display:flex;align-items:center;text-decoration:none}
-  /* Het logo is wit beeldmateriaal op een doorzichtige achtergrond: op de
-     donkere hero klopt het meteen, en zodra de kop wit wordt maken we het
-     zwart met een filter. */
-  .kop__logo img{height:52px;width:auto;transition:filter .3s}
+  .kop__logo img{height:48px;width:auto;filter:brightness(0)}
   .kop__nav{display:none;gap:32px;font-size:15px;font-weight:600}
   @media(min-width:980px){.kop__nav{display:flex}}
-  .kop__nav a{text-decoration:none;color:rgba(255,255,255,.85);transition:color .3s}
-  .kop__nav a:hover{color:#fff}
+  .kop__nav a{text-decoration:none;color:var(--grijs);transition:color .2s}
+  .kop__nav a:hover{color:var(--inkt)}
   .kop__rechts{display:flex;align-items:center;gap:14px}
-  .kop__tel{display:none;font-size:15px;font-weight:700;color:#fff;text-decoration:none;transition:color .3s}
+  .kop__tel{display:none;font-size:15px;font-weight:700;color:var(--inkt);text-decoration:none}
   @media(min-width:640px){.kop__tel{display:block}}
 
-  .kop.vast{background:rgba(251,251,248,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--lijn)}
-  .kop.vast .kop__logo img{filter:brightness(0)}
-  .kop.vast .kop__nav a{color:var(--grijs)}
-  .kop.vast .kop__nav a:hover{color:var(--inkt)}
-  .kop.vast .kop__tel{color:var(--inkt)}
-
   /* ---------- hero ---------- */
-  .hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--inkt)}
+  .hero{position:relative;min-height:min(84svh,720px);display:flex;align-items:flex-end;overflow:hidden;background:var(--inkt)}
   .hero__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72}
   .hero__waas{
     position:absolute;inset:0;
     background:linear-gradient(to top,rgba(10,15,11,.94) 4%,rgba(10,15,11,.5) 46%,rgba(10,15,11,.3) 100%);
   }
-  .hero__inhoud{position:relative;padding:130px 0 68px;color:#fff;max-width:900px}
+  .hero__inhoud{position:relative;padding:96px 0 66px;color:#fff;max-width:900px}
   .hero__plek{
     display:inline-block;padding:7px 15px;border-radius:999px;
     background:rgba(140,193,82,.16);border:1px solid rgba(140,193,82,.35);
@@ -107,22 +103,26 @@
   .titel{font-size:clamp(32px,4.6vw,54px);max-width:15ch}
   .lead{margin-top:20px;max-width:54ch;color:var(--grijs);font-size:18.5px}
 
-  .dienst{padding:52px 0;border-top:1px solid var(--lijn);display:grid;gap:28px}
-  .dienst:first-of-type{border-top:0;padding-top:44px}
-  @media(min-width:900px){.dienst{grid-template-columns:.34fr .66fr;gap:56px;align-items:start}}
-  .dienst__nr{
-    font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--limoen);
+  .diensten{margin-top:52px;display:grid;gap:16px}
+  .kaart{background:#fff;border:1px solid var(--lijn);border-radius:6px;overflow:hidden}
+  .kaart--breed{display:grid}
+  @media(min-width:880px){.kaart--breed{grid-template-columns:.88fr 1.12fr}}
+  .kaart__foto{width:100%;height:100%;min-height:250px;object-fit:cover}
+  .kaart__body{padding:30px}
+  @media(min-width:768px){.kaart__body{padding:40px}}
+  .kaart__nr{
+    display:inline-block;padding:5px 11px;border-radius:999px;background:var(--inkt);
+    color:var(--limoen);font-size:12px;font-weight:800;letter-spacing:.1em;
   }
-  .dienst h3{margin-top:10px;font-size:clamp(26px,3vw,36px)}
-  .dienst__tekst{color:var(--grijs);font-size:17px}
-  .dienst__lijst{
-    margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-    gap:9px 24px;font-size:15.5px;
-  }
-  .dienst__lijst li{position:relative;padding-left:20px;color:var(--inkt-zacht)}
-  .dienst__lijst li::before{
-    content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;
-    border-radius:2px;background:var(--limoen);
+  .kaart h3{margin-top:16px;font-size:clamp(25px,2.8vw,33px)}
+  .kaart__tekst{margin-top:13px;color:var(--grijs);font-size:16.5px}
+  .duo{display:grid;gap:16px}
+  @media(min-width:880px){.duo{grid-template-columns:1fr 1fr}}
+
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:24px}
+  .tags li{
+    padding:6px 13px;border-radius:999px;background:var(--wit);
+    border:1px solid var(--lijn);font-size:14px;color:var(--inkt-zacht);
   }
 
   /* ---------- werkwijze ---------- */
@@ -239,7 +239,7 @@
         <h1>Uw tuin, aangelegd<br>door <em>twee broers</em><br>uit Baarn</h1>
         <p class="hero__tekst">
           Aanleg, onderhoud en boomverzorging. Van het eerste gesprek tot de oplevering
-          heeft u één vast aanspreekpunt &mdash; en dat is een van ons twee.
+          heeft u één vast aanspreekpunt, en dat is een van ons twee.
         </p>
         <div class="hero__knoppen">
           <a class="knop knop--wit" href="#contact">Vraag een offerte aan</a>
@@ -257,7 +257,7 @@
           <li>Baarn</li><li>Soest</li><li>Eemnes</li><li>Huizen</li>
           <li>Hilversum</li><li>Den Dolder</li><li>De Bilt</li><li>Amersfoort</li>
         </ul>
-        <span style="font-size:15px;color:rgba(255,255,255,.45)">&mdash; en daarbuiten komen we ook langs</span>
+        <span style="font-size:15px;color:rgba(255,255,255,.45)">en daarbuiten komen we ook langs</span>
       </div>
     </div>
   </section>
@@ -267,60 +267,59 @@
       <p class="oogje">Wat we doen</p>
       <h2 class="titel">Van eerste spa tot jaarlijkse snoeibeurt</h2>
       <p class="lead">
-        We leggen een tuin compleet aan &mdash; van grondwerk en bestrating tot de
-        laatste plant &mdash; en houden hem daarna bij. Gediplomeerd, met eigen
-        gereedschap en eigen mensen.
+        We leggen een tuin compleet aan, van grondwerk en bestrating tot de laatste
+        plant, en houden hem daarna bij. Gediplomeerd, met eigen gereedschap en
+        eigen mensen.
       </p>
 
-      <article class="dienst">
-        <div>
-          <p class="dienst__nr">01</p>
-          <h3>Aanleg</h3>
-        </div>
-        <div>
-          <p class="dienst__tekst">
-            Een tuin aanleggen is niet zomaar iets, daar komt veel bij kijken. We beginnen
-            altijd met een kennismakingsgesprek en gaan pas de grond in als de tekening en
-            de offerte akkoord zijn.
-          </p>
-          <ul class="dienst__lijst">
-            <li>Grondwerk</li><li>Straatwerk</li><li>Beregening</li><li>Gazon</li>
-            <li>Verlichtingsplan</li><li>Beschoeiingen</li><li>Vlonders</li><li>Pergola&rsquo;s</li>
-            <li>Overkappingen</li><li>Beplanting</li><li>Schuttingen</li><li>Vijvers</li>
-          </ul>
-        </div>
-      </article>
+      <div class="diensten">
+        <article class="kaart kaart--breed">
+          <img class="kaart__foto" src="/demos/baarnsche-broers/aanleg.webp" alt="Aanleg van een tuin" loading="lazy">
+          <div class="kaart__body">
+            <span class="kaart__nr">01</span>
+            <h3>Aanleg</h3>
+            <p class="kaart__tekst">
+              Een tuin aanleggen is niet zomaar iets, daar komt veel bij kijken. We beginnen
+              altijd met een kennismakingsgesprek en gaan pas de grond in als de tekening en
+              de offerte akkoord zijn.
+            </p>
+            <ul class="tags">
+              <li>Grondwerk</li><li>Straatwerk</li><li>Beregening</li><li>Gazon</li>
+              <li>Verlichtingsplan</li><li>Beschoeiingen</li><li>Vlonders</li><li>Pergola&rsquo;s</li>
+              <li>Overkappingen</li><li>Beplanting</li><li>Schuttingen</li><li>Vijvers</li>
+            </ul>
+          </div>
+        </article>
 
-      <article class="dienst">
-        <div>
-          <p class="dienst__nr">02</p>
-          <h3>Onderhoud</h3>
-        </div>
-        <div>
-          <p class="dienst__tekst">
-            Een tuin heeft onderhoud nodig, voor een optimale groei en bloei. We maken
-            onderhoudscontracten op maat, voor particuliere tuinen en bedrijfstuinen.
-          </p>
-          <ul class="dienst__lijst">
-            <li>Snoeien van haag</li><li>Begeleidingssnoei jonge bomen</li><li>Maaien gazon</li>
-            <li>Borderonderhoud</li><li>Blad ruimen</li><li>Mesten</li><li>Verticuteren</li>
-          </ul>
-        </div>
-      </article>
+        <div class="duo">
+          <article class="kaart">
+            <div class="kaart__body">
+              <span class="kaart__nr">02</span>
+              <h3>Onderhoud</h3>
+              <p class="kaart__tekst">
+                Een tuin heeft onderhoud nodig, voor een optimale groei en bloei. We maken
+                onderhoudscontracten op maat, voor particuliere tuinen en bedrijfstuinen.
+              </p>
+              <ul class="tags">
+                <li>Snoeien van haag</li><li>Begeleidingssnoei jonge bomen</li><li>Maaien gazon</li>
+                <li>Borderonderhoud</li><li>Blad ruimen</li><li>Mesten</li><li>Verticuteren</li>
+              </ul>
+            </div>
+          </article>
 
-      <article class="dienst">
-        <div>
-          <p class="dienst__nr">03</p>
-          <h3>Boomverzorging</h3>
+          <article class="kaart">
+            <div class="kaart__body">
+              <span class="kaart__nr">03</span>
+              <h3>Boomverzorging</h3>
+              <p class="kaart__tekst">
+                Staat er een boom die aandacht nodig heeft? Dan hoeft u niet zelf op zoek.
+                We werken vast samen met gediplomeerde boomverzorgers en regelen het via
+                hetzelfde aanspreekpunt als de rest van uw tuin.
+              </p>
+            </div>
+          </article>
         </div>
-        <div>
-          <p class="dienst__tekst">
-            Staat er een boom die aandacht nodig heeft? Dan hoeft u niet zelf op zoek.
-            We werken vast samen met gediplomeerde boomverzorgers en regelen het via
-            hetzelfde aanspreekpunt als de rest van uw tuin.
-          </p>
-        </div>
-      </article>
+      </div>
     </div>
   </section>
 
@@ -442,7 +441,7 @@
               <button type="submit" class="knop knop--groen" style="width:100%">Verstuur aanvraag</button>
             </div>
             <p class="melding" id="melding" role="status" hidden>
-              Dit is een voorbeeldpagina — op de echte site komt dit bericht meteen in de
+              Dit is een voorbeeldpagina. Op de echte site komt dit bericht meteen in de
               mailbox van Baarnsche Broers binnen.
             </p>
           </form>

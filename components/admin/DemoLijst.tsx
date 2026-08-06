@@ -33,7 +33,7 @@ const STATUS: Record<string, { label: string; klasse: string }> = {
 }
 
 function datum(waarde: string | null) {
-  if (!waarde) return '—'
+  if (!waarde) return '-'
   return new Date(waarde).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' })
 }
 
@@ -115,7 +115,7 @@ export default function DemoLijst({ prospects }: { prospects: Prospect[] }) {
                       </span>
                     </span>
                   ) : (
-                    <span className="text-white/25">—</span>
+                    <span className="text-white/25">-</span>
                   )}
                 </td>
 
@@ -128,7 +128,7 @@ export default function DemoLijst({ prospects }: { prospects: Prospect[] }) {
                       ) : null}
                     </>
                   ) : (
-                    <span className="text-white/25">—</span>
+                    <span className="text-white/25">-</span>
                   )}
                 </td>
 
