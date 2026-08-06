@@ -134,8 +134,10 @@ uit gaat.
 |---|---|---|---|---|---|---|
 | voorbeeld-hovenier | A fotoverhaal | schreef | licht, zand | 1 logo links, menu rechts | 1 kolommen | verzonnen bedrijf, n.v.t. |
 | baarnsche-broers | A fotoverhaal | grotesk, zwaar | licht met donkere secties | 1 logo links, menu rechts | 1 kolommen | **nee**, logo is fijn en klassiek |
+| baarnsche-broers-klassiek | C gesplitst scherm | schreef, licht | papier, veel wit | 2 logo gecentreerd, menu gesplitst | 4 contact centraal | ja |
 
-**Wat opvalt:** twee keer skelet A, twee keer dezelfde kop, twee keer dezelfde
-voettekst, en bij Baarnsche Broers een stijl die tegen hun eigen logo in gaat.
-De derde demo krijgt een ander skelet, een andere kop en een andere voettekst,
-ongeacht het beroep.
+De klassieke versie is dezelfde inhoud voor hetzelfde bedrijf, maar dan wel
+afgeleid van hun logo. Naast elkaar leggen laat zien of dit systeem werkt.
+
+**Nog niet gebruikt:** skelet B, D, E en F. Kop 3 tot en met 7. Voettekst 2, 3,
+5 en 6. Daar begint de volgende demo.
