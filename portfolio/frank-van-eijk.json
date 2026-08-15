@@ -1,0 +1,22 @@
+{
+  "titel": "Frank van Eijk",
+  "type": "WEBSITE",
+  "embedUrl": "https://frankvaneijk.nl",
+  "omschrijving": "Portfoliosite voor scenarioschrijver en regisseur Frank van Eijk.",
+  "thumbnail": "/assets/images/Frank-van-Eijk.png",
+  "gepubliceerd": true,
+  "volgorde": 4,
+  "bijwerken": [
+    "type",
+    "embedUrl"
+  ],
+  "blokken": [
+    {
+      "type": "WEBSITE",
+      "inhoud": {
+        "url": "https://frankvaneijk.nl",
+        "type": "embed"
+      }
+    }
+  ]
+}

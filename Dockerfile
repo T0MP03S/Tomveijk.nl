@@ -45,6 +45,9 @@ COPY --from=builder /app/public ./public
 # Ze zitten niet in de Next-build, dus zonder deze regel geeft elke demo een 404
 # in productie terwijl hij lokaal prima werkt.
 COPY --from=builder /app/demos ./demos
+
+# Portfolio-items komen uit bestanden, zodat ze een lege database overleven.
+COPY --from=builder /app/portfolio ./portfolio
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma

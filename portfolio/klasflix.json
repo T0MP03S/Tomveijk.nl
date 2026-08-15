@@ -1,0 +1,55 @@
+{
+  "titel": "Klasflix",
+  "type": "WEBSITE",
+  "omschrijving": "Zoekmachine voor het onderwijs. Doorzoekt ruim 30.000 onderwijsvideo's van Schooltv, Beeld & Geluid en YouTube op wat er letterlijk in gezegd wordt, en springt direct naar het juiste moment.",
+  "thumbnail": "/assets/images/klasflix-logo.png",
+  "gepubliceerd": true,
+  "volgorde": 0,
+  "blokken": [
+    {
+      "type": "PHOTO",
+      "inhoud": {
+        "url": "/assets/images/klasflix-logo.png",
+        "caption": "",
+        "layout": "full"
+      }
+    },
+    {
+      "type": "TEXT",
+      "inhoud": {
+        "text": "Klasflix doorzoekt ruim 30.000 onderwijsvideo's van Schooltv, Beeld & Geluid en YouTube op wat er letterlijk in gezegd wordt. Je typt waar je les over geeft, en je springt direct naar het moment in de video waar het aan bod komt. Geen half uur voorspoelen meer."
+      }
+    },
+    {
+      "type": "SUBTITLE",
+      "inhoud": {
+        "text": "Het probleem"
+      }
+    },
+    {
+      "type": "TEXT",
+      "inhoud": {
+        "text": "Leraren weten dat er goed videomateriaal bestaat, maar vinden het niet terug. Zoeken gaat op titel en omschrijving, terwijl het onderwerp waar je les over geeft ergens halverwege de video langskomt. Daardoor blijft materiaal ongebruikt liggen."
+      }
+    },
+    {
+      "type": "SUBTITLE",
+      "inhoud": {
+        "text": "De oplossing"
+      }
+    },
+    {
+      "type": "TEXT",
+      "inhoud": {
+        "text": "De volledige gesproken tekst van elke video is doorzoekbaar gemaakt. Een zoekopdracht levert daardoor geen lijst met titels op, maar concrete momenten: dit fragment, in deze video, op deze tijdcode. Zoeken is gratis en werkt voor zowel het primair als het voortgezet onderwijs."
+      }
+    },
+    {
+      "type": "WEBSITE",
+      "inhoud": {
+        "url": "https://klasflix.nl",
+        "type": "popup"
+      }
+    }
+  ]
+}

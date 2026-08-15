@@ -25,5 +25,8 @@ node scripts/create-admin.js || echo "Admin user already exists or script failed
 echo "Syncing demos..."
 node scripts/sync-demos.js || echo "Demo sync failed"
 
+echo "Synchroniseren van portfolio-items..."
+node scripts/sync-portfolio.js || echo "portfolio sync overgeslagen"
+
 echo "Starting application..."
 exec node server.js
