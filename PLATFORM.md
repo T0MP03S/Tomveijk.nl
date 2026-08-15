@@ -35,8 +35,11 @@ erin.
 <ul>{{ openingstijden }}</ul>
 ```
 
-Bij het serveren leest de app het bestand en vult de plekken uit de database.
-Daarmee krijg je drie dingen tegelijk:
+Bij het **bouwen** worden die plekken ingevuld, niet bij het serveren. Past de
+eigenaar zijn openingstijden aan in het beheerpaneel, dan slaat de gedeelde
+dienst dat op en zet hij via Coolify een nieuwe versie van díe ene site klaar.
+Binnen een halve minuut staat het erop, en de site blijft ondertussen gewoon
+statisch en snel. Daarmee krijg je drie dingen tegelijk:
 
 1. **Het ontwerp blijft per klant volledig vrij**, want het is gewoon een bestand
 2. **De eigenaar kan bewerken wat jij bewerkbaar maakt**, en niets anders
@@ -99,36 +102,78 @@ een captcha: die kost je echte aanvragen.
 
 ## Domeinen
 
-Klant wijst zijn domein naar de VPS, Traefik regelt het certificaat
-automatisch, de app kijkt bij binnenkomst welk domein het is en dient de
-bijbehorende site op.
+Klant wijst zijn domein naar de VPS en je hangt het in Coolify aan zijn
+applicatie. Traefik regelt het certificaat automatisch. Je hoeft zelf geen
+routering te schrijven die uitzoekt welk domein binnenkomt: dat is precies wat
+je wint door per klant een eigen applicatie te draaien.
 
 **Raak nooit hun MX-records aan.** Verandert daar iets, dan ligt hun mail plat
 en ben je de klant én je naam in de regio kwijt. Alleen A- en CNAME-records, en
 maak vooraf een schermafbeelding van hun oude instellingen.
 
-## Wat dit je VPS kost
+## Hoe het draait: per klant een eigen container
 
-Belangrijke reden om het zo te doen: één app die alle sites bedient, niet één
-container per klant.
+Gemeten op de VPS, niet geschat:
 
-| | RAM |
+| | Geheugen |
 |---|---|
-| Je VPS totaal | 3,7 GB |
-| Nu in gebruik | ~1,6 GB |
-| Eén platform-app voor alle klantsites | ~250 MB |
-| Twintig losse containers zou zijn | ~4 GB, past dus niet |
+| tomveijk.nl (Next.js) | 195 MB |
+| Tweede Next-app | 162 MB |
+| Coolify zelf, alles bij elkaar | ~560 MB |
+| Een piepkleine container (coolify-sentinel) | 8,7 MB |
+| **Vrij op de VPS** | **~2000 MB** |
 
-Een pagina opdienen is een bestand lezen plus een paar databaseregels. Daar
-passen tientallen kleine sites in zonder dat je iets merkt.
+Daar volgt de architectuur uit. Een Node-app kost ongeveer 175 MB, een
+container die statische bestanden serveert ongeveer 8 MB. Twintig Node-apps is
+3,5 GB en past niet. Twintig statische containers is 160 MB en past moeiteloos.
+
+**Dus: per klant een eigen Coolify-applicatie, statisch. Plus één gedeelde
+dienst voor het dynamische deel.**
+
+### Waarom niet één app die alles serveert
+
+- **Isolatie waar het telt.** Een mislukte build bij klant A raakt klant B
+  niet: die blijft op zijn laatste werkende versie draaien. Bij betalende
+  klanten is dat het verschil tussen een schouderophalen en een boze telefoon.
+- **Coolify regelt domein en certificaat al per applicatie.** Je hoeft geen
+  routering te schrijven die uitzoekt welk domein binnenkomt.
+- **Statische sites zijn vrijwel onbreekbaar.** Geen database, geen Node, geen
+  pakketten met lekken die je moet bijwerken. Precies wat je wilt bij klanten
+  die betalen voor geen gedoe.
+
+### De gedeelde dienst
+
+Eén applicatie voor contactformulieren, bezoekcijfers en later het
+beheerpaneel. Kost eenmalig ongeveer 175 MB in plaats van per klant.
+
+Het faalgedrag is hier het belangrijkste argument: **ligt die dienst eruit, dan
+blijven alle klantsites gewoon staan.** Alleen formulieren en tellingen doen
+het even niet. Bij één grote app die alles serveert gaat in dat geval iedereen
+tegelijk plat.
+
+### Praktisch
+
+Eén git-repo met een map per klant. Per klant een Coolify-applicatie die naar
+diezelfde repo wijst met een andere basismap en hun eigen domein.
+
+Zet **automatisch uitrollen uit**. Anders triggert één push twintig
+herbouwen. Je rolt handmatig de klant uit die je hebt aangepast, en dat is één
+klik. Meteen een veiligheidsslot: je zet niets live zonder het te bedoelen.
+
+### Wanneer een demo klant wordt
+
+De demo verhuist van de map in tomveijk.nl naar de klantenrepo, krijgt een
+eigen Coolify-applicatie en hun domein. De verkoopbalk gaat uit. Verder
+verandert er niets aan het bestand.
 
 ## Risico's, eerlijk
 
-**Eén app plat betekent alle klantsites plat.** Dat is de keerzijde van
-gedeelde infrastructuur, en met betalende klanten is dat een echte
-verantwoordelijkheid. Uptime-bewaking is daarom geen luxe maar de eerste stap.
-Wil je het steviger, dan kun je later elke site ook als plat HTML-bestand
-wegschrijven dat Traefik rechtstreeks kan serveren als de app eruit ligt.
+**De gedeelde dienst is één punt waar het mis kan gaan.** Niet voor de sites
+zelf, die blijven staan omdat ze los draaien, maar wel voor formulieren en
+bezoekcijfers. Een aanvraag die binnenkomt terwijl die dienst plat ligt, is
+weg. Uptime-bewaking hoort daarom bij de eerste dingen die je opzet, en het
+formulier moet bij een fout een telefoonnummer tonen in plaats van stilletjes
+te mislukken.
 
 **SQLite is één bestand.** Prima voor deze schaal, maar zonder back-up ben je
 bij een kapot volume alles kwijt: klanten, teksten, aanvragen. Elke nacht een
