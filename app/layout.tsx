@@ -9,11 +9,11 @@ const siteUrl = process.env.NEXTAUTH_URL || 'https://tomveijk.nl'
 
 export const metadata: Metadata = {
   title: {
-    default: "Tom van Eijk - Creative Designer",
+    default: "Tom van Eijk - Websites en vormgeving uit Baarn",
     template: "%s | Tom van Eijk"
   },
-  description: "Portfolio van Tom van Eijk - Grafisch vormgever met passie voor innovatie. Logo's, huisstijlen en creatieve designs.",
-  keywords: ["grafisch ontwerp", "logo design", "huisstijl", "branding", "Tom van Eijk", "tomveijk", "portfolio", "creative designer"],
+  description: "Ik bouw websites voor kleine bedrijven in Baarn en omgeving. Snel, goed leesbaar op de telefoon, en zonder gedoe. Daarnaast logo's en huisstijlen.",
+  keywords: ["website laten maken", "webdesign Baarn", "website kleine ondernemer", "grafisch ontwerp", "logo design", "huisstijl", "Tom van Eijk", "tomveijk", "portfolio"],
   authors: [{ name: "Tom van Eijk" }],
   creator: "Tom van Eijk",
   metadataBase: new URL(siteUrl),
@@ -22,21 +22,21 @@ export const metadata: Metadata = {
     locale: 'nl_NL',
     url: siteUrl,
     siteName: 'tomveijk',
-    title: 'Tom van Eijk - Creative Designer',
-    description: 'Portfolio van Tom van Eijk - Grafisch vormgever met passie voor innovatie. Jouw merk, mijn creativiteit!',
+    title: 'Tom van Eijk - Websites en vormgeving uit Baarn',
+    description: "Ik bouw websites voor kleine bedrijven in Baarn en omgeving. Snel, goed leesbaar op de telefoon, en zonder gedoe.",
     images: [
       {
         url: '/images/tom-profile.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tom van Eijk - Creative Designer',
+        alt: 'Tom van Eijk, websites en vormgeving uit Baarn',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tom van Eijk - Creative Designer',
-    description: 'Portfolio van Tom van Eijk - Grafisch vormgever met passie voor innovatie.',
+    title: 'Tom van Eijk - Websites en vormgeving uit Baarn',
+    description: "Ik bouw websites voor kleine bedrijven in Baarn en omgeving.",
     images: ['/images/tom-profile.jpg'],
   },
   robots: {

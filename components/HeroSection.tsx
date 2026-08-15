@@ -47,13 +47,13 @@ export default function HeroSection() {
           >
             <div>
               <p className="text-sm md:text-base text-[#A34BFF] font-medium uppercase tracking-widest mb-4">
-                Tom van Eijk • Creative Designer
+                Tom van Eijk • Websites en vormgeving uit Baarn
               </p>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                Jouw merk, mijn creativiteit!
+                Een website waar klanten op afkomen
               </h1>
               <p className="text-base md:text-lg text-white/60 max-w-lg leading-relaxed">
-                Ik ben <strong className="text-white">Tom van Eijk</strong>, grafisch vormgever met passie voor innovatie. Laat mij jouw ideeën tot leven brengen met creatieve designs die écht opvallen.
+                Ik ben <strong className="text-white">Tom van Eijk</strong> uit Baarn. Ik bouw websites voor kleine bedrijven: snel, goed leesbaar op de telefoon, en zonder gedoe. Daarnaast maak ik logo&apos;s en huisstijlen.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -63,11 +63,13 @@ export default function HeroSection() {
               >
                 CONTACT
               </MorphingButton>
+              {/* Wijst naar het werk, niet naar de biografie: wie hier vanuit een
+                  mail binnenkomt wil eerst zien wat ik gemaakt heb. */}
               <MorphingButton
                 variant="outline"
-                onClick={() => scrollToSection('over-mij')}
+                onClick={() => scrollToSection('portfolio')}
               >
-                OVER MIJ
+                BEKIJK MIJN WERK
               </MorphingButton>
             </div>
           </motion.div>
