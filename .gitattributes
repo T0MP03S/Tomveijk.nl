@@ -1,0 +1,10 @@
+# Windows checkt bestanden standaard uit met CRLF. Voor deze twee soorten
+# bestanden breekt dat in Linux-containers:
+#
+#  - een shellscript met CRLF geeft "no such file or directory", omdat de \r
+#    onderdeel wordt van het pad achter de shebang;
+#  - Prisma bewaart een checksum van elk migratiebestand. Verschillen de
+#    regeleindes tussen jouw machine en de server, dan klopt die checksum niet
+#    en weigert migrate deploy.
+*.sh text eol=lf
+*.sql text eol=lf

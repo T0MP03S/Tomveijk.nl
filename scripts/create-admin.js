@@ -1,4 +1,10 @@
-require('dotenv').config()
+// dotenv is een devDependency en zit dus niet in de productie-image. Lokaal wil
+// je hem wel, in de container komen de variabelen van Docker zelf. Zonder deze
+// try viel het script in productie bij elke start om op een ontbrekend pakket.
+try {
+  require('dotenv').config()
+} catch {}
+
 const { PrismaClient } = require('@prisma/client')
 const bcrypt = require('bcryptjs')
 
@@ -7,20 +13,27 @@ const prisma = new PrismaClient()
 async function main() {
   const email = process.env.ADMIN_EMAIL || 'info@tomveijk.nl'
   const password = process.env.ADMIN_PASSWORD || 'admin123'
-  
-  const hashedPassword = await bcrypt.hash(password, 10)
-  
-  const user = await prisma.user.upsert({
-    where: { email },
-    update: { password: hashedPassword },
-    create: {
-      email,
-      password: hashedPassword,
-      name: 'Admin'
+
+  const bestaat = await prisma.user.findUnique({ where: { email } })
+
+  if (bestaat) {
+    // Bewust niets bijwerken. Hier stond eerder update: { password }, waardoor
+    // elke deploy je wachtwoord terugzette naar ADMIN_PASSWORD, of naar
+    // 'admin123' als die variabele niet gezet was. Wil je je wachtwoord
+    // wijzigen, doe dat dan in de admin en niet via een deploy.
+    console.log('Adminaccount bestaat al, wachtwoord ongemoeid gelaten:', email)
+  } else {
+    if (!process.env.ADMIN_PASSWORD) {
+      console.warn(
+        'LET OP: ADMIN_PASSWORD is niet gezet, het account krijgt het standaard' +
+          " wachtwoord 'admin123'. Wijzig dit meteen na de eerste keer inloggen.",
+      )
     }
-  })
-  
-  console.log('Admin user created/updated:', user.email)
+    await prisma.user.create({
+      data: { email, password: await bcrypt.hash(password, 10), name: 'Admin' },
+    })
+    console.log('Adminaccount aangemaakt:', email)
+  }
   
   const photoshopSkill = await prisma.skill.upsert({
     where: { id: 'ps-skill' },

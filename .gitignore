@@ -34,7 +34,10 @@ yarn-error.log*
 next-env.d.ts
 
 # prisma
-prisma/migrations
+# Let op: prisma/migrations hoort WEL in git. Stond hier eerder genegeerd,
+# waardoor de container een lege migratiemap kreeg. Prisma meldt dan
+# "No migration found" en stopt met exitcode 0, dus de terugval op db push
+# sloeg over en nieuwe tabellen werden nooit aangemaakt.
 
 # database
 *.db
