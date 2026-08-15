@@ -120,15 +120,23 @@ export default function PortfolioSection() {
       </section>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-6xl h-[80vh]">
+        {/*
+          grid-rows met een expliciete tweede rij is hier nodig. DialogContent
+          is een grid met automatische rijhoogtes, en dan verwijst h-full op de
+          iframe naar een rij zonder vaste hoogte: die klapt in en de rest van
+          de modal blijft zwart.
+        */}
+        <DialogContent className="grid max-w-6xl grid-rows-[auto_1fr] gap-3 h-[85vh] p-4 sm:p-5">
           <DialogHeader>
             <DialogTitle>{selectedItem?.title}</DialogTitle>
           </DialogHeader>
           {selectedItem?.embedUrl && (
             <iframe
               src={selectedItem.embedUrl}
-              className="w-full h-full rounded-lg"
+              className="h-full min-h-0 w-full rounded-lg border-0 bg-white"
               title={selectedItem.title}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
             />
           )}
         </DialogContent>
