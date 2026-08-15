@@ -15,7 +15,7 @@
   */
   :root{
     --inkt:#23271f;
-    --inkt-licht:#5c6156;
+    --inkt-licht:#484d42;
     --groen:#3f5c3e;
     --groen-diep:#2c4230;
     --papier:#faf9f5;
@@ -28,7 +28,7 @@
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{
     margin:0;background:var(--papier);color:var(--inkt);
-    font:300 17.5px/1.7 "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    font:400 18.5px/1.66 "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
     text-wrap:pretty;
   }
   h1,h2,h3{margin:0;font-weight:400;line-height:1.18;letter-spacing:-.005em;text-wrap:balance}
@@ -95,7 +95,7 @@
   }
   .hero h1{font-size:clamp(38px,5.4vw,60px)}
   .hero h1 i{font-style:italic;color:var(--groen)}
-  .hero__tekst p{margin-top:26px;max-width:44ch;color:var(--inkt-licht);font-size:18.5px}
+  .hero__tekst p{margin-top:26px;max-width:44ch;color:var(--inkt-licht);font-size:19.5px}
   .hero__knoppen{margin-top:38px;display:flex;flex-wrap:wrap;gap:12px}
   .hero__foto{width:100%;height:100%;min-height:340px;object-fit:cover}
 
@@ -107,29 +107,27 @@
   }
   .gebied span{color:var(--lijn);margin:0 10px}
 
-  /* ---------- diensten: foto links, lijst rechts ---------- */
-  .diensten__grid{display:grid;gap:52px;align-items:start}
-  @media(min-width:900px){.diensten__grid{grid-template-columns:.9fr 1.1fr;gap:72px}}
-  /* Meeplakken tijdens het scrollen, anders blijft er onder de foto een groot
-     leeg vlak over terwijl de tekstkolom ernaast doorloopt. */
-  .diensten__foto{width:100%;aspect-ratio:3/4;object-fit:cover}
-  @media(min-width:900px){
-    .diensten__foto{position:sticky;top:44px;aspect-ratio:auto;height:calc(100vh - 130px);max-height:760px}
-  }
+  /* ---------- diensten: brede fotoband, daaronder drie kolommen ---------- */
   .titel{font-size:clamp(29px,3.6vw,42px);max-width:17ch}
-  .lead{margin-top:22px;max-width:52ch;color:var(--inkt-licht);font-size:18px}
+  .lead{margin-top:22px;max-width:52ch;color:var(--inkt-licht);font-size:19.5px}
 
-  .dienst{padding:34px 0;border-top:1px solid var(--lijn-fijn)}
-  .dienst:first-of-type{border-top:1px solid var(--lijn);margin-top:44px}
-  .dienst__kop{display:flex;align-items:baseline;gap:16px}
+  /* Een hovenier verkoopt zijn werk met beeld. De foto krijgt daarom de volle
+     breedte in plaats van een smalle kolom naast de tekst. */
+  .diensten__band{width:100%;aspect-ratio:16/7;object-fit:cover;margin-top:52px}
+  @media(max-width:640px){.diensten__band{aspect-ratio:4/3}}
+
+  .diensten__lijst{margin-top:56px;display:grid;gap:44px}
+  @media(min-width:860px){.diensten__lijst{grid-template-columns:repeat(3,1fr);gap:52px}}
+  .dienst{padding-top:26px;border-top:1px solid var(--lijn)}
+  .dienst__kop{display:flex;align-items:baseline;gap:14px}
   .dienst__nr{
     font-family:ui-sans-serif,system-ui,sans-serif;font-size:11.5px;
     letter-spacing:.2em;color:var(--groen);
   }
-  .dienst h3{font-size:25px}
-  .dienst p{margin-top:12px;color:var(--inkt-licht);font-size:16.5px}
+  .dienst h3{font-size:26px}
+  .dienst p{margin-top:14px;color:var(--inkt-licht);font-size:17.5px}
   .dienst__werk{
-    margin-top:14px;font-size:15.5px;color:var(--inkt-licht);
+    margin-top:16px;font-size:16.5px;color:var(--inkt-licht);
     font-style:italic;
   }
 
@@ -149,16 +147,12 @@
     font-family:ui-sans-serif,system-ui,sans-serif;
   }
   .stap h3{font-size:21px}
-  .stap p{margin-top:8px;color:var(--inkt-licht);font-size:16.5px;max-width:52ch}
+  .stap p{margin-top:8px;color:var(--inkt-licht);font-size:17.5px;max-width:52ch}
 
-  /* ---------- over ons: tekst links, foto rechts ---------- */
-  .over__grid{display:grid;gap:52px;align-items:start}
-  @media(min-width:900px){.over__grid{grid-template-columns:1.05fr .95fr;gap:76px}}
-  /* De busfoto is breed. Hem op volle kolomhoogte rekken perst een liggende
-     foto in een staand kader, dus houdt hij zijn eigen verhouding en plakt hij
-     mee tijdens het scrollen. */
+  /* ---------- over ons: tekst links, grotere foto rechts ---------- */
+  .over__grid{display:grid;gap:52px;align-items:center}
+  @media(min-width:900px){.over__grid{grid-template-columns:.95fr 1.05fr;gap:64px}}
   .over__foto{width:100%;aspect-ratio:3/2;object-fit:cover}
-  @media(min-width:900px){.over__foto{position:sticky;top:44px}}
   .over blockquote{
     margin:34px 0 0;padding:0 0 0 26px;border-left:1px solid var(--groen);
     font-size:21px;font-style:italic;line-height:1.55;
@@ -169,7 +163,7 @@
     margin:0;font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;
     font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--groen);
   }
-  .broer p{margin-top:10px;font-size:16px;color:var(--inkt-licht)}
+  .broer p{margin-top:10px;font-size:17px;color:var(--inkt-licht)}
 
   /* ---------- contact: gecentreerd ---------- */
   .contact{text-align:center}
@@ -283,23 +277,24 @@
 
   <section class="sectie" id="diensten">
     <div class="wrap">
-      <div class="diensten__grid">
-        <img class="diensten__foto" src="/demos/baarnsche-broers/aanleg.webp" alt="Aanleg van een tuin" loading="lazy">
-        <div>
-          <span class="label">Wat we doen</span>
-          <h2 class="titel">Van eerste spa tot jaarlijkse snoeibeurt</h2>
-          <p class="lead">
-            We leggen een tuin compleet aan, van grondwerk en bestrating tot de laatste
-            plant, en houden hem daarna bij. Gediplomeerd, met eigen gereedschap en
-            eigen mensen.
-          </p>
+      <span class="label">Wat we doen</span>
+      <h2 class="titel">Van eerste spa tot jaarlijkse snoeibeurt</h2>
+      <p class="lead">
+        We leggen een tuin compleet aan, van grondwerk en bestrating tot de laatste
+        plant, en houden hem daarna bij. Gediplomeerd, met eigen gereedschap en
+        eigen mensen.
+      </p>
 
-          <article class="dienst">
-            <div class="dienst__kop">
-              <span class="dienst__nr">I</span>
-              <h3>Aanleg</h3>
-            </div>
-            <p>
+      <img class="diensten__band" src="/demos/baarnsche-broers/aanleg.webp" alt="Aanleg van een tuin door Baarnsche Broers" loading="lazy">
+
+      <div class="diensten__lijst">
+
+        <article class="dienst">
+          <div class="dienst__kop">
+            <span class="dienst__nr">I</span>
+            <h3>Aanleg</h3>
+          </div>
+          <p>
               Een tuin aanleggen is niet zomaar iets, daar komt veel bij kijken. We
               beginnen altijd met een kennismakingsgesprek en gaan pas de grond in als de
               tekening en de offerte akkoord zijn.
@@ -308,14 +303,14 @@
               Grondwerk, straatwerk, beregening, gazon, verlichtingsplan, beschoeiingen,
               vlonders, pergola&rsquo;s, overkappingen, beplanting, schuttingen en vijvers.
             </p>
-          </article>
+        </article>
 
-          <article class="dienst">
-            <div class="dienst__kop">
-              <span class="dienst__nr">II</span>
-              <h3>Onderhoud</h3>
-            </div>
-            <p>
+        <article class="dienst">
+          <div class="dienst__kop">
+            <span class="dienst__nr">II</span>
+            <h3>Onderhoud</h3>
+          </div>
+          <p>
               Een tuin heeft onderhoud nodig, voor een optimale groei en bloei. We maken
               onderhoudscontracten op maat, voor particuliere tuinen en bedrijfstuinen.
             </p>
@@ -323,20 +318,19 @@
               Snoeien van haag, begeleidingssnoei van jonge bomen, maaien, borderonderhoud,
               blad ruimen, mesten en verticuteren.
             </p>
-          </article>
+        </article>
 
-          <article class="dienst">
-            <div class="dienst__kop">
-              <span class="dienst__nr">III</span>
-              <h3>Boomverzorging</h3>
-            </div>
-            <p>
+        <article class="dienst">
+          <div class="dienst__kop">
+            <span class="dienst__nr">III</span>
+            <h3>Boomverzorging</h3>
+          </div>
+          <p>
               Staat er een boom die aandacht nodig heeft? Dan hoeft u niet zelf op zoek.
               We werken vast samen met gediplomeerde boomverzorgers en regelen het via
               hetzelfde aanspreekpunt als de rest van uw tuin.
             </p>
-          </article>
-        </div>
+        </article>
       </div>
     </div>
   </section>
