@@ -41,11 +41,6 @@ RUN apt-get update \
 # Copy necessary files
 COPY --from=builder /app/public ./public
 
-# De demopagina's zijn losse HTML-bestanden die de /demo-route van schijf leest.
-# Ze zitten niet in de Next-build, dus zonder deze regel geeft elke demo een 404
-# in productie terwijl hij lokaal prima werkt.
-COPY --from=builder /app/demos ./demos
-
 # Portfolio-items komen uit bestanden, zodat ze een lege database overleven.
 COPY --from=builder /app/portfolio ./portfolio
 COPY --from=builder /app/.next/standalone ./

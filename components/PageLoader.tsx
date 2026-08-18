@@ -8,6 +8,17 @@ export default function PageLoader() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Op een telefoon kost dit scherm alleen tijd en niets anders: het is een
+    // vaste 2,5 seconden wachttijd die niets met de echte laadstatus te maken
+    // heeft, met daarin twee continu animerende ballen van blur-[120px]. Dat
+    // laatste is precies waar iOS Safari op vastloopt. Op een aanraakscherm
+    // slaan we het scherm daarom helemaal over.
+    const isAanraakscherm = window.matchMedia('(pointer: coarse)').matches
+    if (isAanraakscherm) {
+      setIsLoading(false)
+      return
+    }
+
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false)

@@ -36,12 +36,6 @@ fi
 echo "Creating admin user if needed..."
 node scripts/create-admin.js || echo "Admin user already exists or script failed"
 
-# Maakt prospects aan voor demos/<slug>.json die nog niet in de database staan.
-# Bestaande prospects blijven ongemoeid, zodat statussen en notities een deploy
-# overleven.
-echo "Syncing demos..."
-node scripts/sync-demos.js || echo "Demo sync failed"
-
 echo "Synchroniseren van portfolio-items..."
 node scripts/sync-portfolio.js || echo "portfolio sync overgeslagen"
 

@@ -43,3 +43,19 @@ export const InDesignIcon = () => (
     style={{ width: '80px', height: '80px' }}
   />
 )
+
+// Officieel Claude-icoon, rechtstreeks uit Anthropic's eigen perskit
+// (anthropic.com/press-kit), niet nagetekend. Anthropic's merkrichtlijnen
+// vereisen vooraf toestemming voor logogebruik; bewuste keuze van Tom om dit
+// zonder die toestemming te gebruiken, met een teruggezet-plan als dat ooit
+// een probleem geeft.
+export const AIIcon = () => (
+  <Image
+    src="/icons/claude.svg"
+    alt="Claude"
+    width={80}
+    height={80}
+    className="w-20 h-20 object-contain"
+    style={{ width: '80px', height: '80px' }}
+  />
+)

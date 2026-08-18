@@ -8,13 +8,14 @@ export function PersonJsonLd() {
     alternateName: 'tomveijk',
     url: siteUrl,
     image: `${siteUrl}/images/tom-profile.jpg`,
-    jobTitle: 'Creative Designer',
-    description: 'Grafisch vormgever met passie voor innovatie. Gespecialiseerd in logo design, huisstijlen en creatieve designs.',
+    jobTitle: 'Grafisch vormgever & webdeveloper',
+    description: "Grafisch vormgever en webdeveloper. Ontwerpt logo's, huisstijlen en websites, en bouwt ze ook zelf.",
     knowsAbout: [
       'Grafisch ontwerp',
       'Logo design',
       'Huisstijl',
       'Branding',
+      'Webdevelopment',
       'Adobe Photoshop',
       'Adobe Illustrator',
       'Adobe After Effects',
@@ -49,7 +50,7 @@ export function WebsiteJsonLd() {
     name: 'tomveijk',
     alternateName: 'Tom van Eijk Portfolio',
     url: siteUrl,
-    description: 'Portfolio website van Tom van Eijk - Creative Designer',
+    description: 'Portfolio website van Tom van Eijk - Grafisch vormgever & webdeveloper',
     author: {
       '@type': 'Person',
       name: 'Tom van Eijk'
@@ -69,7 +70,7 @@ export function LocalBusinessJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'tomveijk - Tom van Eijk',
-    description: 'Grafisch ontwerp en creatieve diensten door Tom van Eijk',
+    description: 'Grafisch ontwerp en webdevelopment door Tom van Eijk',
     url: siteUrl,
     image: `${siteUrl}/images/tom-profile.jpg`,
     priceRange: '€€',
@@ -85,7 +86,8 @@ export function LocalBusinessJsonLd() {
       'Grafisch ontwerp',
       'Logo design',
       'Huisstijl ontwerp',
-      'Branding'
+      'Branding',
+      'Webdevelopment'
     ]
   }
 

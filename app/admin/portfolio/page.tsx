@@ -22,7 +22,7 @@ export default async function PortfolioListPage() {
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-[#A34BFF] to-[#30A8FF] bg-clip-text text-transparent">
             Portfolio Items
           </h1>
-          <p className="text-white/60">Beheer je portfolio projecten — sleep items om de volgorde aan te passen</p>
+          <p className="text-white/60">Beheer je portfolio projecten. Sleep items om de volgorde aan te passen.</p>
         </div>
         <Link
           href="/admin/portfolio/new"

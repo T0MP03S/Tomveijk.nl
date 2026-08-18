@@ -27,7 +27,7 @@ export default function Footer() {
               <Image src="/logo.svg" alt="Tom van Eijk" width={120} height={40} className="h-10 w-auto" />
             </Link>
             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
-              Websites en vormgeving voor kleine bedrijven. Uit Baarn.
+              Grafisch vormgever & webdeveloper uit Baarn.
             </p>
           </div>
 

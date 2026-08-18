@@ -73,7 +73,22 @@ async function main() {
       order: 2
     }
   })
-  
+
+  // Let op: id is 'claude-skill' en niet 'ai-skill', want die laatste bestaat
+  // al hierboven voor Adobe Illustrator.
+  const promptingSkill = await prisma.skill.upsert({
+    where: { id: 'claude-skill' },
+    update: {},
+    create: {
+      id: 'claude-skill',
+      title: 'Bouwen met AI',
+      description: 'Ik ontwerp niet alleen, ik bouw het ook: met Claude als motor en gerichte prompts als besturing. Prompten is een vak, geen toeval. Zo lever ik een werkende site zonder externe developer.',
+      icon: 'AI',
+      color: '#00D752',
+      order: 3
+    }
+  })
+
   console.log('Default skills created')
 }
 

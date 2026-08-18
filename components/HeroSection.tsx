@@ -47,13 +47,13 @@ export default function HeroSection() {
           >
             <div>
               <p className="text-sm md:text-base text-[#A34BFF] font-medium uppercase tracking-widest mb-4">
-                Tom van Eijk • Websites en vormgeving uit Baarn
+                Tom van Eijk • Grafisch vormgever & webdeveloper
               </p>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                Een website waar klanten op afkomen
+                Van ontwerp tot werkende website
               </h1>
               <p className="text-base md:text-lg text-white/60 max-w-lg leading-relaxed">
-                Ik ben <strong className="text-white">Tom van Eijk</strong> uit Baarn. Ik bouw websites voor kleine bedrijven: snel, goed leesbaar op de telefoon, en zonder gedoe. Daarnaast maak ik logo&apos;s en huisstijlen.
+                Ik ben <strong className="text-white">Tom van Eijk</strong> uit Baarn. Ik ontwerp logo&apos;s, huisstijlen en websites, en bouw ze ook zelf met AI. Geen sjabloon, gewoon gemaakt voor jouw merk.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">

@@ -9,11 +9,11 @@ const siteUrl = process.env.NEXTAUTH_URL || 'https://tomveijk.nl'
 
 export const metadata: Metadata = {
   title: {
-    default: "Tom van Eijk - Websites en vormgeving uit Baarn",
+    default: "Tom van Eijk - Grafisch vormgever & webdeveloper",
     template: "%s | Tom van Eijk"
   },
-  description: "Ik bouw websites voor kleine bedrijven in Baarn en omgeving. Snel, goed leesbaar op de telefoon, en zonder gedoe. Daarnaast logo's en huisstijlen.",
-  keywords: ["website laten maken", "webdesign Baarn", "website kleine ondernemer", "grafisch ontwerp", "logo design", "huisstijl", "Tom van Eijk", "tomveijk", "portfolio"],
+  description: "Portfolio van Tom van Eijk uit Baarn. Ik ontwerp logo's, huisstijlen en websites, en bouw ze ook zelf.",
+  keywords: ["grafisch ontwerp", "logo design", "huisstijl", "webdevelopment", "website laten maken", "Tom van Eijk", "tomveijk", "portfolio"],
   authors: [{ name: "Tom van Eijk" }],
   creator: "Tom van Eijk",
   metadataBase: new URL(siteUrl),
@@ -22,21 +22,21 @@ export const metadata: Metadata = {
     locale: 'nl_NL',
     url: siteUrl,
     siteName: 'tomveijk',
-    title: 'Tom van Eijk - Websites en vormgeving uit Baarn',
-    description: "Ik bouw websites voor kleine bedrijven in Baarn en omgeving. Snel, goed leesbaar op de telefoon, en zonder gedoe.",
+    title: 'Tom van Eijk - Grafisch vormgever & webdeveloper',
+    description: "Portfolio van Tom van Eijk uit Baarn. Ik ontwerp logo's, huisstijlen en websites, en bouw ze ook zelf.",
     images: [
       {
         url: '/images/tom-profile.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tom van Eijk, websites en vormgeving uit Baarn',
+        alt: 'Tom van Eijk, grafisch vormgever en webdeveloper uit Baarn',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tom van Eijk - Websites en vormgeving uit Baarn',
-    description: "Ik bouw websites voor kleine bedrijven in Baarn en omgeving.",
+    title: 'Tom van Eijk - Grafisch vormgever & webdeveloper',
+    description: "Portfolio van Tom van Eijk uit Baarn.",
     images: ['/images/tom-profile.jpg'],
   },
   robots: {

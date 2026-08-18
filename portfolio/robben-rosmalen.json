@@ -1,0 +1,30 @@
+{
+  "titel": "Robben Rosmalen (concept)",
+  "type": "WEBSITE",
+  "embedUrl": "/showcase/robben-rosmalen.html",
+  "omschrijving": "Ongevraagd ontwerpvoorbeeld voor een autohandelaar in het hogere segment, gemaakt met hun eigen voorraad en beeldmateriaal. Geen opdracht, geen klant. Puur om te laten zien wat ik voor zo'n bedrijf zou bouwen.",
+  "thumbnail": "/assets/images/robben-rosmalen-concept.png",
+  "gepubliceerd": true,
+  "volgorde": 1,
+  "projectdatum": "2026-08-17",
+  "bijwerken": [
+    "type",
+    "embedUrl",
+    "thumbnail"
+  ],
+  "blokken": [
+    {
+      "type": "WEBSITE",
+      "inhoud": {
+        "url": "/showcase/robben-rosmalen.html",
+        "type": "embed"
+      }
+    },
+    {
+      "type": "TEXT",
+      "inhoud": {
+        "text": "Dit is een concept-ontwerp, geen opdracht. Ik heb 'm gebouwd als voorbeeld van wat voor site ik zou maken voor een autohandelaar: een videohero met hun eigen materiaal, een echte voorraad in een raster, en een popup per auto met alle specificaties."
+      }
+    }
+  ]
+}

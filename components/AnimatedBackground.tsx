@@ -52,7 +52,7 @@ export default function AnimatedBackground() {
     }
   }, [])
 
-  // Use pathname to create a unique seed — orbs look different on every page
+  // Use pathname to create a unique seed, so orbs look different on every page
   const seed = hashString(pathname || '/')
   const rand = seededRandom(seed)
 

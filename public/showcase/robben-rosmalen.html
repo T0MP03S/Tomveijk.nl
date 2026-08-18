@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept: Robben Rosmalen | Portfolio-voorbeeld van Tom van Eijk</title>
+<meta name="description" content="Ongevraagd ontwerpvoorbeeld van Tom van Eijk, gemaakt met de echte voorraad van Robben Rosmalen als oefenmateriaal. Geen opdracht, geen klantrelatie.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="preload" as="image" href="/showcase/robben-rosmalen/film-poster.webp">
+<style>
+/* ---------------------------------------------------------------------------
+   Robben Rosmalen. Alleen hun eigen kleuren: de twee grijzen en het oranje uit
+   het logo. Geen afgeronde hoeken. Hun woordmerk is een zware grotesk, en dat
+   is hier de maat.
+
+   Het lettertype wordt meegeleverd en niet aan het systeem overgelaten. Eerder
+   stond hier "Helvetica Neue, Helvetica, Arial". Op Windows bestaat Helvetica
+   niet, en dan kiest de browser zelf iets uit de buurt: hier werd dat een smalle
+   variant, wat de tekst slecht leesbaar maakte. Inter is één variabel bestand
+   van 47 KB voor alle diktes, met een grote x-hoogte die op donker prettig
+   leest.
+   --------------------------------------------------------------------------- */
+@font-face{
+  font-family:"Inter";
+  src:url("/showcase/robben-rosmalen/inter.woff2") format("woff2");
+  font-weight:400 800;
+  font-style:normal;
+  font-display:swap;
+}
+:root{
+  --grond:#0b0b0b;
+  --op:#141414;
+  --lijn:#242424;
+  --grijs:#8f8f8f;
+  --grijs-diep:#5a5a5a;
+  --oranje:#f06020;
+  --wit:#f4f4f4;
+  --kolom:1280px;
+  --zij:clamp(22px,5vw,60px);
+  --letter:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--grond);color:var(--wit);font:400 17px/1.62 var(--letter);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.kolom{width:100%;max-width:var(--kolom);margin:0 auto;padding:0 var(--zij)}
+
+/* Kop 5: logo boven, menu op een tweede regel. Ligt doorzichtig over de film
+   en wordt dekkend zodra je voorbij het eerste scherm bent. ----------------- */
+.kop{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .35s,border-color .35s,backdrop-filter .35s;border-bottom:1px solid transparent}
+.kop.vast{background:rgba(11,11,11,.94);border-bottom-color:var(--lijn);backdrop-filter:blur(10px)}
+/* padding-top/bottom, niet de padding-shorthand: dit element combineert de
+   klasse .kolom (die padding:0 var(--zij) zet voor de zijmarge) met deze
+   klasse. Een shorthand als "padding:22px 0 18px" zet links/rechts expliciet
+   op 0 en overschrijft daarmee de zijmarge van .kolom volledig, waardoor de
+   kop tot aan de randen van het scherm liep op elke breedte tot 1280px. */
+.kop__boven{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:22px;padding-bottom:18px;transition:padding .35s}
+.kop.vast .kop__boven{padding-top:14px;padding-bottom:12px}
+/* height:auto is hier geen stijlkeuze maar een noodzaak: de HTML heeft
+   width="312" height="150" als attributen. Zet je alleen CSS-width, dan telt
+   de browser het height-attribuut als vaste pixelwaarde in plaats van als
+   verhoudingshint, en wordt het logo verticaal in elkaar gedrukt. */
+.kop__logo img{width:180px;height:auto;transition:width .35s}
+.kop.vast .kop__logo img{width:150px;height:auto}
+.kop__rechts{display:flex;align-items:center;gap:26px;font-size:14px;color:var(--grijs)}
+.kop__rechts a:hover{color:var(--wit)}
+.kop__tel{color:var(--wit);font-weight:700}
+.kop__menu ul{display:flex;gap:38px;padding:0 0 14px;font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:#cfcfcf}
+.kop__menu a:hover{color:var(--oranje)}
+.kop__menu .nu{color:var(--wit);position:relative}
+.kop__menu .nu::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--oranje)}
+/* Het "···"-knopje bestaat alleen op mobiel. Op breed scherm is er ruimte
+   genoeg voor alle zes de items, dus daar blijft het verborgen. */
+.kop__meer{display:none}
+.kop__meer-knop{
+  background:none;border:1px solid var(--lijn);color:var(--grijs);
+  width:26px;height:22px;font-size:13px;line-height:1;letter-spacing:0;
+  cursor:pointer;transition:border-color .18s,color .18s;
+}
+.kop__meer-knop:hover,.kop__menu.open .kop__meer-knop{border-color:var(--oranje);color:var(--oranje)}
+
+/* Opening: hun eigen film, schermvullend. ---------------------------------- */
+.film{position:relative;min-height:640px;height:100svh;overflow:hidden;background:#000}
+.film__beeld{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* De film wisselt sterk in helderheid: sommige shots zijn nachtopnamen, andere
+   zijn bij daglicht. Een vaste laag eronder houdt het geheel diep, de verloop
+   erboven maakt de onderkant leesbaar. */
+.film__waas{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(11,11,11,.82) 0,rgba(11,11,11,.30) 22%,rgba(11,11,11,.44) 54%,rgba(11,11,11,.96) 100%),
+  rgba(11,11,11,.26)}
+.film__inhoud{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:clamp(38px,7vh,74px)}
+.film__op{display:flex;align-items:center;gap:14px;font-size:12.5px;letter-spacing:.19em;text-transform:uppercase;color:#d8d8d8;margin-bottom:20px}
+.film__op i{display:block;width:46px;height:2px;background:var(--oranje)}
+.film h1{
+  font-size:clamp(40px,7.8vw,108px);line-height:.94;letter-spacing:-.038em;font-weight:800;
+  text-transform:uppercase;text-shadow:0 2px 40px rgba(0,0,0,.5);
+}
+.film h1 em{font-style:normal;color:#9d9d9d}
+.film__onder{
+  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:22px;
+  margin-top:clamp(26px,4vh,44px);padding-top:22px;border-top:1px solid rgba(255,255,255,.16);
+}
+.film__onder p{max-width:44ch;color:#d2d2d2;font-size:17px}
+.film__nu{display:flex;align-items:center;gap:11px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#bdbdbd;white-space:nowrap}
+.film__nu b{color:var(--oranje);font-size:17px;letter-spacing:0}
+.film__pijl{position:absolute;left:50%;bottom:14px;translate:-50% 0;width:1px;height:38px;background:linear-gradient(180deg,transparent,var(--oranje));animation:zak 2.2s ease-in-out infinite}
+@keyframes zak{0%,100%{opacity:.25;transform:translateY(-8px)}50%{opacity:1;transform:translateY(0)}}
+
+/* Blokken die rustig in beeld komen. -------------------------------------- */
+[data-toon]{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+[data-toon].zichtbaar{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  [data-toon]{opacity:1;transform:none;transition:none}
+  .film__pijl{animation:none}
+  html{scroll-behavior:auto}
+}
+
+/* Band met echte cijfers. -------------------------------------------------- */
+.cijfers{border-bottom:1px solid var(--lijn);background:var(--op)}
+/* Scheiding met randen en niet met tussenruimte op een gekleurde ondergrond:
+   dat laatste liet donkere stroken achter aan de buitenkant van de band. */
+.cijfers ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.cijfers li{padding:clamp(28px,4vw,44px) clamp(20px,2.6vw,34px);border-left:1px solid var(--lijn)}
+.cijfers li:first-child{border-left:0;padding-left:0}
+.cijfers b{display:block;font-size:clamp(26px,3.4vw,42px);line-height:1;font-weight:800;letter-spacing:-.032em}
+.cijfers span{display:block;margin-top:10px;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--grijs-diep)}
+
+/* Skelet E: het raster met de collectie. ----------------------------------- */
+.collectie{padding:clamp(66px,9vw,116px) 0 clamp(56px,8vw,96px)}
+.balk{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:24px;margin-bottom:clamp(30px,4vw,46px);border-bottom:1px solid var(--lijn)}
+.balk h2{font-size:clamp(24px,3vw,36px);line-height:1.05;letter-spacing:-.028em;font-weight:800}
+.balk span{font-size:14px;color:var(--grijs)}
+.balk b{color:var(--oranje)}
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:clamp(24px,2.6vw,38px)}
+.kaart{display:flex}
+/* Was een <a>, is nu een <button>: reset alle standaard knopstijl weg zodat
+   hij er precies zo uitziet als de link die hij verving. */
+.kaart__link{display:flex;flex-direction:column;flex:1;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+/* 1.54 is de gemiddelde verhouding nadat de witte studiobanden uit hun foto's
+   zijn gesneden. Uitsnijden vanaf linksboven, want daar zit hun watermerk. */
+.kaart__beeld{position:relative;aspect-ratio:1.54;overflow:hidden;background:#000}
+.kaart__beeld img{width:100%;height:100%;object-fit:cover;object-position:left top;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.kaart__link:hover .kaart__beeld img{transform:scale(1.045)}
+.kaart__beeld::after{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:var(--oranje);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.kaart__link:hover .kaart__beeld::after{transform:scaleX(1)}
+.kaart__tekst{display:flex;flex-direction:column;flex:1;padding-top:18px}
+.kaart__tekst h3{font-size:19px;line-height:1.28;font-weight:700;letter-spacing:-.012em}
+.kaart__spec{margin-top:8px;font-size:14.5px;color:var(--grijs)}
+.kaart__spec s{display:inline-block;width:14px;height:1px;background:var(--grijs-diep);vertical-align:middle;margin:0 4px}
+.kaart__opties{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.kaart__opties li{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grijs);border:1px solid var(--lijn);padding:4px 9px}
+.kaart__prijs{margin-top:auto;padding-top:16px;font-size:20px;font-weight:700}
+.kaart--breed{grid-column:span 2}
+/* Was 2.05: bij die verhouding viel 25% van de hoogte weg, en of je nu vanaf
+   de bovenkant sneed (het watermerk linksboven verdween) of lager (de wielen
+   werden afgesneden), je moest altijd één van de twee opofferen. Bij 1.7 past
+   het watermerk bovenin én raken de wielen de vloer, allebei tegelijk, zonder
+   dat de kaart zijn brede, filmische verhouding kwijtraakt. */
+.kaart--breed .kaart__beeld{aspect-ratio:1.7}
+.kaart--breed .kaart__tekst h3{font-size:27px;letter-spacing:-.022em}
+.kaart--breed .kaart__prijs{font-size:26px}
+.meer{margin-top:clamp(40px,5vw,62px);text-align:center}
+.stippen{display:none}
+
+.knop{display:inline-block;padding:17px 34px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:background .18s,color .18s,border-color .18s}
+.knop--vol{background:var(--oranje);color:#0b0b0b}
+.knop--vol:hover{background:#ff7a3c}
+.knop--lijn{border:1px solid var(--grijs-diep)}
+.knop--lijn:hover{border-color:var(--oranje);color:var(--oranje)}
+
+/* Hun eigen woorden, groot. ------------------------------------------------ */
+.woord{padding:clamp(70px,9vw,124px) 0;border-top:1px solid var(--lijn)}
+.woord blockquote{font-size:clamp(26px,3.9vw,48px);line-height:1.18;letter-spacing:-.028em;font-weight:800;max-width:19ch}
+.woord blockquote b{color:var(--oranje);font-weight:700}
+.zuilen{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(28px,3vw,44px);margin-top:clamp(44px,5vw,66px)}
+.zuilen h3{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--oranje);margin-bottom:12px}
+.zuilen p{color:var(--grijs);font-size:16px}
+
+.showroom{padding:clamp(66px,9vw,116px) 0;border-top:1px solid var(--lijn)}
+.showroom h2{font-size:clamp(28px,4.2vw,52px);line-height:1.04;letter-spacing:-.028em;font-weight:800}
+.gegevens{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:clamp(26px,3vw,40px);margin-top:clamp(38px,4vw,54px)}
+.gegevens h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grijs-diep);margin-bottom:9px}
+.gegevens p,.gegevens a{font-size:17px}
+.gegevens a:hover{color:var(--oranje)}
+
+/* Voettekst 5: eerst de belangrijkste knop, daarna pas de kleine letters. --- */
+.voet{border-top:1px solid var(--lijn);background:var(--op)}
+.voet__actie{text-align:center;padding:clamp(52px,7vw,88px) 0 clamp(46px,6vw,68px);border-bottom:1px solid var(--lijn)}
+.voet__actie p{font-size:clamp(22px,2.8vw,34px);font-weight:700;letter-spacing:-.02em;margin-bottom:28px}
+/* Zelfde reden als bij .kop__boven hierboven: dit element draagt ook .kolom,
+   dus alleen verticale padding zetten en de zijmarge aan .kolom overlaten. */
+.voet__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:32px;padding-top:clamp(44px,5vw,60px);padding-bottom:clamp(44px,5vw,60px)}
+.voet__grid img{width:164px;height:auto;margin-bottom:16px}
+.voet__grid h5{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grijs-diep);margin-bottom:12px}
+.voet__grid li{margin-bottom:7px;font-size:15px;color:var(--grijs)}
+.voet__grid a:hover{color:var(--oranje)}
+.voet__klein{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;padding-top:20px;padding-bottom:30px;border-top:1px solid var(--lijn);font-size:13px;color:var(--grijs-diep)}
+
+/* Popup bij een auto. Rechte hoeken, net als de rest van de site: een
+   afgeronde kaart zou de enige zachte vorm in het hele ontwerp zijn. Geen
+   backdrop-filter op het scherm erachter: dat is precies de belasting die op
+   mobiel net is weggehaald bij de hero, en hier zou hij terugkomen. Een
+   effen donkere laag doet visueel bijna hetzelfde en kost niets. -------- */
+.modaal{position:fixed;inset:0;z-index:100;visibility:hidden}
+.modaal.open{visibility:visible}
+.modaal__scherm{position:absolute;inset:0;background:rgba(6,6,6,.78);opacity:0;transition:opacity .3s}
+.modaal.open .modaal__scherm{opacity:1}
+/* Eén verschuiving via één eigenschap: translate. Eerder stond hier zowel de
+   losse translate-eigenschap als transform:translate(...), en die twee tellen
+   op in plaats van dat de een de ander vervangt. Dat schoof het venster
+   ruim een hele breedte naar links in plaats van hem te centreren. */
+.modaal__vlak{
+  position:absolute;left:50%;top:50%;
+  width:min(880px,92vw);max-height:86vh;overflow:hidden auto;
+  background:var(--op);border:1px solid var(--lijn);
+  display:grid;grid-template-columns:1.1fr 1fr;
+  opacity:0;translate:-50% -46%;transition:opacity .3s,translate .3s;
+}
+.modaal.open .modaal__vlak{opacity:1;translate:-50% -50%}
+.modaal__sluit{
+  position:absolute;right:14px;top:14px;z-index:2;width:38px;height:38px;
+  background:rgba(11,11,11,.55);border:1px solid rgba(255,255,255,.18);color:var(--wit);
+  font-size:20px;line-height:1;cursor:pointer;transition:background .18s,border-color .18s;
+}
+.modaal__sluit:hover{background:var(--oranje);border-color:var(--oranje);color:#0b0b0b}
+.modaal__beeld{position:relative;background:#000;min-height:220px}
+.modaal__beeld img{width:100%;height:100%;object-fit:cover;object-position:left top}
+.modaal__body{padding:clamp(24px,3vw,40px)}
+.modaal__body h3{font-size:clamp(21px,2.4vw,27px);font-weight:800;letter-spacing:-.018em;line-height:1.2}
+.modaal__specs{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;margin-top:22px;padding-top:20px;border-top:1px solid var(--lijn)}
+.modaal__specs div{display:flex;flex-direction:column;gap:5px}
+.modaal__specs span{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--grijs-diep)}
+.modaal__specs b{font-size:15.5px;font-weight:600}
+.modaal__opties{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+.modaal__opties li{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grijs);border:1px solid var(--lijn);padding:5px 10px}
+.modaal__onder{margin-top:26px;padding-top:22px;border-top:1px solid var(--lijn)}
+.modaal__prijs{font-size:clamp(24px,2.8vw,30px);font-weight:800}
+.modaal__knoppen{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.modaal__knoppen .knop{flex:1;text-align:center;white-space:nowrap}
+body.geen-scroll{overflow:hidden}
+
+@media (max-width:760px){
+  /* Onderaan uitschuivend blad in plaats van een gecentreerd venster: dat is
+     het patroon dat een telefoon-gebruiker al kent van app-achtige sites, en
+     het laat meteen zien hoeveel er nog onder de vouw staat. */
+  .modaal__vlak{
+    grid-template-columns:1fr;left:0;top:auto;bottom:0;
+    width:100%;max-width:none;max-height:88vh;
+    translate:0 100%;
+  }
+  .modaal.open .modaal__vlak{translate:0 0}
+  .modaal__beeld{aspect-ratio:1.54;min-height:0}
+  /* Naast elkaar met white-space:nowrap paste "Vraag deze auto aan" niet in de
+     helft van een telefoonbreedte en liep de knop van het scherm af. Onder
+     elkaar heeft elke knop de volle breedte. */
+  .modaal__knoppen{flex-direction:column}
+  .modaal__knoppen .knop{white-space:normal}
+}
+
+/* Zwevende contactknop op mobiel: het snelste pad naar contact, altijd
+   binnen handbereik. */
+.zwevend{display:none}
+@media (max-width:640px){
+  .zwevend{
+    display:block;position:fixed;left:16px;right:16px;bottom:16px;z-index:70;
+  }
+  .zwevend a{
+    display:block;text-align:center;padding:15px;background:var(--oranje);color:#0b0b0b;
+    font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    box-shadow:0 12px 30px -8px rgba(0,0,0,.7);
+  }
+  body.geen-scroll .zwevend{display:none}
+}
+
+@media (max-width:820px){
+  .kaart--breed{grid-column:span 1}
+  .kaart--breed .kaart__beeld{aspect-ratio:1.54}
+  .kaart--breed .kaart__tekst h3{font-size:19px}
+  .kaart--breed .kaart__prijs{font-size:20px}
+}
+@media (max-width:640px){
+  .kop__rechts a:not(.kop__tel){display:none}
+  .kop__logo img{width:140px;height:auto}
+  .film__pijl{display:none}
+
+  /* Zes menu-items op een rij is op een telefoon altijd krap, en horizontaal
+     laten scrollen verstopt net zo goed spullen als een hamburgermenu doet,
+     alleen minder herkenbaar. In plaats daarvan: alleen Collectie en Contact
+     blijven staan, de rest komt pas tevoorschijn na een tik op "···". */
+  .kop__menu ul{gap:18px;flex-wrap:wrap;font-size:11.5px}
+  .kop__menu li.kop__extra{display:none}
+  .kop__menu.open li.kop__extra{display:list-item}
+  .kop__meer{display:list-item;margin-left:auto}
+
+  /* Geen gestapelde kolom op mobiel, maar auto's naast elkaar om doorheen te
+     swipen. Een gestapelde lijst is precies wat hun eigen site ook al doet,
+     dus dat maakt geen indruk. Dit wel: het voelt als een app, niet als een
+     folder. De volgende kaart piept aan de rand mee (peek), dat is het
+     signaal dat er meer te vinden is, zonder er een pijltje bij te zetten. */
+  .raster{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    gap:16px;margin:0 calc(var(--zij) * -1);padding:2px var(--zij) 10px;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .raster::-webkit-scrollbar{display:none}
+  .kaart,.kaart--breed{flex:0 0 82vw;scroll-snap-align:center;grid-column:auto}
+  .kaart--breed .kaart__beeld{aspect-ratio:1.54}
+  .kaart--breed .kaart__tekst h3{font-size:19px}
+  .kaart--breed .kaart__prijs{font-size:20px}
+
+  .stippen{display:flex;justify-content:center;gap:8px;margin-top:18px}
+  .stippen span{width:6px;height:6px;background:var(--lijn);transition:background .25s,transform .25s}
+  .stippen span.actief{background:var(--oranje);transform:scale(1.3)}
+}
+</style>
+</head>
+<body>
+
+<header class="kop" id="kop">
+  <div class="kolom kop__boven">
+    <a class="kop__logo" href="#"><img src="/showcase/robben-rosmalen/logo.png" alt="Robben Rosmalen" width="312" height="150"></a>
+    <div class="kop__rechts">
+      <a href="mailto:info@robbenrosmalen.nl">info@robbenrosmalen.nl</a>
+      <a class="kop__tel" href="tel:+31738887883">073 888 78 83</a>
+    </div>
+  </div>
+  <nav class="kop__menu kolom" aria-label="hoofdmenu">
+    <ul>
+      <!-- kop__extra: op mobiel standaard verborgen achter de "···"-knop.
+           Home en Collectie doen op deze eenpagina-site zowat hetzelfde, en
+           Lease/Verzekeren zijn diensten, geen bestemmingen. Wat overblijft,
+           Collectie en Contact, is waar iemand die vanaf zijn telefoon komt
+           voor komt: auto's zien, of iemand aan de lijn krijgen. -->
+      <li class="kop__extra"><a class="nu" href="#">Home</a></li>
+      <li><a href="#collectie">Collectie</a></li>
+      <li class="kop__extra"><a href="#collectie">Verkocht</a></li>
+      <li class="kop__extra"><a href="#diensten">Lease</a></li>
+      <li class="kop__extra"><a href="#diensten">Verzekeren</a></li>
+      <li><a href="#showroom">Contact</a></li>
+      <li class="kop__meer">
+        <button type="button" class="kop__meer-knop" aria-expanded="false">&middot;&middot;&middot;</button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<section class="film">
+  <video class="film__beeld" autoplay muted loop playsinline preload="metadata" poster="/showcase/robben-rosmalen/film-poster.webp">
+    <source src="/showcase/robben-rosmalen/film.webm" type="video/webm">
+    <source src="/showcase/robben-rosmalen/film.mp4" type="video/mp4">
+  </video>
+  <div class="film__waas"></div>
+  <div class="film__inhoud kolom">
+    <p class="film__op"><i></i>Exclusieve automobielen <span>&middot; 's-Hertogenbosch</span></p>
+    <h1>Uitgezocht,<br><em>niet ingekocht</em></h1>
+    <div class="film__onder">
+      <p>Met een klein gespecialiseerd team selecteren wij de beste auto's voor onze collectie. Staat er niets tussen, dan zoeken wij hem voor u.</p>
+      <p class="film__nu"><b>11</b> auto's nu op voorraad</p>
+    </div>
+  </div>
+  <span class="film__pijl" aria-hidden="true"></span>
+</section>
+
+<section class="cijfers">
+  <ul class="kolom">
+    <li data-toon><b data-count="11">0</b><span>Auto's op voorraad</span></li>
+    <li data-toon><b data-count="7">0</b><span>Merken in de collectie</span></li>
+    <li data-toon><b data-count="34499" data-euro>€ 0</b><span>Vanafprijs</span></li>
+    <li data-toon><b data-count="99990" data-euro>€ 0</b><span>Tot en met</span></li>
+  </ul>
+</section>
+
+<section class="collectie" id="collectie">
+  <div class="kolom">
+    <div class="balk" data-toon>
+      <h2>De collectie van vandaag</h2>
+      <span><b>11</b> beschikbaar &middot; dagelijks aangevuld</span>
+    </div>
+    <div class="raster">
+        <article class="kaart kaart--breed" data-toon>
+          <button type="button" class="kaart__link" data-auto="0">
+            <div class="kaart__beeld">
+              <img src="/showcase/robben-rosmalen/porsche-cayenne-coup-3-0-e-hybrid.webp" alt="Porsche Cayenne Coupé 3.0 E-Hybrid" loading="eager" decoding="async" width="1200" height="780">
+            </div>
+            <div class="kaart__tekst">
+              <h3>Porsche Cayenne Coupé 3.0 E-Hybrid</h3>
+              <p class="kaart__spec">2023 <s></s> 40.810 km <s></s> 470 pk</p>
+              <ul class="kaart__opties"><li>PANO</li><li>22inch</li><li>S-Display</li></ul>
+              <p class="kaart__prijs">€ 99.990</p>
+            </div>
+          </button>
+        </article>
+        <article class="kaart" data-toon>
+          <button type="button" class="kaart__link" data-auto="1">
+            <div class="kaart__beeld">
+              <img src="/showcase/robben-rosmalen/aston-martin-v8-vantage-roadster-4-7-v8.webp" alt="Aston Martin V8 Vantage Roadster 4.7 V8" loading="eager" decoding="async" width="1200" height="780">
+            </div>
+            <div class="kaart__tekst">
+              <h3>Aston Martin V8 Vantage Roadster 4.7 V8</h3>
+              <p class="kaart__spec">2009 <s></s> 79.898 km <s></s> 426 pk</p>
+              
+              <p class="kaart__prijs">€ 59.900</p>
+            </div>
+          </button>
+        </article>
+        <article class="kaart" data-toon>
+          <button type="button" class="kaart__link" data-auto="2">
+            <div class="kaart__beeld">
+              <img src="/showcase/robben-rosmalen/land-rover-defender-110-p400e-110-x-dyna.webp" alt="Land Rover Defender 110 P400e 110 X-Dynamic HSE PANO" loading="eager" decoding="async" width="1200" height="780">
+            </div>
+            <div class="kaart__tekst">
+              <h3>Land Rover Defender 110 P400e 110 X-Dynamic HSE PANO</h3>
+              <p class="kaart__spec">2022 <s></s> 40.337 km <s></s> 404 pk</p>
+              
+              <p class="kaart__prijs">€ 78.990</p>
+            </div>
+          </button>
+        </article>
+        <article class="kaart" data-toon>
+          <button type="button" class="kaart__link" data-auto="3">
+            <div class="kaart__beeld">
+              <img src="/showcase/robben-rosmalen/lancia-beta-1600.webp" alt="Lancia Beta 1600" loading="lazy" decoding="async" width="1200" height="780">
+            </div>
+            <div class="kaart__tekst">
+              <h3>Lancia Beta 1600</h3>
+              <p class="kaart__spec">1974 <s></s> Vermogen: <s></s> 101 pk</p>
+              
+              <p class="kaart__prijs">Prijs op aanvraag</p>
+            </div>
+          </button>
+        </article>
+        <article class="kaart" data-toon>
+          <button type="button" class="kaart__link" data-auto="4">
+            <div class="kaart__beeld">
+              <img src="/showcase/robben-rosmalen/porsche-panamera-sport-turismo-4-0-turbo.webp" alt="Porsche Panamera Sport Turismo 4.0 Turbo AKRA" loading="lazy" decoding="async" width="1200" height="780">
+            </div>
+            <div class="kaart__tekst">
+              <h3>Porsche Panamera Sport Turismo 4.0 Turbo AKRA</h3>
+              <p class="kaart__spec">2018 <s></s> 89.164 km <s></s> 549 pk</p>
+              
+              <p class="kaart__prijs">€ 72.499</p>
+            </div>
+          </button>
+        </article>
+        <article class="kaart" data-toon>
+          <button type="button" class="kaart__link" data-auto="5">
+            <div class="kaart__beeld">
+              <img src="/showcase/robben-rosmalen/volvo-xc90-2-0-t8-recharge-awd-ultimate.webp" alt="Volvo XC90 2.0 T8 Recharge AWD Ultimate" loading="lazy" decoding="async" width="1200" height="780">
+            </div>
+            <div class="kaart__tekst">
+              <h3>Volvo XC90 2.0 T8 Recharge AWD Ultimate</h3>
+              <p class="kaart__spec">2022 <s></s> 23.222 km <s></s> 455 pk</p>
+              
+              <p class="kaart__prijs">€ 58.999</p>
+            </div>
+          </button>
+        </article>
+        <article class="kaart" data-toon>
+          <button type="button" class="kaart__link" data-auto="6">
+            <div class="kaart__beeld">
+              <img src="/showcase/robben-rosmalen/audi-q3-sportback-45-tfsi-quattro-pro-li.webp" alt="Audi Q3 Sportback 45 TFSI Quattro Pro Line S" loading="lazy" decoding="async" width="1200" height="780">
+            </div>
+            <div class="kaart__tekst">
+              <h3>Audi Q3 Sportback 45 TFSI Quattro Pro Line S</h3>
+              <p class="kaart__spec">2020 <s></s> 42.315 km <s></s> 230 pk</p>
+              
+              <p class="kaart__prijs">€ 34.499</p>
+            </div>
+          </button>
+        </article>
+    </div>
+    <div class="stippen" aria-hidden="true"><span data-stip="0" class="actief"></span><span data-stip="1"></span><span data-stip="2"></span><span data-stip="3"></span><span data-stip="4"></span><span data-stip="5"></span><span data-stip="6"></span></div>
+    <div class="meer" data-toon><a class="knop knop--lijn" href="#collectie">Bekijk alle 11 auto's</a></div>
+  </div>
+</section>
+
+<section class="woord" id="diensten">
+  <div class="kolom">
+    <blockquote data-toon>Het gaat niet enkel om vervoer. Het gaat om <b>beleving, kwaliteit en passie</b>.</blockquote>
+    <div class="zuilen">
+      <div data-toon><h3>Selectie</h3><p>Elke auto in de collectie is met de hand uitgezocht door ons eigen team.</p></div>
+      <div data-toon><h3>Inkoop</h3><p>Door onze inkoopkanalen bieden wij een prestigieus aanbod tegen scherpe tarieven.</p></div>
+      <div data-toon><h3>Lease</h3><p>Financial of operational lease, zakelijk en particulier. Wij rekenen het voor u door.</p></div>
+      <div data-toon><h3>Verzekeren</h3><p>Via Sportwagenpolis verzekert u uw auto tegen voorwaarden die bij het segment passen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="showroom" id="showroom">
+  <div class="kolom">
+    <h2 data-toon>Loop binnen in de showroom</h2>
+    <div class="gegevens">
+      <div data-toon><h4>Adres</h4><p>Afrikalaan 17a<br>5232 BD 's-Hertogenbosch</p></div>
+      <div data-toon><h4>Showroom</h4><p><a href="tel:+31738887883">073 888 78 83</a></p></div>
+      <div data-toon><h4>Thijs Robben</h4><p><a href="tel:+31681764763">06 81 76 47 63</a></p></div>
+      <div data-toon><h4>E-mail</h4><p><a href="mailto:info@robbenrosmalen.nl">info@robbenrosmalen.nl</a></p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="voet">
+  <div class="voet__actie">
+    <div class="kolom">
+      <p>Een auto uit de collectie bekijken?</p>
+      <a class="knop knop--vol" href="mailto:info@robbenrosmalen.nl">Plan een bezichtiging</a>
+    </div>
+  </div>
+  <div class="kolom voet__grid">
+    <div>
+      <img src="/showcase/robben-rosmalen/logo.png" alt="Robben Rosmalen" width="312" height="150">
+      <p style="color:var(--grijs-diep);font-size:14px">Exclusieve automobielen uit het hogere segment.</p>
+    </div>
+    <div>
+      <h5>Collectie</h5>
+      <ul>
+        <li><a href="#collectie">Aanbod</a></li>
+        <li><a href="#collectie">Verkochte auto's</a></li>
+        <li><a href="#diensten">Lease</a></li>
+        <li><a href="#diensten">Verzekeren</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Showroom</h5>
+      <ul>
+        <li>Afrikalaan 17a</li>
+        <li>5232 BD 's-Hertogenbosch</li>
+        <li><a href="tel:+31738887883">073 888 78 83</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Openingstijden</h5>
+      <ul>
+        <li>Wij hanteren flexibele openingstijden. Bel even voordat u vertrekt.</li>
+        <li style="margin-top:12px">Ook via WhatsApp bereikbaar</li>
+      </ul>
+    </div>
+  </div>
+  <div class="kolom voet__klein">
+    <span>Robben Rosmalen Automobielen</span>
+    <span>Algemene voorwaarden &middot; Privacy en cookies</span>
+  </div>
+</footer>
+
+<div class="zwevend">
+  <a href="mailto:info@robbenrosmalen.nl">Plan een bezichtiging</a>
+</div>
+
+<div class="modaal" id="modaal" aria-hidden="true">
+  <div class="modaal__scherm" data-sluit></div>
+  <div class="modaal__vlak" role="dialog" aria-modal="true" aria-labelledby="modaal-naam">
+    <button type="button" class="modaal__sluit" data-sluit aria-label="Sluiten">&times;</button>
+    <div class="modaal__beeld"><img id="modaal-foto" src="" alt=""></div>
+    <div class="modaal__body">
+      <h3 id="modaal-naam"></h3>
+      <div class="modaal__specs">
+        <div><span>Bouwjaar</span><b id="modaal-bouwjaar"></b></div>
+        <div><span>Kilometerstand</span><b id="modaal-km"></b></div>
+        <div><span>Vermogen</span><b id="modaal-vermogen"></b></div>
+        <div><span>Brandstof</span><b id="modaal-brandstof"></b></div>
+        <div><span>Transmissie</span><b id="modaal-transmissie"></b></div>
+        <div><span>Prijs</span><b id="modaal-prijs-klein"></b></div>
+      </div>
+      <ul class="modaal__opties" id="modaal-opties"></ul>
+      <div class="modaal__onder">
+        <p class="modaal__prijs" id="modaal-prijs"></p>
+        <div class="modaal__knoppen">
+          <a class="knop knop--lijn" href="tel:+31738887883">Bel ons</a>
+          <a class="knop knop--vol" id="modaal-mail" href="#">Vraag deze auto aan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="autos-data">[{"naam":"Porsche Cayenne Coupé 3.0 E-Hybrid","foto":"/showcase/robben-rosmalen/porsche-cayenne-coup-3-0-e-hybrid.webp","bouwjaar":"2023","km":"40.810 km","vermogen":"470 pk","brandstof":"Hybride","transmissie":"Automaat","prijs":"€ 99.990","opties":["PANO","22inch","S-Display","TrkHk"]},{"naam":"Aston Martin V8 Vantage Roadster 4.7 V8","foto":"/showcase/robben-rosmalen/aston-martin-v8-vantage-roadster-4-7-v8.webp","bouwjaar":"2009","km":"79.898 km","vermogen":"426 pk","brandstof":"Benzine","transmissie":"Automaat","prijs":"€ 59.900","opties":[]},{"naam":"Land Rover Defender 110 P400e 110 X-Dynamic HSE PANO","foto":"/showcase/robben-rosmalen/land-rover-defender-110-p400e-110-x-dyna.webp","bouwjaar":"2022","km":"40.337 km","vermogen":"404 pk","brandstof":"Hybride","transmissie":"Automaat","prijs":"€ 78.990","opties":["TrkHk","VOL"]},{"naam":"Lancia Beta 1600","foto":"/showcase/robben-rosmalen/lancia-beta-1600.webp","bouwjaar":"1974","km":"Vermogen:","vermogen":"101 pk","brandstof":"Benzine","transmissie":"Handgeschakeld","prijs":"Prijs op aanvraag","opties":[]},{"naam":"Porsche Panamera Sport Turismo 4.0 Turbo AKRA","foto":"/showcase/robben-rosmalen/porsche-panamera-sport-turismo-4-0-turbo.webp","bouwjaar":"2018","km":"89.164 km","vermogen":"549 pk","brandstof":"Benzine","transmissie":"Automaat","prijs":"€ 72.499","opties":["PANO","MASSAGE","MATRIX","VOL"]},{"naam":"Volvo XC90 2.0 T8 Recharge AWD Ultimate","foto":"/showcase/robben-rosmalen/volvo-xc90-2-0-t8-recharge-awd-ultimate.webp","bouwjaar":"2022","km":"23.222 km","vermogen":"455 pk","brandstof":"Hybride","transmissie":"Automaat","prijs":"€ 58.999","opties":["Hud","Alcantare"]},{"naam":"Audi Q3 Sportback 45 TFSI Quattro Pro Line S","foto":"/showcase/robben-rosmalen/audi-q3-sportback-45-tfsi-quattro-pro-li.webp","bouwjaar":"2020","km":"42.315 km","vermogen":"230 pk","brandstof":"Benzine","transmissie":"Automaat","prijs":"€ 34.499","opties":["Dew silver met.","CAM"]}]</script>
+
+<script>
+(function(){
+  var stil=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Kop wordt dekkend zodra je van de film af scrollt.
+  var kop=document.getElementById('kop');
+  function stand(){ kop.classList.toggle('vast', window.scrollY > 60); }
+  stand(); addEventListener('scroll', stand, {passive:true});
+
+  // "···"-knop op mobiel: klapt Home, Verkocht, Lease en Verzekeren in en uit.
+  var menu=document.querySelector('.kop__menu');
+  var meerKnop=document.querySelector('.kop__meer-knop');
+  if(menu && meerKnop){
+    meerKnop.addEventListener('click', function(){
+      var open=menu.classList.toggle('open');
+      meerKnop.setAttribute('aria-expanded', open?'true':'false');
+      meerKnop.textContent=open?'×':'···';
+    });
+    // Na het kiezen van een verborgen link weer inklappen, anders blijft het
+    // menu openstaan terwijl de pagina al doorgescrolld is.
+    menu.querySelectorAll('.kop__extra a').forEach(function(a){
+      a.addEventListener('click', function(){
+        menu.classList.remove('open');
+        meerKnop.setAttribute('aria-expanded','false');
+        meerKnop.textContent='···';
+      });
+    });
+  }
+
+  // Cijfers tellen op vanaf 0 zodra ze in beeld komen. Reduced motion of geen
+  // count-getal: gewoon meteen de einduitkomst tonen.
+  function telOp(el){
+    var doel=Number(el.dataset.count);
+    var euroTeken=el.hasAttribute('data-euro');
+    if(!isFinite(doel)) return;
+    if(stil){ el.textContent=(euroTeken?'€ ':'')+doel.toLocaleString('nl-NL'); return; }
+    var start=performance.now(), duur=1100;
+    function stap(nu){
+      var t=Math.min(1,(nu-start)/duur);
+      var uit=1-Math.pow(1-t,3); // ease-out
+      var waarde=Math.round(doel*uit);
+      el.textContent=(euroTeken?'€ ':'')+waarde.toLocaleString('nl-NL');
+      if(t<1) requestAnimationFrame(stap);
+    }
+    requestAnimationFrame(stap);
+  }
+
+  // Blokken rustig in beeld laten komen. Zonder waarnemer, of wanneer iemand
+  // beweging heeft uitgezet, staat alles er gewoon meteen.
+  var blokken=[].slice.call(document.querySelectorAll('[data-toon]'));
+  if(stil || !('IntersectionObserver' in window)){
+    blokken.forEach(function(b){
+      b.classList.add('zichtbaar');
+      [].slice.call(b.querySelectorAll('[data-count]')).forEach(telOp);
+    });
+  } else {
+    var w=new IntersectionObserver(function(rijen){
+      rijen.forEach(function(r){
+        if(!r.isIntersecting) return;
+        r.target.classList.add('zichtbaar');
+        [].slice.call(r.target.querySelectorAll('[data-count]')).forEach(telOp);
+        w.unobserve(r.target);
+      });
+    },{rootMargin:'0px 0px -12% 0px',threshold:.08});
+    blokken.forEach(function(b){ w.observe(b); });
+  }
+
+  // Popup per auto. De knop op elke kaart draagt data-auto met het index-
+  // nummer, en de volledige gegevens staan los in het JSON-blok hieronder,
+  // want de kaart zelf toont maar drie opties en niet brandstof/transmissie.
+  var autos=JSON.parse(document.getElementById('autos-data').textContent);
+  var modaal=document.getElementById('modaal');
+  var laatsteFocus=null;
+
+  function vulModaal(a){
+    document.getElementById('modaal-foto').src=a.foto;
+    document.getElementById('modaal-foto').alt=a.naam;
+    document.getElementById('modaal-naam').textContent=a.naam;
+    document.getElementById('modaal-bouwjaar').textContent=a.bouwjaar||'–';
+    document.getElementById('modaal-km').textContent=a.km||'–';
+    document.getElementById('modaal-vermogen').textContent=a.vermogen||'–';
+    document.getElementById('modaal-brandstof').textContent=a.brandstof||'–';
+    document.getElementById('modaal-transmissie').textContent=a.transmissie||'–';
+    document.getElementById('modaal-prijs-klein').textContent=a.prijs;
+    document.getElementById('modaal-prijs').textContent=a.prijs;
+    var lijst=document.getElementById('modaal-opties');
+    lijst.innerHTML='';
+    (a.opties||[]).forEach(function(o){
+      var li=document.createElement('li');
+      li.textContent=o;
+      lijst.appendChild(li);
+    });
+    document.getElementById('modaal-mail').href='mailto:info@robbenrosmalen.nl?subject='+encodeURIComponent('Interesse in '+a.naam);
+  }
+
+  function open(i, bron){
+    var a=autos[i];
+    if(!a) return;
+    laatsteFocus=bron||document.activeElement;
+    vulModaal(a);
+    modaal.classList.add('open');
+    modaal.setAttribute('aria-hidden','false');
+    document.body.classList.add('geen-scroll');
+    modaal.querySelector('.modaal__sluit').focus();
+  }
+  function sluit(){
+    modaal.classList.remove('open');
+    modaal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('geen-scroll');
+    if(laatsteFocus) laatsteFocus.focus();
+  }
+
+  [].slice.call(document.querySelectorAll('.kaart__link')).forEach(function(knop){
+    knop.addEventListener('click', function(){ open(Number(knop.dataset.auto), knop); });
+  });
+  [].slice.call(modaal.querySelectorAll('[data-sluit]')).forEach(function(el){
+    el.addEventListener('click', sluit);
+  });
+  addEventListener('keydown', function(e){
+    if(e.key==='Escape' && modaal.classList.contains('open')) sluit();
+  });
+
+  // Bolletjes onder de mobiele swipelijst volgen welke kaart nu in beeld is.
+  var raster=document.querySelector('.raster');
+  var stippen=[].slice.call(document.querySelectorAll('[data-stip]'));
+  if(raster && stippen.length && 'IntersectionObserver' in window){
+    var kaarten=[].slice.call(raster.children);
+    var kijker=new IntersectionObserver(function(rijen){
+      rijen.forEach(function(r){
+        if(r.intersectionRatio<0.6) return;
+        var idx=kaarten.indexOf(r.target);
+        if(idx<0) return;
+        stippen.forEach(function(s,i){ s.classList.toggle('actief', i===idx); });
+      });
+    },{root:raster,threshold:[0,.6,1]});
+    kaarten.forEach(function(k){ kijker.observe(k); });
+  }
+})();
+</script>
+</body>
+</html>

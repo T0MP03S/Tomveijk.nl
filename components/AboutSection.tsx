@@ -57,10 +57,10 @@ export default function AboutSection() {
               </h3>
               <div className="space-y-4 text-white/70 leading-relaxed">
                 <p>
-                  Als <strong className="text-white">Grafisch Vormgever</strong> met veel ervaring en een passie voor innovatie, heb ik mijn diploma behaald aan het GLU. Mijn ontwerpen kenmerken zich door eenvoud en effectiviteit.
+                  Als <strong className="text-white">Grafisch Vormgever</strong> heb ik mijn diploma behaald aan het GLU. Mijn ontwerpen kenmerken zich door eenvoud en effectiviteit. Daarnaast bouw ik ook zelf websites: van ontwerp tot werkende site, met AI als gereedschap.
                 </p>
                 <p>
-                  In mijn portfolio vind je een breed scala aan werk, van logo's tot complete huisstijlen. Heb je vragen of wil je samenwerken? Neem gerust contact met me op.
+                  In mijn portfolio vind je een breed scala aan werk, van logo's en huisstijlen tot complete websites. Heb je vragen of wil je samenwerken? Neem gerust contact met me op.
                 </p>
                 <p className="text-white/90 font-medium">
                   Samen kunnen we geweldige visuele verhalen creëren.

@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "demos:sync": "node scripts/sync-demos.js",
     "postinstall": "prisma generate",
     "portfolio:sync": "node scripts/sync-portfolio.js"
   },

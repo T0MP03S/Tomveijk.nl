@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { PhotoshopIcon, AfterEffectsIcon, IllustratorIcon } from './AdobeIcons'
+import { PhotoshopIcon, AfterEffectsIcon, IllustratorIcon, AIIcon } from './AdobeIcons'
 
 interface Skill {
   id: string
@@ -14,7 +14,6 @@ interface Skill {
 
 export default function SkillsSection() {
   const [skills, setSkills] = useState<Skill[]>([])
-  const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
     fetch('/api/skills')
@@ -22,20 +21,6 @@ export default function SkillsSection() {
       .then(data => setSkills(data))
       .catch(err => console.error('Failed to load skills:', err))
   }, [])
-
-  const visibleSkills = skills.length > 0 ? [
-    skills[currentIndex],
-    skills[(currentIndex + 1) % skills.length],
-    skills[(currentIndex + 2) % skills.length],
-  ].filter(Boolean) : []
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % skills.length)
-  }
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + skills.length) % skills.length)
-  }
 
   if (skills.length === 0) {
     return null
@@ -54,9 +39,11 @@ export default function SkillsSection() {
           <p className="text-white/50 text-sm uppercase tracking-widest">Expertise Overzicht</p>
         </motion.div>
 
-        <div className="relative max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {visibleSkills.map((skill, idx) => (
+        <div className="relative max-w-7xl mx-auto">
+          {/* Alle vaardigheden in één keer, niet een carrousel van drie: bij
+              vier stond de nieuwste altijd verstopt achter een pijltje. */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {skills.map((skill, idx) => (
               <motion.div
                 key={skill.id}
                 initial={{ opacity: 0, y: 50 }}
@@ -65,8 +52,8 @@ export default function SkillsSection() {
                 transition={{ delay: idx * 0.15 }}
                 className="group"
               >
-                <div 
-                  className="relative p-10 rounded-3xl border border-white/5 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:border-white/10 bg-gradient-to-br from-white/5 to-transparent h-full min-h-[400px] flex flex-col"
+                <div
+                  className="relative p-8 rounded-3xl border border-white/5 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:border-white/10 bg-gradient-to-br from-white/5 to-transparent h-full min-h-[360px] flex flex-col"
                 >
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
@@ -79,12 +66,17 @@ export default function SkillsSection() {
                       {(skill.title.toLowerCase().includes('photoshop') || skill.title.toLowerCase().includes('photo')) && <PhotoshopIcon />}
                       {(skill.title.toLowerCase().includes('after effects') || skill.title.toLowerCase().includes('motion')) && <AfterEffectsIcon />}
                       {(skill.title.toLowerCase().includes('illustrator') || skill.title.toLowerCase().includes('logo')) && <IllustratorIcon />}
-                      {!(skill.title.toLowerCase().includes('photoshop') || 
+                      {/* Matcht op het icon-veld ('AI') en niet op de titel: een
+                          titel-trefwoord zoals 'ai' zou te makkelijk per ongeluk
+                          ook andere skills kunnen raken. */}
+                      {skill.icon === 'AI' && <AIIcon />}
+                      {!(skill.title.toLowerCase().includes('photoshop') ||
                          skill.title.toLowerCase().includes('photo') ||
-                         skill.title.toLowerCase().includes('after effects') || 
+                         skill.title.toLowerCase().includes('after effects') ||
                          skill.title.toLowerCase().includes('motion') ||
                          skill.title.toLowerCase().includes('illustrator') ||
-                         skill.title.toLowerCase().includes('logo')) && (
+                         skill.title.toLowerCase().includes('logo') ||
+                         skill.icon === 'AI') && (
                         <div 
                           className="w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-black shadow-2xl"
                           style={{ 
@@ -107,22 +99,6 @@ export default function SkillsSection() {
             ))}
           </div>
 
-          {skills.length > 3 && (
-            <div className="flex justify-center gap-4 mt-8">
-              <button
-                onClick={handlePrev}
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-              >
-                ←
-              </button>
-              <button
-                onClick={handleNext}
-                className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-              >
-                →
-              </button>
-            </div>
-          )}
         </div>
 
         <motion.div

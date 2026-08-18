@@ -131,7 +131,7 @@ export default async function PortfolioDetailPage({
             <div className="bg-yellow-500/10 border-b border-yellow-500/20 py-3 px-6">
               <div className="container mx-auto max-w-4xl flex items-center gap-3 text-yellow-400 text-sm">
                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-                <span>Dit is een <strong>draft preview</strong> — dit project is nog niet gepubliceerd en alleen zichtbaar voor ingelogde admins.</span>
+                <span>Dit is een <strong>draft preview</strong>. Dit project is nog niet gepubliceerd en alleen zichtbaar voor ingelogde admins.</span>
               </div>
             </div>
           )}
