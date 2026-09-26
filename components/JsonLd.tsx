@@ -8,13 +8,22 @@ export function PersonJsonLd() {
     alternateName: 'tomveijk',
     url: siteUrl,
     image: `${siteUrl}/images/tom-profile.jpg`,
-    jobTitle: 'Grafisch vormgever & webdeveloper',
-    description: "Grafisch vormgever en webdeveloper. Ontwerpt logo's, huisstijlen en websites, en bouwt ze ook zelf.",
+    jobTitle: 'Grafisch vormgever',
+    description: "Grafisch vormgever uit Baarn. Ontwerpt logo's, huisstijlen, posters, thumbnails en motion design, en bouwt ook websites.",
+    homeLocation: {
+      '@type': 'Place',
+      address: { '@type': 'PostalAddress', addressLocality: 'Baarn', addressCountry: 'NL' }
+    },
+    alumniOf: { '@type': 'EducationalOrganization', name: 'Grafisch Lyceum Utrecht' },
+    hasOccupation: { '@type': 'Occupation', name: 'AV vormgever', description: 'AV vormgever bij NOS Paintbox' },
+    affiliation: { '@type': 'CollegeOrUniversity', name: 'Hogeschool van Amsterdam', url: 'https://www.hva.nl' },
     knowsAbout: [
       'Grafisch ontwerp',
-      'Logo design',
+      'Logo ontwerp',
       'Huisstijl',
       'Branding',
+      'Motion design',
+      'Creative Business',
       'Webdevelopment',
       'Adobe Photoshop',
       'Adobe Illustrator',
@@ -23,10 +32,7 @@ export function PersonJsonLd() {
     ],
     sameAs: [
       'https://www.linkedin.com/in/tomveijknl/',
-      'https://www.instagram.com/tompoeso',
-      'https://www.tiktok.com/@tompoeso',
-      'https://www.twitch.tv/t0mp03s',
-      'https://www.youtube.com/@Tompoeso'
+      'https://www.instagram.com/tompoeso'
     ],
     worksFor: {
       '@type': 'Organization',
@@ -50,7 +56,7 @@ export function WebsiteJsonLd() {
     name: 'tomveijk',
     alternateName: 'Tom van Eijk Portfolio',
     url: siteUrl,
-    description: 'Portfolio website van Tom van Eijk - Grafisch vormgever & webdeveloper',
+    description: 'Portfolio van Tom van Eijk, grafisch vormgever uit Baarn',
     author: {
       '@type': 'Person',
       name: 'Tom van Eijk'
@@ -70,12 +76,13 @@ export function LocalBusinessJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'tomveijk - Tom van Eijk',
-    description: 'Grafisch ontwerp en webdevelopment door Tom van Eijk',
+    description: 'Grafisch ontwerp door Tom van Eijk uit Baarn: logo, huisstijl, print en motion design',
     url: siteUrl,
     image: `${siteUrl}/images/tom-profile.jpg`,
     priceRange: '€€',
     address: {
       '@type': 'PostalAddress',
+      addressLocality: 'Baarn',
       addressCountry: 'NL'
     },
     founder: {
@@ -87,6 +94,7 @@ export function LocalBusinessJsonLd() {
       'Logo design',
       'Huisstijl ontwerp',
       'Branding',
+      'Motion design',
       'Webdevelopment'
     ]
   }

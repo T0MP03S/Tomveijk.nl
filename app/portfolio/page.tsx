@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { prisma } from '@/lib/prisma'
-import PortfolioFilters from '@/components/PortfolioFilters'
+import PortfolioOverzicht from '@/components/PortfolioOverzicht'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import Navigation from '@/components/Navigation'
@@ -10,12 +10,16 @@ import ScrollToTop from '@/components/ScrollToTop'
 
 const siteUrl = process.env.NEXTAUTH_URL || 'https://tomveijk.nl'
 
+const beschrijving = "Portfolio van grafisch vormgever Tom van Eijk uit Baarn: logo's, huisstijlen, posters, thumbnails, motion design en websites."
+
 export const metadata: Metadata = {
-  title: 'Portfolio | Tom van Eijk',
-  description: 'Bekijk al mijn projecten: van videowerk en branding tot websites en design.',
+  // De template in app/layout.tsx plakt er zelf ' | Tom van Eijk' achter.
+  title: 'Portfolio',
+  description: beschrijving,
+  alternates: { canonical: '/portfolio' },
   openGraph: {
     title: 'Portfolio | Tom van Eijk',
-    description: 'Bekijk al mijn projecten: van videowerk en branding tot websites en design.',
+    description: beschrijving,
     url: `${siteUrl}/portfolio`,
     type: 'website',
   },
@@ -76,14 +80,14 @@ export default async function PortfolioPage() {
               </Link>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                Alle Projecten
+                Portfolio
               </h1>
               <p className="text-white/50 text-lg max-w-2xl">
-                Al mijn projecten, websites, branding en videowerk, nieuwste eerst.
+                Mijn werk als grafisch vormgever, en de websites die ik heb gemaakt. Nieuwste eerst.
               </p>
             </div>
 
-            <PortfolioFilters items={items} />
+            <PortfolioOverzicht items={items} />
           </div>
         </main>
 

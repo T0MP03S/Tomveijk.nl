@@ -1,122 +1,130 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { PhotoshopIcon, AfterEffectsIcon, IllustratorIcon, AIIcon } from './AdobeIcons'
+import { PenTool, Image as ImageIcon, Film, Newspaper } from 'lucide-react'
 
-interface Skill {
-  id: string
-  title: string
-  description: string
-  icon: string
-  color: string
-}
+/**
+ * Wat ik doe: disciplines met werk als voorbeeld, in plaats van losse
+ * programma's. Photoshop kan elke vormgever; wat iemand ermee maakt zegt meer.
+ */
+
+const disciplines = [
+  {
+    titel: 'Logo & huisstijl',
+    tekst: 'Een beeldmerk en een stijl die klopt bij wie je bent, van logo tot visitekaartje.',
+    voorbeelden: 'GG Shields, Past Pursuits, Stilo Design',
+    icoon: PenTool,
+    kleur: '#A34BFF',
+  },
+  {
+    titel: 'Social & thumbnails',
+    tekst: 'Beeld dat in een tijdlijn opvalt en ervoor zorgt dat mensen doorklikken.',
+    voorbeelden: 'StukTV, Xander Houtman, Kalvijn',
+    icoon: ImageIcon,
+    kleur: '#30A8FF',
+  },
+  {
+    titel: 'Motion design',
+    tekst: 'Animaties en visuals die beweging geven aan een merk of video.',
+    voorbeelden: 'NOS, Radio 538, Talpa Social',
+    icoon: Film,
+    kleur: '#00D752',
+  },
+  {
+    titel: 'Print & poster',
+    tekst: 'Posters, kaarten en drukwerk met een eigen idee erachter.',
+    voorbeelden: 'Freaky Food Festival, IDTV',
+    icoon: Newspaper,
+    kleur: '#FF9A3C',
+  },
+]
+
+const gereedschap = [
+  { src: '/icons/photoshop.svg', naam: 'Photoshop' },
+  { src: '/icons/illustrator.svg', naam: 'Illustrator' },
+  { src: '/icons/after-effects.svg', naam: 'After Effects' },
+  { src: '/icons/indesign.svg', naam: 'InDesign' },
+]
 
 export default function SkillsSection() {
-  const [skills, setSkills] = useState<Skill[]>([])
-
-  useEffect(() => {
-    fetch('/api/skills')
-      .then(res => res.json())
-      .then(data => setSkills(data))
-      .catch(err => console.error('Failed to load skills:', err))
-  }, [])
-
-  if (skills.length === 0) {
-    return null
-  }
-
   return (
-    <section id="vaardigheden" className="py-32 relative">
+    <section id="wat-ik-doe" className="py-20 md:py-24 relative">
       <div className="container mx-auto px-6 relative z-10 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Vaardigheden</h2>
-          <p className="text-white/50 text-sm uppercase tracking-widest">Expertise Overzicht</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Wat ik doe</h2>
+          <p className="text-white/50 text-sm uppercase tracking-widest">Grafisch ontwerp in vier vormen</p>
         </motion.div>
 
-        <div className="relative max-w-7xl mx-auto">
-          {/* Alle vaardigheden in één keer, niet een carrousel van drie: bij
-              vier stond de nieuwste altijd verstopt achter een pijltje. */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skills.map((skill, idx) => (
-              <motion.div
-                key={skill.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.15 }}
-                className="group"
-              >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {disciplines.map((d, idx) => (
+            <motion.div
+              key={d.titel}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.12 }}
+              className="group"
+            >
+              <div className="relative h-full p-8 rounded-3xl border border-white/5 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-white/10 bg-gradient-to-br from-white/5 to-transparent flex flex-col">
                 <div
-                  className="relative p-8 rounded-3xl border border-white/5 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:border-white/10 bg-gradient-to-br from-white/5 to-transparent h-full min-h-[360px] flex flex-col"
-                >
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: `linear-gradient(135deg, ${skill.color}15 0%, transparent 100%)`
-                    }}
-                  />
-                  
-                  <div className="relative z-10 flex flex-col items-center text-center space-y-6 flex-1">
-                    <div className="w-20 h-20 flex items-center justify-center">
-                      {(skill.title.toLowerCase().includes('photoshop') || skill.title.toLowerCase().includes('photo')) && <PhotoshopIcon />}
-                      {(skill.title.toLowerCase().includes('after effects') || skill.title.toLowerCase().includes('motion')) && <AfterEffectsIcon />}
-                      {(skill.title.toLowerCase().includes('illustrator') || skill.title.toLowerCase().includes('logo')) && <IllustratorIcon />}
-                      {/* Matcht op het icon-veld ('AI') en niet op de titel: een
-                          titel-trefwoord zoals 'ai' zou te makkelijk per ongeluk
-                          ook andere skills kunnen raken. */}
-                      {skill.icon === 'AI' && <AIIcon />}
-                      {!(skill.title.toLowerCase().includes('photoshop') ||
-                         skill.title.toLowerCase().includes('photo') ||
-                         skill.title.toLowerCase().includes('after effects') ||
-                         skill.title.toLowerCase().includes('motion') ||
-                         skill.title.toLowerCase().includes('illustrator') ||
-                         skill.title.toLowerCase().includes('logo') ||
-                         skill.icon === 'AI') && (
-                        <div 
-                          className="w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-black shadow-2xl"
-                          style={{ 
-                            backgroundColor: `${skill.color}`,
-                            color: '#000',
-                            fontFamily: 'system-ui, -apple-system, sans-serif'
-                          }}
-                        >
-                          {skill.icon}
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold mb-4">{skill.title}</h3>
-                      <p className="text-white/60 leading-relaxed text-sm">{skill.description}</p>
-                    </div>
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: `linear-gradient(135deg, ${d.kleur}15 0%, transparent 100%)` }}
+                />
+                <div className="relative z-10 flex flex-col flex-1">
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
+                    style={{ backgroundColor: `${d.kleur}20`, color: d.kleur }}
+                  >
+                    <d.icoon className="w-7 h-7" />
                   </div>
+                  <h3 className="text-xl font-bold mb-3">{d.titel}</h3>
+                  <p className="text-white/60 leading-relaxed text-sm flex-1">{d.tekst}</p>
+                  <p className="mt-6 text-xs text-white/40">
+                    <span className="uppercase tracking-wider text-white/30">Bijvoorbeeld </span>
+                    {d.voorbeelden}
+                  </p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-
+              </div>
+            </motion.div>
+          ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
+        >
+          <span className="text-xs uppercase tracking-widest text-white/30">Ik werk met</span>
+          {gereedschap.map((g) => (
+            <span key={g.naam} className="flex items-center gap-2 text-sm text-white/50">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={g.src} alt="" className="w-6 h-6" />
+              {g.naam}
+            </span>
+          ))}
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-32"
+          className="mt-20"
         >
           <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold mb-3">Samenwerkingen</h3>
-            <p className="text-white/40 text-sm uppercase tracking-widest">Merken waar ik mee heb gewerkt</p>
+            <h3 className="text-2xl md:text-3xl font-bold mb-3">Waar ik heb gewerkt</h3>
+            <p className="text-white/40 text-sm uppercase tracking-widest">Baan en stages</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto">
             {[
-              { src: '/logos/idtv.svg', alt: 'IDTV' },
-              { src: '/logos/defensie.svg', alt: 'Ministerie van Defensie' },
               { src: '/logos/nos.svg', alt: 'NOS' },
               { src: '/logos/talpa.svg', alt: 'Talpa Network' },
+              { src: '/logos/idtv.svg', alt: 'IDTV' },
             ].map((logo, i) => (
               <motion.div
                 key={logo.alt}

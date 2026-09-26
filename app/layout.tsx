@@ -6,38 +6,40 @@ import { PersonJsonLd, WebsiteJsonLd, LocalBusinessJsonLd } from "@/components/J
 const inter = Inter({ subsets: ["latin"] })
 
 const siteUrl = process.env.NEXTAUTH_URL || 'https://tomveijk.nl'
+const description = "Tom van Eijk is grafisch vormgever uit Baarn en AV vormgever bij de NOS. Logo's, huisstijlen, posters, thumbnails, motion design en websites. Student Creative Business aan de HvA."
 
 export const metadata: Metadata = {
   title: {
-    default: "Tom van Eijk - Grafisch vormgever & webdeveloper",
+    default: "Tom van Eijk | Grafisch vormgever uit Baarn",
     template: "%s | Tom van Eijk"
   },
-  description: "Portfolio van Tom van Eijk uit Baarn. Ik ontwerp logo's, huisstijlen en websites, en bouw ze ook zelf.",
-  keywords: ["grafisch ontwerp", "logo design", "huisstijl", "webdevelopment", "website laten maken", "Tom van Eijk", "tomveijk", "portfolio"],
+  description,
+  keywords: ["grafisch vormgever", "grafisch vormgever Baarn", "grafisch ontwerp", "logo ontwerp", "huisstijl", "motion design", "thumbnails", "Creative Business HvA", "Tom van Eijk", "tomveijk", "portfolio"],
   authors: [{ name: "Tom van Eijk" }],
   creator: "Tom van Eijk",
   metadataBase: new URL(siteUrl),
+  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     locale: 'nl_NL',
     url: siteUrl,
     siteName: 'tomveijk',
-    title: 'Tom van Eijk - Grafisch vormgever & webdeveloper',
-    description: "Portfolio van Tom van Eijk uit Baarn. Ik ontwerp logo's, huisstijlen en websites, en bouw ze ook zelf.",
+    title: 'Tom van Eijk | Grafisch vormgever uit Baarn',
+    description,
     images: [
       {
-        url: '/images/tom-profile.jpg',
+        url: '/images/tom-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tom van Eijk, grafisch vormgever en webdeveloper uit Baarn',
+        alt: 'Tom van Eijk, grafisch vormgever uit Baarn',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tom van Eijk - Grafisch vormgever & webdeveloper',
-    description: "Portfolio van Tom van Eijk uit Baarn.",
-    images: ['/images/tom-profile.jpg'],
+    title: 'Tom van Eijk | Grafisch vormgever uit Baarn',
+    description,
+    images: ['/images/tom-og.jpg'],
   },
   robots: {
     index: true,

@@ -12,8 +12,9 @@ const socialLinks = [
 
 const navLinks = [
   { href: '/#over-mij', label: 'Over mij' },
-  { href: '/#portfolio', label: 'Portfolio' },
-  { href: '/#vaardigheden', label: 'Vaardigheden' },
+  { href: '/portfolio#vormgeving', label: 'Vormgeving' },
+  { href: '/portfolio#websites', label: 'Websites' },
+  { href: '/#wat-ik-doe', label: 'Wat ik doe' },
 ]
 
 export default function Footer() {
@@ -29,6 +30,9 @@ export default function Footer() {
             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
               Grafisch vormgever & webdeveloper uit Baarn.
             </p>
+            <a href="mailto:info@tomveijk.nl" className="inline-block text-sm text-white/70 hover:text-white transition-colors">
+              info@tomveijk.nl
+            </a>
           </div>
 
           {/* Navigation */}
@@ -68,12 +72,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-center gap-4">
           <p className="text-white/30 text-xs">
             &copy; {new Date().getFullYear()} Tom van Eijk. Alle rechten voorbehouden.
-          </p>
-          <p className="text-white/20 text-xs">
-            Handgemaakt met Next.js
           </p>
         </div>
       </div>

@@ -44,7 +44,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${item.title} | Tom van Eijk`,
+    title: item.title,
+    alternates: { canonical: `/portfolio/${params.slug}` },
     description: item.description || `Portfolio project: ${item.title} door Tom van Eijk`,
     openGraph: {
       title: `${item.title} - Tom van Eijk`,

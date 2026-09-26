@@ -22,7 +22,7 @@ export default function MorphingButton({
   type = 'button'
 }: MorphingButtonProps) {
   const variants = {
-    primary: 'bg-gradient-to-r from-[#00D752] to-[#00B844] text-[#030310] shadow-[0_0_20px_rgba(0,215,82,0.3)]',
+    primary: 'bg-gradient-to-r from-[#00D752] via-[#30A8FF] to-[#A34BFF] text-white shadow-lg shadow-[#30A8FF]/20 hover:shadow-[#30A8FF]/40',
     secondary: 'bg-gradient-to-r from-[#A34BFF] to-[#8a3eff] text-white shadow-[0_0_20px_rgba(163,75,255,0.3)]',
     outline: 'bg-transparent border-2 border-white/30 text-white hover:border-white/50 hover:bg-white/5'
   }
@@ -32,18 +32,14 @@ export default function MorphingButton({
       type={type}
       onClick={onClick}
       className={`
-        relative px-8 py-4 rounded-xl font-semibold text-base
+        relative px-8 py-4 rounded-full font-semibold text-sm uppercase tracking-wider
         cursor-pointer overflow-hidden
         transition-all duration-300 ease-out
         flex items-center gap-3 justify-center
         ${variants[variant]}
         ${className}
       `}
-      whileHover={{ 
-        scale: 1.02,
-        borderRadius: '24px',
-        y: -2
-      }}
+      whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.98 }}
     >
       <span className="relative z-10">{children}</span>
