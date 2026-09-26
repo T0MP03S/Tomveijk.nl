@@ -1,10 +1,14 @@
-FROM node:18-bullseye-slim AS base
+# Bookworm (Debian 12): bullseye is sinds eind augustus 2026 uit de support en
+# de beveiligingsmirror geeft 404 op zijn pakketten, waardoor elke build faalde.
+FROM node:20-bookworm-slim AS base
 
-# Install dependencies only when needed
-FROM base AS deps
+# openssl in de basis, zodat Prisma in elke stap de juiste engine kiest.
 RUN apt-get update \
   && apt-get install -y --no-install-recommends openssl ca-certificates \
   && rm -rf /var/lib/apt/lists/*
+
+# Install dependencies only when needed
+FROM base AS deps
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
@@ -34,8 +38,9 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Geen libvips-dev: sharp brengt zijn eigen libvips mee via @img (zie hieronder).
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends openssl ca-certificates wget libvips-dev \
+  && apt-get install -y --no-install-recommends wget \
   && rm -rf /var/lib/apt/lists/*
 
 # Copy necessary files
