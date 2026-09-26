@@ -23,7 +23,7 @@ export default function AboutSection() {
           className="text-center mb-12 md:mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Over mij</h2>
-          <p className="text-white/50 text-sm uppercase tracking-widest">Grafisch vormgever &amp; webdeveloper uit Baarn</p>
+          <p className="text-white/50 text-sm uppercase tracking-widest">Grafisch vormgever &amp; webdeveloper</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
@@ -37,7 +37,7 @@ export default function AboutSection() {
             <div className="relative aspect-[3/4] max-w-md mx-auto rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-transparent">
               <Image
                 src="/images/tom-profile.jpg"
-                alt="Portretfoto van Tom van Eijk, grafisch vormgever uit Baarn"
+                alt="Portretfoto van Tom van Eijk, grafisch vormgever"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"

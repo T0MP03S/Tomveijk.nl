@@ -10,7 +10,7 @@ import ScrollToTop from '@/components/ScrollToTop'
 
 const siteUrl = process.env.NEXTAUTH_URL || 'https://tomveijk.nl'
 
-const beschrijving = "Portfolio van grafisch vormgever Tom van Eijk uit Baarn: logo's, huisstijlen, posters, thumbnails, motion design en websites."
+const beschrijving = "Portfolio van grafisch vormgever Tom van Eijk: logo's, huisstijlen, posters, thumbnails, motion design en websites."
 
 export const metadata: Metadata = {
   // De template in app/layout.tsx plakt er zelf ' | Tom van Eijk' achter.

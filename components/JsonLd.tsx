@@ -9,11 +9,7 @@ export function PersonJsonLd() {
     url: siteUrl,
     image: `${siteUrl}/images/tom-profile.jpg`,
     jobTitle: 'Grafisch vormgever',
-    description: "Grafisch vormgever uit Baarn. Ontwerpt logo's, huisstijlen, posters, thumbnails en motion design, en bouwt ook websites.",
-    homeLocation: {
-      '@type': 'Place',
-      address: { '@type': 'PostalAddress', addressLocality: 'Baarn', addressCountry: 'NL' }
-    },
+    description: "Grafisch vormgever. Ontwerpt logo's, huisstijlen, posters, thumbnails en motion design, en bouwt ook websites.",
     alumniOf: { '@type': 'EducationalOrganization', name: 'Grafisch Lyceum Utrecht' },
     hasOccupation: { '@type': 'Occupation', name: 'AV vormgever', description: 'AV vormgever bij NOS Paintbox' },
     affiliation: { '@type': 'CollegeOrUniversity', name: 'Hogeschool van Amsterdam', url: 'https://www.hva.nl' },
@@ -56,7 +52,7 @@ export function WebsiteJsonLd() {
     name: 'tomveijk',
     alternateName: 'Tom van Eijk Portfolio',
     url: siteUrl,
-    description: 'Portfolio van Tom van Eijk, grafisch vormgever uit Baarn',
+    description: 'Portfolio van Tom van Eijk, grafisch vormgever',
     author: {
       '@type': 'Person',
       name: 'Tom van Eijk'
@@ -76,13 +72,12 @@ export function LocalBusinessJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'tomveijk - Tom van Eijk',
-    description: 'Grafisch ontwerp door Tom van Eijk uit Baarn: logo, huisstijl, print en motion design',
+    description: 'Grafisch ontwerp door Tom van Eijk: logo, huisstijl, print en motion design',
     url: siteUrl,
     image: `${siteUrl}/images/tom-profile.jpg`,
     priceRange: '€€',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Baarn',
       addressCountry: 'NL'
     },
     founder: {

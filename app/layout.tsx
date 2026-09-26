@@ -6,15 +6,15 @@ import { PersonJsonLd, WebsiteJsonLd, LocalBusinessJsonLd } from "@/components/J
 const inter = Inter({ subsets: ["latin"] })
 
 const siteUrl = process.env.NEXTAUTH_URL || 'https://tomveijk.nl'
-const description = "Tom van Eijk is grafisch vormgever uit Baarn en AV vormgever bij de NOS. Logo's, huisstijlen, posters, thumbnails, motion design en websites. Student Creative Business aan de HvA."
+const description = "Tom van Eijk is grafisch vormgever en AV vormgever bij de NOS. Logo's, huisstijlen, posters, thumbnails, motion design en websites. Student Creative Business aan de HvA."
 
 export const metadata: Metadata = {
   title: {
-    default: "Tom van Eijk | Grafisch vormgever uit Baarn",
+    default: "Tom van Eijk | Grafisch vormgever",
     template: "%s | Tom van Eijk"
   },
   description,
-  keywords: ["grafisch vormgever", "grafisch vormgever Baarn", "grafisch ontwerp", "logo ontwerp", "huisstijl", "motion design", "thumbnails", "Creative Business HvA", "Tom van Eijk", "tomveijk", "portfolio"],
+  keywords: ["grafisch vormgever", "grafisch ontwerp", "logo ontwerp", "huisstijl", "motion design", "thumbnails", "Creative Business HvA", "Tom van Eijk", "tomveijk", "portfolio"],
   authors: [{ name: "Tom van Eijk" }],
   creator: "Tom van Eijk",
   metadataBase: new URL(siteUrl),
@@ -24,20 +24,20 @@ export const metadata: Metadata = {
     locale: 'nl_NL',
     url: siteUrl,
     siteName: 'tomveijk',
-    title: 'Tom van Eijk | Grafisch vormgever uit Baarn',
+    title: 'Tom van Eijk | Grafisch vormgever',
     description,
     images: [
       {
         url: '/images/tom-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tom van Eijk, grafisch vormgever uit Baarn',
+        alt: 'Tom van Eijk, grafisch vormgever',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tom van Eijk | Grafisch vormgever uit Baarn',
+    title: 'Tom van Eijk | Grafisch vormgever',
     description,
     images: ['/images/tom-og.jpg'],
   },

@@ -28,7 +28,7 @@ export default function Footer() {
               <Image src="/logo.svg" alt="Tom van Eijk" width={120} height={40} className="h-10 w-auto" />
             </Link>
             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
-              Grafisch vormgever & webdeveloper uit Baarn.
+              Grafisch vormgever & webdeveloper.
             </p>
             <a href="mailto:info@tomveijk.nl" className="inline-block text-sm text-white/70 hover:text-white transition-colors">
               info@tomveijk.nl
