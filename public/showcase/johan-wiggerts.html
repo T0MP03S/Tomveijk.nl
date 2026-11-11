@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bouwbedrijf Johan Wiggerts | Ontwerpvoorstel van Tom van Eijk</title>
+<meta name="description" content="Ontwerpvoorstel voor een nieuwe website van Bouwbedrijf Johan Wiggerts in Baarn, gemaakt door Tom van Eijk.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#BF0202">
+<link rel="preload" as="font" type="font/woff2" href="/showcase/johan-wiggerts/archivo.woff2" crossorigin>
+<style>
+/* ---------------------------------------------------------------------------
+   Bouwbedrijf Johan Wiggerts. Het rood uit hun logo, op zand en antraciet.
+   Hoekig waar Jansen rond is: kleine radius, dunne lijnen en maatvoering als
+   in een bouwtekening. Koppen in Archivo (smal en zwaar), tekst in Inter.
+   --------------------------------------------------------------------------- */
+@font-face{font-family:"Archivo";src:url("/showcase/johan-wiggerts/archivo.woff2") format("woff2");font-weight:500 900;font-stretch:62% 125%;font-display:swap}
+@font-face{font-family:"Inter";src:url("/showcase/johan-wiggerts/inter.woff2") format("woff2");font-weight:400 800;font-display:swap}
+:root{
+  --zand:#F2EEE6;
+  --zand-d:#E6DFD2;
+  --rood:#BF0202;
+  --rood-d:#9A0202;
+  --antr:#1D1D1F;
+  --antr-2:#2A2A2D;
+  --wit:#FFFFFF;
+  --grijs:#5F5B55;
+  --lijn:#D6CEBF;
+  --op-donker:#B4AEA6;
+  --kader:1280px;
+  --zij:clamp(20px,5.5vw,80px);
+  --kop:"Archivo",ui-sans-serif,system-ui,sans-serif;
+  --tekst:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--zand);color:var(--antr);font-family:var(--tekst);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--rood);outline-offset:3px}
+
+.kader{max-width:calc(var(--kader) + 2*var(--zij));margin:0 auto;padding:0 var(--zij)}
+.kop{font-family:var(--kop);font-weight:850;font-stretch:78%;text-transform:uppercase;letter-spacing:-.01em;line-height:.92}
+.label{display:flex;align-items:center;gap:14px;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--grijs)}
+.label::before{content:"";width:36px;height:2px;background:var(--rood)}
+
+/* knoppen: rechthoekig met een klein afgeschuind hoekje */
+.knop{display:inline-flex;align-items:center;gap:16px;height:58px;padding:0 26px;font-weight:600;font-size:16px;white-space:nowrap;border-radius:4px;transition:background .2s ease,transform .2s ease}
+.knop:hover{transform:translateY(-2px)}
+.knop svg{width:18px;height:18px;transition:transform .2s ease}
+.knop:hover svg{transform:translateX(3px)}
+.knop-rood{background:var(--rood);color:var(--wit)}
+.knop-rood:hover{background:var(--rood-d)}
+.knop-lijn{border:1.5px solid var(--antr)}
+
+.concept{background:var(--antr);color:var(--op-donker);font-size:13px;text-align:center;padding:9px 16px}
+.concept a{color:var(--wit);text-decoration:underline;text-underline-offset:2px}
+
+/* kop */
+.top{background:var(--wit);border-bottom:1px solid var(--lijn)}
+.menu{display:flex;align-items:center;justify-content:space-between;height:96px}
+.menu .logo img{height:56px;width:auto}
+.menu nav{display:flex;align-items:center;gap:32px;font-weight:500;font-size:16px}
+.menu nav a:not(.knop):hover{color:var(--rood)}
+.menu .knop{height:48px;padding:0 20px;margin-left:8px}
+.menuknop{display:none}
+
+/* hero met bouwtekening-raster */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--lijn);
+  background-color:var(--zand);
+  background-image:linear-gradient(var(--zand-d) 1px,transparent 1px),linear-gradient(90deg,var(--zand-d) 1px,transparent 1px);
+  background-size:40px 40px;background-position:-1px -1px}
+.hero .kader{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center;padding-top:88px;padding-bottom:96px}
+.hero h1{font-size:clamp(58px,8.4vw,128px);margin-top:28px}
+.hero h1 em{font-style:normal;color:var(--rood)}
+.hero p{font-size:20px;color:var(--grijs);max-width:540px;margin-top:30px}
+.knoppen{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.foto-maat{position:relative;padding:28px 0 0 28px}
+.foto-maat img{width:100%;aspect-ratio:4/3.1;object-fit:cover;border-radius:4px;box-shadow:0 24px 60px rgba(29,29,31,.18)}
+/* maatlijnen */
+.maat-h,.maat-v{position:absolute;color:var(--grijs);font-size:12px;font-weight:600;letter-spacing:.06em}
+.maat-h{top:0;left:28px;right:0;height:14px;border-left:1.5px solid var(--grijs);border-right:1.5px solid var(--grijs)}
+.maat-h::before{content:"";position:absolute;left:0;right:0;top:7px;border-top:1.5px solid var(--grijs)}
+.maat-h span{position:absolute;left:50%;top:-4px;transform:translateX(-50%);background:var(--zand);padding:0 10px}
+.maat-v{left:0;top:28px;bottom:0;width:14px;border-top:1.5px solid var(--grijs);border-bottom:1.5px solid var(--grijs)}
+.maat-v::before{content:"";position:absolute;top:0;bottom:0;left:7px;border-left:1.5px solid var(--grijs)}
+.bordje{position:absolute;right:-12px;bottom:-22px;background:var(--antr);color:var(--wit);padding:18px 22px;border-radius:4px;max-width:250px}
+.bordje b{display:block;font-family:var(--kop);font-weight:850;font-stretch:78%;text-transform:uppercase;font-size:40px;line-height:1;color:var(--wit)}
+.bordje span{font-size:14px;color:var(--op-donker)}
+
+/* strook met diensten */
+.strook{background:var(--rood);color:var(--wit);overflow:hidden}
+.strook ul{display:flex;gap:48px;list-style:none;padding:22px 0;white-space:nowrap;width:max-content;animation:loop 38s linear infinite}
+.strook li{font-family:var(--kop);font-weight:800;font-stretch:78%;text-transform:uppercase;font-size:28px;display:flex;align-items:center;gap:48px}
+.strook li::after{content:"";width:10px;height:10px;background:var(--wit);transform:rotate(45deg)}
+@keyframes loop{to{transform:translateX(-50%)}}
+
+/* secties */
+section{scroll-margin-top:24px}
+.sectie{padding:112px 0}
+.koprij{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:64px}
+.koprij h2{font-size:clamp(44px,5.6vw,80px)}
+.koprij p{color:var(--grijs);font-size:18px;max-width:520px}
+
+.diensten{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--antr);border-left:1px solid var(--lijn)}
+.dienst{border-right:1px solid var(--lijn);border-bottom:1px solid var(--lijn);padding:28px 28px 32px;min-height:220px;display:flex;flex-direction:column;transition:background .2s ease}
+.dienst:hover{background:var(--wit)}
+.dienst .nr{font-size:13px;font-weight:600;color:var(--rood);letter-spacing:.06em}
+.dienst h3{font-family:var(--kop);font-weight:800;font-stretch:85%;text-transform:uppercase;font-size:30px;line-height:1;margin-top:auto;padding-top:48px}
+.dienst p{color:var(--grijs);font-size:15px;margin-top:10px}
+.dienst.vraag{background:var(--antr);color:var(--wit)}
+.dienst.vraag p{color:var(--op-donker)}
+.dienst.vraag:hover{background:var(--antr-2)}
+.dienst.vraag .pijl{margin-top:16px;color:var(--wit);font-weight:600;font-size:15px}
+
+.donker{background:var(--antr);color:var(--wit)}
+.donker .koprij p{color:var(--op-donker)}
+.donker .label{color:var(--op-donker)}
+.punten{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#3A3A3E;border:1px solid #3A3A3E}
+.punt{background:var(--antr);padding:36px 32px 40px}
+.punt .vk{width:44px;height:44px;border:1.5px solid var(--rood);display:grid;place-items:center;color:var(--wit);transform:rotate(45deg)}
+.punt .vk svg{transform:rotate(-45deg);width:18px;height:18px}
+.punt h3{font-family:var(--kop);font-weight:800;font-stretch:85%;text-transform:uppercase;font-size:28px;line-height:1;margin-top:32px}
+.punt p{color:var(--op-donker);font-size:16px;margin-top:10px}
+
+.werk{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.werk figure{position:relative;background:var(--wit);padding:16px 16px 22px;border-radius:4px}
+.werk img{width:100%;height:420px;object-fit:cover;border-radius:2px}
+.werk figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:18px;font-size:15px;color:var(--grijs)}
+.werk figcaption strong{color:var(--antr);font-weight:600}
+.werk .tekst{background:var(--wit);border-radius:4px;padding:40px;display:flex;flex-direction:column}
+.werk .tekst h3{font-family:var(--kop);font-weight:850;font-stretch:78%;text-transform:uppercase;font-size:44px;line-height:.95}
+.werk .tekst p{color:var(--grijs);margin-top:18px}
+.werk .tekst img{height:180px;margin-top:auto;object-fit:cover;object-position:50% 60%}
+.werk .tekst small{display:block;color:var(--grijs);font-size:14px;margin-top:12px}
+
+.stappen{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.stap{border-top:3px solid var(--antr);padding-top:26px}
+.stap b{font-family:var(--kop);font-weight:850;font-stretch:78%;font-size:64px;line-height:1;color:var(--rood)}
+.stap h3{font-family:var(--kop);font-weight:800;font-stretch:85%;text-transform:uppercase;font-size:28px;line-height:1;margin-top:20px}
+.stap p{color:var(--grijs);margin-top:10px;max-width:360px}
+
+.slogan{background:var(--zand-d);text-align:center;padding:120px 0}
+.slogan p{font-family:var(--kop);font-weight:900;font-stretch:72%;text-transform:uppercase;font-size:clamp(52px,9.5vw,148px);line-height:.88;letter-spacing:-.01em}
+.slogan p span{color:var(--rood)}
+.slogan small{display:block;margin-top:28px;color:var(--grijs);font-size:16px}
+
+.contact{background:var(--antr);color:var(--wit);padding:104px 0}
+.contact .kader{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.contact h2{font-size:clamp(44px,5.6vw,80px)}
+.contact .sub{color:var(--op-donker);font-size:18px;margin-top:22px;max-width:460px}
+.nummers{margin-top:44px;display:grid;gap:22px}
+.nummers a{display:block;font-family:var(--kop);font-weight:850;font-stretch:80%;font-size:clamp(36px,4vw,54px);line-height:1}
+.nummers a:hover{color:var(--rood)}
+.nummers small{display:block;font-family:var(--tekst);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--op-donker);margin-bottom:8px}
+.adres{margin-top:40px;color:var(--op-donker);font-size:16px}
+.adres a{color:var(--wit);text-decoration:underline;text-underline-offset:3px}
+form{background:var(--wit);color:var(--antr);border-radius:4px;padding:40px}
+form h3{font-family:var(--kop);font-weight:800;font-stretch:85%;text-transform:uppercase;font-size:30px;line-height:1;margin-bottom:26px}
+form label{display:block;margin-bottom:14px}
+form label span{display:block;font-size:13px;font-weight:600;color:var(--grijs);margin-bottom:6px}
+form input,form select,form textarea{width:100%;height:52px;border:1px solid var(--lijn);background:var(--zand);border-radius:4px;padding:0 16px;font:inherit;font-size:16px;color:var(--antr)}
+form textarea{height:100px;padding-top:12px;resize:vertical}
+form input:focus,form select:focus,form textarea:focus{outline:2px solid var(--rood);outline-offset:1px;border-color:transparent}
+form .rij{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+form .knop{border:0;cursor:pointer;font-family:inherit;margin-top:8px}
+.melding{display:none;margin-top:16px;padding:14px 16px;background:var(--zand);font-size:15px;border-left:3px solid var(--rood)}
+
+footer{background:var(--antr);color:var(--op-donker);border-top:1px solid #3A3A3E;overflow:hidden}
+.voet{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 48px;padding-top:36px;padding-bottom:28px;font-size:14px}
+.voet strong{color:var(--wit);font-weight:600}
+.woordmerk{font-family:var(--kop);font-weight:900;font-stretch:72%;text-transform:uppercase;color:var(--antr-2);font-size:clamp(60px,15.4vw,226px);line-height:.8;white-space:nowrap;text-align:center;margin-bottom:-.1em;user-select:none}
+
+.belbalk{display:none}
+.in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.in.zichtbaar{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.in{opacity:1;transform:none;transition:none}.strook ul{animation:none}html{scroll-behavior:auto}}
+
+@media (max-width:1080px){
+  .menu nav a:not(.knop){display:none}
+  .hero .kader{grid-template-columns:1fr;gap:56px;padding-top:56px}
+  .diensten{grid-template-columns:1fr 1fr}
+  .punten{grid-template-columns:1fr 1fr}
+  .werk{grid-template-columns:1fr}
+  .koprij{grid-template-columns:1fr;gap:20px}
+  .contact .kader{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  body{font-size:16px;padding-bottom:88px}
+  .menu{height:76px}
+  .menu .logo img{height:40px}
+  .menu nav{display:none}
+  .menuknop{display:grid;place-items:center;width:46px;height:46px;background:var(--antr);border-radius:4px}
+  .menuknop i{display:block;width:20px;height:2px;background:var(--wit);box-shadow:0 7px 0 var(--wit);transform:translateY(-3.5px)}
+  .hero{background-size:28px 28px}
+  .hero .kader{padding-top:36px;padding-bottom:56px;gap:44px}
+  .hero h1{font-size:60px;margin-top:20px}
+  .hero p{font-size:17px;margin-top:20px}
+  .knoppen{margin-top:28px}
+  .knoppen .knop-lijn{display:none}
+  .foto-maat{padding:22px 0 0 22px}
+  .maat-h{left:22px}.maat-v{top:22px}
+  .bordje{right:-6px;bottom:-24px;padding:14px 16px}
+  .bordje b{font-size:30px}
+  .strook li{font-size:22px;gap:32px}.strook ul{gap:32px;padding:16px 0}
+  .sectie{padding:64px 0}
+  .koprij{margin-bottom:36px}
+  .koprij h2,.contact h2{font-size:46px}
+  .koprij p{font-size:16px}
+  .diensten{grid-template-columns:1fr 1fr}
+  .dienst{min-height:150px;padding:18px 16px 20px}
+  .dienst h3{font-size:22px;padding-top:28px}
+  .dienst p{display:none}
+  .punten{grid-template-columns:1fr}
+  .punt{padding:26px 22px 28px;display:grid;grid-template-columns:44px 1fr;column-gap:22px}
+  .punt .vk{grid-row:span 2;margin-top:4px}
+  .punt h3{margin-top:0;font-size:24px}
+  .werk img{height:250px}
+  .werk .tekst{padding:26px}
+  .werk .tekst h3{font-size:34px}
+  .werk .tekst img{height:150px;margin-top:22px}
+  .stappen{grid-template-columns:1fr;gap:28px}
+  .stap b{font-size:48px}
+  .slogan{padding:72px 0}
+  .contact{padding:64px 0}
+  form{padding:24px}
+  form .rij{grid-template-columns:1fr}
+  .belbalk{display:flex;position:fixed;left:8px;right:8px;bottom:10px;z-index:20;height:60px;background:var(--rood);color:var(--wit);border-radius:4px;align-items:center;justify-content:space-between;padding:0 20px;font-weight:600;box-shadow:0 10px 30px rgba(29,29,31,.3);transition:transform .3s ease,opacity .3s ease}
+  .belbalk.weg{transform:translateY(90px);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="concept">Ontwerpvoorstel voor Bouwbedrijf Johan Wiggerts, gemaakt door <a href="https://tomveijk.nl" target="_blank" rel="noopener">Tom van Eijk</a>. Dit is nog niet de echte website.</div>
+
+<div class="top">
+  <header class="kader menu">
+    <a class="logo" href="#top" aria-label="Bouwbedrijf Johan Wiggerts, naar boven"><img src="/showcase/johan-wiggerts/logo.webp" alt="Bouwbedrijf Johan Wiggerts" width="829" height="202"></a>
+    <nav aria-label="Hoofdmenu">
+      <a href="#diensten">Diensten</a>
+      <a href="#waarom">Waarom wij</a>
+      <a href="#werk">Werk</a>
+      <a href="#contact">Contact</a>
+      <a class="knop knop-rood" href="tel:+31654310033">06 54 31 00 33</a>
+    </nav>
+    <a class="menuknop" href="#contact" aria-label="Naar contact"><i></i></a>
+  </header>
+</div>
+
+<main id="top">
+  <section class="hero">
+    <div class="kader">
+      <div>
+        <p class="label">Aannemer in Baarn, ruim 30 jaar</p>
+        <h1 class="kop">Bouwen,<br>verbouwen,<br><em>renoveren.</em></h1>
+        <p>Van een complete renovatie tot gewoon onderhoud. Bouwbedrijf Johan Wiggerts werkt met oog voor detail en tegen een scherp tarief.</p>
+        <div class="knoppen">
+          <a class="knop knop-rood" href="#contact">Vrijblijvend advies <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+          <a class="knop knop-lijn" href="tel:+31355330205">Bel 035 533 02 05</a>
+        </div>
+      </div>
+      <div class="foto-maat">
+        <div class="maat-h" aria-hidden="true"><span>AANBOUW</span></div>
+        <div class="maat-v" aria-hidden="true"></div>
+        <img src="/showcase/johan-wiggerts/aanbouw.webp" alt="Aanbouw met grote glazen puien en houten gevelbekleding" width="650" height="432" fetchpriority="high">
+        <div class="bordje"><b>30+ jaar</b><span>ervaring in alle facetten van de bouw</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strook" aria-hidden="true">
+    <ul>
+      <li>Nieuwbouw</li><li>Verbouw</li><li>Onderhoud</li><li>Renovatie</li><li>Aanbouw</li><li>Badkamers</li><li>Keukens</li>
+      <li>Nieuwbouw</li><li>Verbouw</li><li>Onderhoud</li><li>Renovatie</li><li>Aanbouw</li><li>Badkamers</li><li>Keukens</li>
+    </ul>
+  </div>
+
+  <section class="sectie" id="diensten">
+    <div class="kader">
+      <div class="koprij in">
+        <div><p class="label">Wat wij doen</p><h2 class="kop" style="margin-top:22px">Alle facetten<br>van de bouw.</h2></div>
+        <p>Specialist in complete renovaties, maar ook voor het gewone onderhoud aan uw huis bent u bij ons aan het goede adres.</p>
+      </div>
+      <div class="diensten in">
+        <div class="dienst"><span class="nr">01</span><h3>Nieuwbouw</h3><p>Van fundering tot oplevering.</p></div>
+        <div class="dienst"><span class="nr">02</span><h3>Verbouw</h3><p>Indeling aanpassen, ruimte winnen.</p></div>
+        <div class="dienst"><span class="nr">03</span><h3>Renovatie</h3><p>Complete renovaties, onze specialiteit.</p></div>
+        <div class="dienst"><span class="nr">04</span><h3>Aanbouw</h3><p>Meer leefruimte aan uw huis.</p></div>
+        <div class="dienst"><span class="nr">05</span><h3>Badkamers</h3><p>Volledig verbouwd en afgewerkt.</p></div>
+        <div class="dienst"><span class="nr">06</span><h3>Keukens</h3><p>Plaatsen en inbouwen.</p></div>
+        <div class="dienst"><span class="nr">07</span><h3>Onderhoud</h3><p>Timmer- en onderhoudswerk.</p></div>
+        <a class="dienst vraag" href="#contact"><span class="nr">?</span><h3>Iets anders?</h3><p>Vraag het gewoon. We denken graag met u mee.</p><span class="pijl">Neem contact op &rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie donker" id="waarom">
+    <div class="kader">
+      <div class="koprij in">
+        <div><p class="label">Waarom Wiggerts</p><h2 class="kop" style="margin-top:22px">Kwaliteit en<br>duurzame bouw.</h2></div>
+        <p>Een aannemersbedrijf uit Baarn, met ruim 30 jaar ervaring. Dit is waar u op kunt rekenen.</p>
+      </div>
+      <div class="punten in">
+        <div class="punt"><span class="vk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><h3>Hoge kwaliteit</h3><p>Kwaliteit en duurzame bouw, daar staan we voor.</p></div>
+        <div class="punt"><span class="vk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><h3>Veel ervaring</h3><p>Ruim 30 jaar in alle facetten van de bouw.</p></div>
+        <div class="punt"><span class="vk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><h3>Oog voor detail</h3><p>De afwerking maakt het verschil, dus daar nemen we de tijd voor.</p></div>
+        <div class="punt"><span class="vk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><h3>Denkt met u mee</h3><p>Vrijblijvend advies over wat er mogelijk is in uw huis.</p></div>
+        <div class="punt"><span class="vk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><h3>Persoonlijke aanpak</h3><p>Persoonlijk contact en een aanpak die past bij u en uw huis.</p></div>
+        <div class="punt"><span class="vk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><h3>Scherp tarief</h3><p>Goed werk hoeft niet duur te zijn. Wij werken tegen een scherp tarief.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie" id="werk">
+    <div class="kader">
+      <div class="koprij in">
+        <div><p class="label">Ons werk</p><h2 class="kop" style="margin-top:22px">Vakwerk<br>van dichtbij.</h2></div>
+        <p>Een greep uit ons werk. Benieuwd wat we voor uw huis kunnen betekenen? We komen graag langs.</p>
+      </div>
+      <div class="werk in">
+        <figure>
+          <img src="/showcase/johan-wiggerts/aanbouw.webp" alt="Aanbouw met grote glazen puien" width="650" height="432" loading="lazy">
+          <figcaption><strong>Aanbouw met glazen puien</strong><span>Aanbouw</span></figcaption>
+        </figure>
+        <div class="tekst">
+          <h3>Herkent u<br>onze bus?</h3>
+          <p>Dan zijn we vast bij u in de buurt aan het werk. Spreek ons gerust aan, of bel voor een afspraak.</p>
+          <img src="/showcase/johan-wiggerts/bus.webp" alt="Bedrijfsbus van Bouwbedrijf Johan Wiggerts" width="584" height="292" loading="lazy">
+          <small>Zandheuvelweg 1, Baarn</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie" style="padding-top:0">
+    <div class="kader">
+      <div class="koprij in">
+        <div><p class="label">Zo werken we</p><h2 class="kop" style="margin-top:22px">In drie<br>stappen.</h2></div>
+      </div>
+      <div class="stappen in">
+        <div class="stap"><b>01</b><h3>Kennismaken</h3><p>U belt of mailt, en we maken een afspraak om uw wensen te bespreken.</p></div>
+        <div class="stap"><b>02</b><h3>Advies en offerte</h3><p>Vrijblijvend advies en een duidelijke offerte tegen een scherp tarief.</p></div>
+        <div class="stap"><b>03</b><h3>Bouwen</h3><p>We gaan aan de slag met oog voor detail, tot alles naar wens is opgeleverd.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="slogan">
+    <div class="kader in">
+      <p>Meer dan<br><span>bouwen alleen.</span></p>
+      <small>Bouwbedrijf Johan Wiggerts, Baarn</small>
+    </div>
+  </div>
+
+  <section class="contact" id="contact">
+    <div class="kader">
+      <div>
+        <p class="label">Contact</p>
+        <h2 class="kop" style="margin-top:22px">Plannen voor<br>uw huis?</h2>
+        <p class="sub">Neem vrijblijvend contact op voor advies of informatie. We maken graag een afspraak.</p>
+        <div class="nummers">
+          <div><small>Mobiel</small><a href="tel:+31654310033">06 54 31 00 33</a></div>
+          <div><small>Kantoor</small><a href="tel:+31355330205">035 533 02 05</a></div>
+        </div>
+        <p class="adres">Zandheuvelweg 1, 3744 MN Baarn<br><a href="mailto:johanwiggerts1968@gmail.com">johanwiggerts1968@gmail.com</a></p>
+      </div>
+      <form id="aanvraag" novalidate>
+        <h3>Vraag vrijblijvend advies</h3>
+        <div class="rij">
+          <label><span>Naam</span><input name="naam" autocomplete="name"></label>
+          <label><span>Telefoon</span><input name="telefoon" inputmode="tel" autocomplete="tel"></label>
+        </div>
+        <label><span>Waar gaat het om?</span>
+          <select name="soort"><option>Renovatie</option><option>Verbouw</option><option>Aanbouw</option><option>Badkamer</option><option>Keuken</option><option>Nieuwbouw</option><option>Onderhoud</option><option>Iets anders</option></select>
+        </label>
+        <label><span>Vertel kort over uw plannen</span><textarea name="bericht"></textarea></label>
+        <button class="knop knop-rood" type="submit">Verstuur aanvraag <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+        <p class="melding" role="status">Dit is een ontwerpvoorstel, het formulier verstuurt nog niets. Op de echte site komt uw aanvraag direct bij Johan binnen.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="kader voet">
+    <span><strong>Bouwbedrijf Johan Wiggerts</strong> &nbsp; Zandheuvelweg 1, 3744 MN Baarn</span>
+    <span>035 533 02 05 &nbsp;&bull;&nbsp; 06 54 31 00 33</span>
+  </div>
+  <div class="woordmerk" aria-hidden="true">Johan Wiggerts</div>
+</footer>
+
+<a class="belbalk" href="tel:+31654310033">Bel Johan: 06 54 31 00 33 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+
+<script>
+(function () {
+  var items = document.querySelectorAll(".in");
+  if (!("IntersectionObserver" in window)) { items.forEach(function (e) { e.classList.add("zichtbaar"); }); return; }
+  var io = new IntersectionObserver(function (l) { l.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("zichtbaar"); io.unobserve(x.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (e) { io.observe(e); });
+  var balk = document.querySelector(".belbalk"), contact = document.getElementById("contact");
+  new IntersectionObserver(function (l) { balk.classList.toggle("weg", l[0].isIntersecting); }, { threshold: 0.2 }).observe(contact);
+})();
+document.getElementById("aanvraag").addEventListener("submit", function (e) { e.preventDefault(); this.querySelector(".melding").style.display = "block"; });
+</script>
+</body>
+</html>

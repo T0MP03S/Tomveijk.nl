@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerard Visser Loodgieters &amp; Verwarmingsbedrijf | Ontwerpvoorstel van Tom van Eijk</title>
+<meta name="description" content="Ontwerpvoorstel voor een nieuwe website van Gerard Visser Loodgieters &amp; Verwarmingsbedrijf in Baarn, gemaakt door Tom van Eijk.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#232A38">
+<link rel="preload" as="font" type="font/woff2" href="/showcase/gerard-visser/fraunces.woff2" crossorigin>
+<link rel="preload" as="image" href="/showcase/gerard-visser/koper.webp">
+<style>
+/* ---------------------------------------------------------------------------
+   Gerard Visser, sinds 1962. Leigrijs uit hun logo, koper als accent (het
+   materiaal van het vak), op warm papier. Een klassieke serif voor de koppen
+   omdat het bedrijf al ruim zestig jaar bestaat; Inter voor de tekst.
+   --------------------------------------------------------------------------- */
+@font-face{font-family:"Fraunces";src:url("/showcase/gerard-visser/fraunces.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Inter";src:url("/showcase/gerard-visser/inter.woff2") format("woff2");font-weight:400 800;font-display:swap}
+:root{
+  --papier:#FAF6F0;
+  --papier-2:#F1EAE0;
+  --lei:#4F5970;
+  --inkt:#232A38;
+  --koper:#B4673F;
+  --koper-l:#E9C9B3;
+  --wit:#FFFFFF;
+  --grijs:#646B78;
+  --lijn:#E0D7CA;
+  --op-inkt:#AEB4C0;
+  --kader:1240px;
+  --zij:clamp(20px,5.5vw,80px);
+  --serif:"Fraunces",ui-serif,Georgia,"Times New Roman",serif;
+  --tekst:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--papier);color:var(--inkt);font-family:var(--tekst);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--koper);outline-offset:3px;border-radius:4px}
+.kader{max-width:calc(var(--kader) + 2*var(--zij));margin:0 auto;padding:0 var(--zij)}
+.serif{font-family:var(--serif);font-weight:500;letter-spacing:-.005em;line-height:1.02;font-variation-settings:"opsz" 144}
+.serif em{font-style:italic;color:var(--koper);font-weight:400}
+.klein{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--koper)}
+
+.knop{display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 28px;border-radius:999px;font-weight:600;font-size:16px;white-space:nowrap;transition:background .2s ease,color .2s ease}
+.knop svg{width:18px;height:18px;transition:transform .2s ease}
+.knop:hover svg{transform:translateX(3px)}
+.knop-koper{background:var(--koper);color:var(--wit)}
+.knop-koper:hover{background:#9C5531}
+.knop-lijn{border:1.5px solid var(--inkt)}
+.knop-lijn:hover{background:var(--inkt);color:var(--wit)}
+
+.concept{background:var(--inkt);color:var(--op-inkt);font-size:13px;text-align:center;padding:9px 16px}
+.concept a{color:var(--wit);text-decoration:underline;text-underline-offset:2px}
+
+.menu{display:flex;align-items:center;justify-content:space-between;height:100px;border-bottom:1px solid var(--lijn)}
+.menu .logo img{width:230px;height:auto}
+.menu nav{display:flex;align-items:center;gap:34px;font-size:15px;font-weight:500}
+.menu nav a:not(.knop):hover{color:var(--koper)}
+.menu .knop{height:46px;padding:0 22px;margin-left:6px}
+.menuknop{display:none}
+
+/* hero */
+.hero{padding:72px 0 0}
+.hero .kader{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:end}
+.sinds{display:flex;align-items:baseline;gap:18px}
+.sinds b{font-family:var(--serif);font-size:20px;font-weight:500;font-style:italic;color:var(--koper)}
+.sinds span{flex:1;height:1px;background:var(--lijn);transform:translateY(-5px)}
+.hero h1{font-size:clamp(52px,6.6vw,96px);margin-top:30px}
+.hero p{font-size:19px;color:var(--grijs);max-width:520px;margin-top:30px}
+.knoppen{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;padding-bottom:72px}
+.hero-beeld{position:relative;align-self:stretch;min-height:560px;border-radius:280px 280px 0 0;overflow:hidden}
+.hero-beeld img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.zegel{position:absolute;left:-44px;bottom:72px;width:150px;height:150px;border-radius:50%;background:var(--inkt);color:var(--wit);display:grid;place-items:center;text-align:center;box-shadow:0 16px 40px rgba(35,42,56,.25)}
+.zegel small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--koper-l)}
+.zegel b{display:block;font-family:var(--serif);font-weight:500;font-size:46px;line-height:1;margin-top:4px}
+.hero-wrap{position:relative}
+
+/* voor wie */
+.wie{background:var(--inkt);color:var(--wit)}
+.wie .kader{display:flex;align-items:center;gap:40px;padding-top:30px;padding-bottom:30px;flex-wrap:wrap}
+.wie p{color:var(--op-inkt);font-size:14px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.wie ul{display:flex;flex-wrap:wrap;gap:10px 36px;list-style:none;font-family:var(--serif);font-size:24px;font-style:italic}
+
+section{scroll-margin-top:24px}
+.sectie{padding:120px 0}
+.intro{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:start}
+.intro h2{font-size:clamp(40px,4.6vw,64px)}
+.intro .tekst{font-size:19px;color:var(--grijs);padding-top:14px}
+.intro .tekst p+p{margin-top:18px}
+
+/* vakgebieden als redactionele lijst */
+.vakken{margin-top:80px;border-top:1px solid var(--inkt)}
+.vak{display:grid;grid-template-columns:120px 1.1fr 1.6fr 56px;gap:32px;align-items:baseline;padding:36px 0;border-bottom:1px solid var(--lijn);transition:padding .25s ease}
+.vak:hover{padding-left:12px}
+.vak .nr{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--koper)}
+.vak h3{font-family:var(--serif);font-weight:500;font-size:36px;letter-spacing:-.015em;line-height:1.1}
+.vak p{color:var(--grijs);font-size:16px}
+.vak .pijl{justify-self:end;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--lijn);display:grid;place-items:center;color:var(--koper);transition:background .2s ease,border-color .2s ease}
+.vak:hover .pijl{background:var(--koper);border-color:var(--koper);color:var(--wit)}
+.vak .pijl svg{width:18px;height:18px}
+
+/* zekerheid */
+.zeker{background:var(--papier-2)}
+.zeker .rij{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px}
+.blok{background:var(--wit);border-radius:20px;padding:32px 28px 36px}
+.blok .ico{width:52px;height:52px;border-radius:50%;background:var(--papier-2);display:grid;place-items:center;color:var(--koper)}
+.blok .ico svg{width:22px;height:22px}
+.blok h3{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.15;margin-top:28px}
+.blok p{color:var(--grijs);font-size:15px;margin-top:10px}
+.blok.uitgelicht{background:var(--inkt);color:var(--wit)}
+.blok.uitgelicht p{color:var(--op-inkt)}
+.blok.uitgelicht .ico{background:#323B4D;color:var(--koper-l)}
+
+/* merken + showroom */
+.showroom{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.showroom .links{background:var(--koper);color:var(--wit);border-radius:20px;padding:56px 52px;display:flex;flex-direction:column}
+.showroom .links h2{font-size:clamp(38px,4vw,56px)}
+.showroom .links p{color:#FBE9DD;font-size:18px;margin-top:22px;max-width:440px}
+.showroom .links .knop{margin-top:auto;align-self:flex-start;background:var(--wit);color:var(--inkt)}
+.showroom .links .knop:hover{background:var(--inkt);color:var(--wit)}
+.showroom .rechts{background:var(--wit);border-radius:20px;padding:48px 52px}
+.merken{list-style:none;margin-top:26px;border-top:1px solid var(--lijn)}
+.merken li{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--lijn);font-family:var(--serif);font-size:26px}
+.merken li span{font-family:var(--tekst);font-size:13px;color:var(--grijs)}
+
+/* citaat */
+.citaat{text-align:center;padding:128px 0}
+.citaat blockquote{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,50px);line-height:1.2;letter-spacing:-.015em;max-width:980px;margin:0 auto}
+.citaat blockquote em{font-style:italic;color:var(--koper)}
+.citaat cite{display:block;font-style:normal;margin-top:30px;color:var(--grijs);font-size:15px}
+
+/* contact */
+.contact{background:var(--inkt);color:var(--wit);padding:104px 0}
+.contact .kader{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.contact h2{font-size:clamp(42px,5vw,72px)}
+.contact .sub{color:var(--op-inkt);font-size:18px;margin-top:24px;max-width:460px}
+.contact .tel{display:inline-block;font-family:var(--serif);font-size:clamp(38px,4.4vw,60px);font-weight:500;margin-top:40px;border-bottom:2px solid var(--koper);line-height:1.15}
+.contact .tel:hover{color:var(--koper-l)}
+.gegevens{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:10px 28px;font-size:16px}
+.gegevens dt{color:var(--op-inkt)}
+.gegevens a{text-decoration:underline;text-underline-offset:3px}
+form{background:var(--papier);color:var(--inkt);border-radius:20px;padding:40px}
+form h3{font-family:var(--serif);font-weight:500;font-size:30px;margin-bottom:26px}
+form label{display:block;margin-bottom:14px}
+form label span{display:block;font-size:13px;font-weight:600;color:var(--grijs);margin-bottom:6px}
+form input,form select,form textarea{width:100%;height:52px;border:1px solid var(--lijn);background:var(--wit);border-radius:12px;padding:0 16px;font:inherit;font-size:16px;color:var(--inkt)}
+form textarea{height:100px;padding-top:12px;resize:vertical}
+form input:focus,form select:focus,form textarea:focus{outline:2px solid var(--koper);outline-offset:1px;border-color:transparent}
+form .rij{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+form .knop{border:0;cursor:pointer;font-family:inherit;margin-top:8px}
+.melding{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--papier-2);font-size:15px}
+
+footer{background:var(--inkt);color:var(--op-inkt);border-top:1px solid #343C4D;font-size:14px}
+.voet{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;padding-top:32px;padding-bottom:36px}
+.voet strong{color:var(--wit);font-weight:600}
+
+.belbalk{display:none}
+.in{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.in.zichtbaar{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.in{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (max-width:1080px){
+  .menu nav a:not(.knop){display:none}
+  .hero .kader{grid-template-columns:1fr;gap:0}
+  .knoppen{padding-bottom:56px}
+  .hero-beeld{min-height:460px;margin:0 calc(var(--zij)*-1 + 16px);border-radius:240px 240px 0 0}
+  .zegel{left:auto;right:24px;bottom:32px}
+  .intro{grid-template-columns:1fr;gap:24px}
+  .vak{grid-template-columns:72px 1fr 48px;gap:8px 20px}
+  .vak p{grid-column:2/3}
+  .vak .pijl{grid-column:3;grid-row:1}
+  .zeker .rij{grid-template-columns:1fr 1fr}
+  .showroom{grid-template-columns:1fr}
+  .contact .kader{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  body{font-size:16px;padding-bottom:88px}
+  .menu{height:76px}
+  .menu .logo img{width:170px}
+  .menu nav{display:none}
+  .menuknop{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:1.5px solid var(--inkt)}
+  .menuknop i{display:block;width:18px;height:2px;background:var(--inkt);box-shadow:0 6px 0 var(--inkt);transform:translateY(-3px)}
+  .hero{padding-top:36px}
+  .hero h1{font-size:48px;margin-top:22px}
+  .hero p{font-size:17px;margin-top:20px}
+  .knoppen{margin-top:28px;padding-bottom:44px}
+  .knoppen .knop-lijn{display:none}
+  .hero-beeld{min-height:340px;border-radius:180px 180px 0 0;margin:0 calc(8px - var(--zij))}
+  .zegel{width:112px;height:112px;right:16px;bottom:20px}
+  .zegel b{font-size:34px}
+  .wie .kader{gap:14px;padding-top:24px;padding-bottom:26px}
+  .wie ul{font-size:19px;gap:6px 20px}
+  .sectie{padding:72px 0}
+  .intro .tekst{font-size:17px}
+  .vakken{margin-top:44px}
+  .vak{grid-template-columns:40px 1fr 40px;padding:24px 0}
+  .vak .nr{font-size:17px}
+  .vak h3{font-size:26px}
+  .vak p{grid-column:1/-1;font-size:15px}
+  .vak .pijl{width:40px;height:40px}
+  .zeker .rij{grid-template-columns:1fr;margin-top:36px;gap:12px}
+  .blok{padding:24px;display:grid;grid-template-columns:52px 1fr;column-gap:18px}
+  .blok .ico{grid-row:span 2}
+  .blok h3{margin-top:2px;font-size:21px}
+  .blok p{margin-top:4px}
+  .showroom .links,.showroom .rechts{padding:32px 26px}
+  .showroom .links .knop{margin-top:28px}
+  .merken li{font-size:21px;padding:13px 0}
+  .citaat{padding:80px 0}
+  .contact{padding:64px 0}
+  form{padding:24px}
+  form .rij{grid-template-columns:1fr}
+  .belbalk{display:flex;position:fixed;left:8px;right:8px;bottom:10px;z-index:20;height:62px;border-radius:31px;background:var(--inkt);color:var(--wit);align-items:center;justify-content:space-between;padding:0 8px 0 24px;font-weight:600;box-shadow:0 10px 30px rgba(35,42,56,.3);transition:transform .3s ease,opacity .3s ease}
+  .belbalk .rond{width:46px;height:46px;border-radius:50%;background:var(--koper);display:grid;place-items:center}
+  .belbalk.weg{transform:translateY(90px);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="concept">Ontwerpvoorstel voor Gerard Visser Loodgieters &amp; Verwarmingsbedrijf, gemaakt door <a href="https://tomveijk.nl" target="_blank" rel="noopener">Tom van Eijk</a>. Dit is nog niet de echte website.</div>
+
+<header class="kader menu">
+  <a class="logo" href="#top" aria-label="Gerard Visser, naar boven"><img src="/showcase/gerard-visser/logo.png" alt="Gerard Visser loodgieters &amp; verwarmingsbedrijf" width="260" height="54"></a>
+  <nav aria-label="Hoofdmenu">
+    <a href="#vakgebieden">Vakgebieden</a>
+    <a href="#zekerheid">Garantie</a>
+    <a href="#showroom">Showroom</a>
+    <a href="#contact">Contact</a>
+    <a class="knop knop-koper" href="tel:+31355413322">035 541 33 22</a>
+  </nav>
+  <a class="menuknop" href="#contact" aria-label="Naar contact"><i></i></a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="kader">
+      <div>
+        <div class="sinds"><b>Sinds 1962 in Baarn</b><span></span></div>
+        <h1 class="serif">Vakmanschap<br>dat <em>generaties</em><br>meegaat.</h1>
+        <p>Sanitair, verwarming, daken en leidingwerk. Voor particulieren, aannemers, woningcorporaties en VvE's in Baarn en omgeving.</p>
+        <div class="knoppen">
+          <a class="knop knop-koper" href="#contact">Vraag een offerte aan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+          <a class="knop knop-lijn" href="#showroom">Bezoek de showroom</a>
+        </div>
+      </div>
+      <div class="hero-wrap">
+        <div class="hero-beeld"><img src="/showcase/gerard-visser/koper.webp" alt="Koperen waterleidingbuizen" width="1150" height="912" fetchpriority="high"></div>
+        <div class="zegel"><div><small>Opgericht</small><b>1962</b></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wie">
+    <div class="kader">
+      <p>Wij werken voor</p>
+      <ul><li>particulieren</li><li>aannemers</li><li>woningbouwverenigingen</li><li>VvE's</li><li>stichtingen</li></ul>
+    </div>
+  </div>
+
+  <section class="sectie" id="vakgebieden">
+    <div class="kader">
+      <div class="intro in">
+        <div><p class="klein">Over ons</p><h2 class="serif" style="margin-top:20px">Groot en klein,<br>al ruim <em>zestig jaar</em>.</h2></div>
+        <div class="tekst">
+          <p>Gerard Visser, voorheen bekend als René Visser B.V., is in 1962 opgericht in Baarn. Sindsdien hebben we vele kleine en grote opdrachten uitgevoerd.</p>
+          <p>Door vakmanschap, kwaliteit van materialen, service en garantie hebben we een groot relatiebestand opgebouwd dat is gebaseerd op goed vertrouwen.</p>
+        </div>
+      </div>
+
+      <div class="vakken">
+        <a class="vak in" href="#contact"><span class="nr">01</span><h3>Sanitair</h3><p>Een nieuwe badkamer of toilet, of de vervanging van een wastafel. Ook het tegelwerk en de aanpassingen aan de elektra verzorgen we.</p><span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
+        <a class="vak in" href="#contact"><span class="nr">02</span><h3>Verwarming</h3><p>Cv-installaties, vloerverwarming en gas- en sfeerhaarden van gerenommeerde merken. Aanleg en onderhoud, met een 24/7-contract mogelijk.</p><span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
+        <a class="vak in" href="#contact"><span class="nr">03</span><h3>Daken</h3><p>Platte daken met bitumen of kunststof, lood- en zinkwerk en goten. Vernieuwen, maar ook het jaarlijks controleren en schoonhouden.</p><span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
+        <a class="vak in" href="#contact"><span class="nr">04</span><h3>Gas, water en riool</h3><p>Nieuwe aanleg of wijzigingen van gas-, water- en rioolinstallaties. En service bij problemen met kraan, gootsteen of afvoer.</p><span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
+        <a class="vak in" href="#contact"><span class="nr">05</span><h3>Bouwbegeleiding</h3><p>Advies vanaf het eerste plan, en de aansturing voor en tijdens de bouw. Zo voorkomen we extra kosten en vertraging.</p><span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie zeker" id="zekerheid">
+    <div class="kader">
+      <div class="intro in">
+        <div><p class="klein">Zekerheid</p><h2 class="serif" style="margin-top:20px">Service en garantie<br>staan <em>voorop</em>.</h2></div>
+        <div class="tekst"><p>Op de materialen die we leveren krijgt u volledige garantie. Op het installatiewerk geldt de garantie volgens de voorwaarden van Uneto-VNI.</p></div>
+      </div>
+      <div class="rij">
+        <div class="blok in"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Volledige garantie</h3><p>Op alle materialen die wij leveren.</p></div>
+        <div class="blok in"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M8.5 13.5L7 21l5-2.5 5 2.5-1.5-7.5"/></svg></span><h3>Uneto-VNI en SEI</h3><p>Aangesloten bij Uneto-VNI en SEI-gecertificeerd.</p></div>
+        <div class="blok in"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11.5V16c0 1.5 2.5 3 5 3s5-1.5 5-3v-4.5"/></svg></span><h3>Erkend leerbedrijf</h3><p>Wij leiden de vakmensen van morgen op.</p></div>
+        <div class="blok uitgelicht in"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>24/7-contract</h3><p>Samen met ervaren partners, voor maximaal warmtecomfort.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie" id="showroom">
+    <div class="kader showroom">
+      <div class="links in">
+        <p class="klein" style="color:#FBE9DD">Showroom</p>
+        <h2 class="serif" style="margin-top:20px">Kom kijken<br>en voelen.</h2>
+        <p>Maak een afspraak voor een bezoek aan onze showroom. We adviseren u graag over de mogelijkheden en doen u vrijblijvend een passend aanbod.</p>
+        <a class="knop" href="#contact">Plan een bezoek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="rechts in">
+        <p class="klein">Wij leveren onder andere</p>
+        <ul class="merken">
+          <li>Duravit <span>sanitair</span></li>
+          <li>Villeroy &amp; Boch <span>sanitair</span></li>
+          <li>Geberit <span>inbouw en toilet</span></li>
+          <li>Hansgrohe <span>kranen en douches</span></li>
+          <li>Keramag <span>sanitair</span></li>
+          <li>Sphinx <span>sanitair</span></li>
+          <li>Kermi <span>radiatoren</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="citaat">
+    <div class="kader in">
+      <blockquote>&ldquo;Door vakmanschap en jarenlange ervaring, met kwaliteit, service en garantie, hebben wij een relatiebestand opgebouwd dat is gebaseerd op <em>goed vertrouwen</em>.&rdquo;</blockquote>
+      <cite>Gerard Visser, loodgieters &amp; verwarmingsbedrijf sinds 1962</cite>
+    </div>
+  </div>
+
+  <section class="contact" id="contact">
+    <div class="kader">
+      <div>
+        <p class="klein" style="color:var(--koper-l)">Contact</p>
+        <h2 class="serif" style="margin-top:20px">Waarmee kunnen<br>we u <em>helpen</em>?</h2>
+        <p class="sub">Bel ons, stuur een bericht of maak een afspraak voor de showroom. We adviseren u graag.</p>
+        <a class="tel" href="tel:+31355413322">035 541 33 22</a>
+        <dl class="gegevens">
+          <dt>Adres</dt><dd>J.F. Kennedylaan 4, 3741 EE Baarn</dd>
+          <dt>E-mail</dt><dd><a href="mailto:info@loodgietervisser.nl">info@loodgietervisser.nl</a></dd>
+          <dt>KvK</dt><dd>31030010</dd>
+        </dl>
+      </div>
+      <form id="aanvraag" novalidate>
+        <h3>Offerte of afspraak</h3>
+        <div class="rij">
+          <label><span>Naam</span><input name="naam" autocomplete="name"></label>
+          <label><span>Telefoon</span><input name="telefoon" inputmode="tel" autocomplete="tel"></label>
+        </div>
+        <label><span>Ik ben</span>
+          <select name="wie"><option>Particulier</option><option>Aannemer</option><option>Woningcorporatie</option><option>VvE of stichting</option></select>
+        </label>
+        <label><span>Waar gaat het om?</span><textarea name="bericht"></textarea></label>
+        <button class="knop knop-koper" type="submit">Verstuur <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+        <p class="melding" role="status">Dit is een ontwerpvoorstel, het formulier verstuurt nog niets. Op de echte site komt uw bericht hier direct binnen.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="kader voet">
+    <span><strong>Gerard Visser</strong> loodgieters &amp; verwarmingsbedrijf &nbsp;&bull;&nbsp; J.F. Kennedylaan 4, 3741 EE Baarn</span>
+    <span>035 541 33 22 &nbsp;&bull;&nbsp; Algemene voorwaarden</span>
+  </div>
+</footer>
+
+<a class="belbalk" href="tel:+31355413322">Bel 035 541 33 22 <span class="rond"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
+
+<script>
+(function () {
+  var items = document.querySelectorAll(".in");
+  if (!("IntersectionObserver" in window)) { items.forEach(function (e) { e.classList.add("zichtbaar"); }); return; }
+  var io = new IntersectionObserver(function (l) { l.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("zichtbaar"); io.unobserve(x.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (e) { io.observe(e); });
+  var balk = document.querySelector(".belbalk"), contact = document.getElementById("contact");
+  new IntersectionObserver(function (l) { balk.classList.toggle("weg", l[0].isIntersecting); }, { threshold: 0.2 }).observe(contact);
+})();
+document.getElementById("aanvraag").addEventListener("submit", function (e) { e.preventDefault(); this.querySelector(".melding").style.display = "block"; });
+</script>
+</body>
+</html>
