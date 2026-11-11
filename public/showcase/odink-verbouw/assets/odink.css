@@ -275,7 +275,10 @@ section{scroll-margin-top:24px}
   .knop{height:56px;font-size:16px}
   .feiten{gap:0;justify-content:space-between;padding-top:20px;font-size:12px}
   .feiten strong{font-size:24px}
-  .hero-raster{gap:28px}
+  .hero-raster{gap:24px}
+  .tekenvak{order:-1}
+  .tv-beeld{aspect-ratio:1/1}
+  .tekenvak figcaption{font-size:14px}
   .tv-beeld{border-radius:18px}
   .tv-lijn span{width:40px;height:40px;margin:-20px 0 0 -20px}
   .twee{grid-template-columns:1fr}
