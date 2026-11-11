@@ -173,8 +173,18 @@ export default function PortfolioSection({ items }: { items: PortfolioItem[] }) 
           de modal blijft zwart.
         */}
         <DialogContent className="grid max-w-6xl grid-rows-[auto_1fr] gap-3 h-[85vh] p-4 sm:p-5">
-          <DialogHeader>
+          <DialogHeader className="flex flex-row items-center justify-between gap-4 space-y-0 pr-10">
             <DialogTitle>{selectedItem?.title}</DialogTitle>
+            {selectedItem?.embedUrl && (
+              <a
+                href={selectedItem.embedUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                Volledig scherm
+              </a>
+            )}
           </DialogHeader>
           {selectedItem?.embedUrl && (
             <iframe

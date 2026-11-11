@@ -148,16 +148,29 @@ function renderBlock(block: ContentBlock) {
         )
       }
       return (
-        <div className="rounded-2xl overflow-hidden border border-white/10">
-          <div className="relative w-full aspect-video">
-            <iframe
-              src={content.url}
-              className="w-full h-full"
-              title="Website embed"
-              allowFullScreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            />
+        <div className="space-y-4">
+          <div className="rounded-2xl overflow-hidden border border-white/10">
+            <div className="relative w-full aspect-video">
+              <iframe
+                src={content.url}
+                className="w-full h-full"
+                title="Website embed"
+                allowFullScreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
+            </div>
           </div>
+          <a
+            href={content.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#A34BFF] to-[#30A8FF] px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          >
+            Bekijk op volledig scherm
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            </svg>
+          </a>
         </div>
       )
 
