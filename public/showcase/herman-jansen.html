@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Herman Jansen Loodgieterswerken | Ontwerpvoorstel van Tom van Eijk</title>
+<meta name="description" content="Ontwerpvoorstel voor een nieuwe website van Herman Jansen Loodgieterswerken B.V. in Soest, gemaakt door Tom van Eijk.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#2F6BB3">
+<link rel="preload" as="font" type="font/woff2" href="/showcase/herman-jansen/manrope.woff2" crossorigin>
+<link rel="preload" as="image" href="/showcase/herman-jansen/cv1.webp">
+<style>
+/* ---------------------------------------------------------------------------
+   Herman Jansen Loodgieterswerken. Kleuren uit hun eigen logo: het blauw van
+   het mannetje, met een donker inktblauw als tegenwicht en geel alleen voor
+   de hoofdknop. Koppen in Manrope, tekst in Inter, allebei zelf gehost.
+
+   Raster: alle inhoud staat in een kader van 1280px. De tweede kolom begint
+   precies op de helft. Gekleurde vlakken lopen bijna tot de rand (16px).
+   --------------------------------------------------------------------------- */
+@font-face{font-family:"Manrope";src:url("/showcase/herman-jansen/manrope.woff2") format("woff2");font-weight:600 800;font-display:swap}
+@font-face{font-family:"Inter";src:url("/showcase/herman-jansen/inter.woff2") format("woff2");font-weight:400 800;font-display:swap}
+:root{
+  --basis:#F5F3EE;
+  --blauw:#2F6BB3;
+  --inkt:#14233A;
+  --geel:#FFD23F;
+  --wit:#FFFFFF;
+  --grijs:#5C6675;
+  --lijn:#E2DED5;
+  --zacht:#E8EFF8;
+  --op-blauw:#D6E3F3;
+  --op-inkt:#A3AEBE;
+  --kader:1280px;
+  --zij:clamp(20px,5.5vw,80px);
+  --rand:clamp(8px,1.2vw,16px);
+  --kop:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --tekst:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--basis);color:var(--inkt);font-family:var(--tekst);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--geel);outline-offset:3px;border-radius:8px}
+
+.kader{max-width:calc(var(--kader) + 2*var(--zij));margin:0 auto;padding:0 var(--zij)}
+.vlak{margin:0 var(--rand);border-radius:32px}
+.kop{font-family:var(--kop);font-weight:800;letter-spacing:-.035em;line-height:1.04}
+.h2{font-size:clamp(36px,4.2vw,56px)}
+.vlak .kader{max-width:calc(var(--kader) + 2*var(--zij) - 2*var(--rand));padding-left:calc(var(--zij) - var(--rand));padding-right:calc(var(--zij) - var(--rand))}
+.twee{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;align-items:start}
+.inleiding{color:var(--grijs);font-size:18px;max-width:520px;padding-top:12px}
+
+/* knoppen */
+.knop{display:inline-flex;align-items:center;gap:14px;height:60px;padding:0 8px 0 24px;border-radius:999px;font-weight:600;font-size:17px;white-space:nowrap;transition:transform .2s ease}
+.knop:hover{transform:translateY(-2px)}
+.knop .pijl{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;transition:transform .2s ease}
+.knop:hover .pijl{transform:translateX(3px)}
+.knop-geel{background:var(--geel);color:var(--inkt)}
+.knop-geel .pijl{background:var(--inkt);color:var(--geel)}
+.knop-rand{border:1.5px solid currentColor;padding:0 24px}
+.pijl svg{width:18px;height:18px}
+
+/* conceptbalk */
+.concept{background:var(--inkt);color:var(--op-inkt);font-size:13px;text-align:center;padding:9px 16px}
+.concept a{color:var(--wit);text-decoration:underline;text-underline-offset:2px}
+
+/* menu */
+.menu{display:flex;align-items:center;justify-content:space-between;height:104px}
+.menu .logo img{height:66px;width:auto;margin-left:-8px}
+.menu nav{display:flex;align-items:center;gap:30px;font-weight:500;font-size:16px}
+.menu nav a:not(.tel):hover{color:var(--blauw)}
+.menu .tel{background:var(--inkt);color:var(--wit);height:50px;padding:0 24px;border-radius:999px;display:inline-flex;align-items:center;font-weight:600;margin-left:6px}
+.menuknop{display:none}
+
+/* hero */
+.hero{background:var(--blauw);color:var(--wit);padding:32px 0}
+.hero .kader{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-right:32px}
+.hero-tekst{padding:64px 0 32px;display:flex;flex-direction:column}
+.hero h1{font-size:clamp(46px,5.5vw,78px);line-height:1.03}
+.hero p{color:var(--op-blauw);font-size:20px;max-width:540px;margin-top:28px}
+.knoppen{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;margin-bottom:48px}
+.feiten{margin-top:auto;display:flex;gap:56px;border-top:1px solid #5A8AC6;max-width:560px}
+.feiten div{padding-top:24px}
+.feiten strong{display:block;font-family:var(--kop);font-weight:800;font-size:32px;letter-spacing:-.03em;line-height:1.1}
+.feiten span{font-size:14px;color:var(--op-blauw)}
+.hero-foto{position:relative;border-radius:24px;overflow:hidden;min-height:620px}
+.hero-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:35% 50%}
+.kaartje{position:absolute;left:32px;bottom:32px;background:var(--wit);color:var(--inkt);border-radius:20px;padding:18px 26px 18px 18px;display:flex;align-items:center;gap:16px;box-shadow:0 12px 40px rgba(20,35,58,.18)}
+.vink{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--zacht);color:var(--blauw);flex:none}
+.vink svg{width:20px;height:20px}
+.kaartje strong{display:block;font-size:16px;font-weight:600}
+.kaartje span{font-size:14px;color:var(--grijs)}
+
+/* secties */
+section{scroll-margin-top:24px}
+.sectie{padding:96px 0}
+.diensten{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.dienst{background:var(--wit);border-radius:24px;padding:28px;display:flex;flex-direction:column;min-height:300px;transition:transform .25s ease,box-shadow .25s ease}
+.dienst:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(20,35,58,.08)}
+.nr{color:var(--blauw);font-weight:600;font-size:14px}
+.dienst h3{font-family:var(--kop);font-weight:700;font-size:24px;letter-spacing:-.02em;line-height:1.2;margin-top:52px}
+.dienst p{color:var(--grijs);font-size:16px;line-height:1.55;margin-top:10px}
+.meer{color:var(--blauw);font-weight:600;font-size:15px;margin-top:auto;padding-top:24px;display:inline-flex;gap:8px}
+
+.werk{background:var(--inkt);color:var(--wit);padding:80px 0 88px}
+.werk .inleiding{color:var(--op-inkt)}
+.fotos{display:grid;grid-template-columns:1.43fr 1fr 1fr;gap:16px;margin-top:56px}
+.fotos figure img{width:100%;height:440px;object-fit:cover;border-radius:20px}
+.fotos figcaption{margin-top:22px}
+.fotos strong{display:block;font-weight:600;font-size:18px}
+.fotos span{color:var(--op-inkt);font-size:15px}
+
+.label{color:var(--blauw);font-weight:600;font-size:15px;letter-spacing:.04em}
+.over p{color:var(--grijs);font-size:18px;max-width:560px;margin-top:28px}
+.erkend{display:grid;gap:16px}
+.erkend li{list-style:none;background:var(--wit);border-radius:20px;padding:24px;display:flex;align-items:center;gap:22px}
+.erkend strong{display:block;font-weight:600;font-size:18px}
+.erkend span{color:var(--grijs);font-size:15px}
+
+.stappen{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.stap{background:var(--wit);border-radius:24px;padding:28px 28px 36px}
+.stap b{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--blauw);color:var(--wit);font-family:var(--kop);font-weight:800;font-size:24px}
+.stap h3{font-family:var(--kop);font-weight:700;font-size:24px;letter-spacing:-.02em;margin-top:32px}
+.stap p{color:var(--grijs);font-size:16px;margin-top:8px}
+
+.contact{background:var(--blauw);color:var(--wit);padding:48px 0}
+.contact .twee{align-items:center}
+.contact h2{font-size:clamp(36px,3.8vw,48px)}
+.contact .sub{color:var(--op-blauw);font-size:19px;margin-top:16px}
+.groot-tel{display:inline-block;font-family:var(--kop);font-weight:800;font-size:clamp(40px,5vw,64px);letter-spacing:-.03em;margin-top:44px}
+.groot-tel:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.adres{margin-top:36px;font-size:18px}
+.adres a{font-weight:500}
+.adres span{display:block;color:var(--op-blauw)}
+form{background:var(--wit);color:var(--inkt);border-radius:24px;padding:36px}
+form h3{font-family:var(--kop);font-weight:700;font-size:22px;letter-spacing:-.01em;margin-bottom:22px}
+form label{display:block;margin-bottom:14px}
+form label span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+form input,form textarea{width:100%;height:52px;border:1px solid var(--lijn);background:var(--basis);border-radius:14px;padding:0 20px;font:inherit;font-size:16px;color:var(--inkt)}
+form textarea{height:96px;padding-top:14px;resize:vertical}
+form input:focus,form textarea:focus{outline:2px solid var(--blauw);outline-offset:1px;border-color:transparent}
+form .knop{border:0;cursor:pointer;font-family:inherit;margin-top:10px}
+.melding{display:none;margin-top:16px;padding:14px 18px;border-radius:14px;background:var(--zacht);color:var(--inkt);font-size:15px}
+
+footer.vlak{background:var(--inkt);color:var(--op-inkt);margin-top:16px;margin-bottom:var(--rand);overflow:hidden;padding-top:44px}
+.voet{display:grid;grid-template-columns:1fr 1fr;gap:24px 56px;font-size:15px}
+.voet strong{color:var(--wit);font-weight:600}
+.voet nav{display:flex;flex-wrap:wrap;gap:12px 28px;font-weight:500}
+.voet nav a:hover{color:var(--wit)}
+.hero .kader{padding-right:32px}
+.woordmerk{font-family:var(--kop);font-weight:800;letter-spacing:-.04em;color:#1E3150;font-size:clamp(56px,11.8vw,172px);line-height:.8;white-space:nowrap;margin:56px 0 -.12em 24px;user-select:none}
+
+.belbalk{display:none}
+
+/* scroll: rustig van onder binnenkomen */
+.in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.in.zichtbaar{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.in{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* ---------- tablet ---------- */
+@media (max-width:1080px){
+  .menu nav a:not(.tel){display:none}
+  .diensten{grid-template-columns:1fr 1fr}
+  .fotos{grid-template-columns:1fr 1fr}
+  .fotos figure:first-child{grid-column:1/-1}
+  .hero .kader{grid-template-columns:1fr;padding-right:calc(var(--zij) - var(--rand))}
+  .hero-tekst{padding:40px 0 8px}
+  .hero-foto{min-height:460px}
+}
+/* ---------- telefoon ---------- */
+@media (max-width:720px){
+  body{font-size:16px;padding-bottom:96px}
+  .menu{height:80px}
+  .menu .logo img{height:48px;margin-left:-4px}
+  .menu .tel{display:none}
+  .menuknop{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--inkt);border:0}
+  .menuknop i{display:block;width:22px;height:2px;background:var(--wit);box-shadow:0 7px 0 var(--wit);transform:translateY(-3.5px)}
+  .vlak{border-radius:26px}
+  .hero{padding:20px 0 12px}
+  .hero-tekst{padding:20px 0 0}
+  .hero h1{font-size:46px}
+  .hero p{font-size:16px;margin-top:18px}
+  .knoppen{margin-top:28px;margin-bottom:0}
+  .knoppen .knop-rand{display:none}
+  .knop{height:56px;font-size:16px}
+  .hero .kader{gap:28px;padding:0 12px 0 calc(var(--zij) - var(--rand))}
+  .hero-foto{min-height:344px;margin-left:calc(12px - var(--zij) + var(--rand));border-radius:18px}
+  .kaartje{left:16px;bottom:16px;padding:12px 18px 12px 12px;border-radius:16px}
+  .kaartje .vink{width:36px;height:36px}
+  .kaartje span{display:none}
+  .feiten{display:none}
+  .feiten-los{display:flex !important}
+  .twee{grid-template-columns:1fr}
+  .inleiding{font-size:16px}
+  .sectie{padding:56px 0}
+  .h2{font-size:34px}
+  .diensten{grid-template-columns:1fr;margin-top:32px;gap:12px}
+  .dienst{min-height:0;padding:20px 24px}
+  .dienst h3{margin-top:6px;font-size:20px}
+  .dienst p{display:none}
+  .meer{padding-top:10px;font-size:14px}
+  .werk{padding:36px 0 40px}
+  .fotos{margin-top:28px;gap:12px}
+  .fotos figure img{height:260px;border-radius:16px}
+  .fotos figure:not(:first-child) img{height:120px;border-radius:14px}
+  .fotos figure:not(:first-child) figcaption{display:none}
+  .fotos figcaption{margin-top:14px}
+  .erkend{margin-top:32px}
+  .erkend li{padding:18px;gap:16px}
+  .stappen{grid-template-columns:1fr;margin-top:32px;gap:12px}
+  .stap{display:grid;grid-template-columns:56px 1fr;column-gap:18px;padding:22px}
+  .stap b{grid-row:span 2}
+  .stap h3{margin-top:2px;font-size:20px}
+  .stap p{margin-top:2px}
+  .contact{padding:32px 0 36px}
+  .groot-tel{margin-top:22px}
+  .adres{margin-top:18px;font-size:16px}
+  form{padding:24px;margin-top:32px}
+  .voet{grid-template-columns:1fr}
+  .belbalk{display:flex;position:fixed;left:8px;right:8px;bottom:12px;z-index:20;height:64px;border-radius:32px;background:var(--inkt);color:var(--wit);align-items:center;justify-content:space-between;padding:0 8px 0 24px;font-weight:600;box-shadow:0 10px 30px rgba(20,35,58,.3);transition:transform .3s ease,opacity .3s ease}
+  .belbalk.weg{transform:translateY(90px);opacity:0}
+  .belbalk .pijl{background:var(--geel);color:var(--inkt);width:48px;height:48px;border-radius:50%;display:grid;place-items:center}
+}
+.feiten-los{display:none;gap:0;justify-content:space-between;padding-top:28px;padding-bottom:8px}
+.feiten-los strong{display:block;font-family:var(--kop);font-weight:800;font-size:24px;letter-spacing:-.03em;line-height:1.2}
+.feiten-los span{font-size:12px;color:var(--grijs)}
+</style>
+</head>
+<body>
+
+<div class="concept">Ontwerpvoorstel voor Herman Jansen Loodgieterswerken, gemaakt door <a href="https://tomveijk.nl" target="_blank" rel="noopener">Tom van Eijk</a>. Dit is nog niet de echte website.</div>
+
+<header class="kader menu">
+  <a class="logo" href="#top" aria-label="Herman Jansen Loodgieterswerken, naar boven"><img src="/showcase/herman-jansen/logo.png" alt="Herman Jansen Loodgieterswerken" width="600" height="200"></a>
+  <nav aria-label="Hoofdmenu">
+    <a href="#diensten">Diensten</a>
+    <a href="#werk">Ons werk</a>
+    <a href="#over">Over ons</a>
+    <a href="#werkwijze">Werkwijze</a>
+    <a href="#contact">Contact</a>
+    <a class="tel" href="tel:+31651358894">06 51 35 88 94</a>
+  </nav>
+  <a class="menuknop" href="#contact" aria-label="Naar contact"><i></i></a>
+</header>
+
+<main id="top">
+  <section class="vlak hero">
+    <div class="kader">
+      <div class="hero-tekst">
+        <h1 class="kop">Je cv-ketel<br>in goede handen.</h1>
+        <p>Onderhoud, storingen en nieuwe installaties in Soest en heel midden-Nederland. Door gecertificeerde monteurs, al sinds 1997.</p>
+        <div class="knoppen">
+          <a class="knop knop-geel" href="#contact">Plan onderhoud <span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
+          <a class="knop knop-rand" href="tel:+31651358894">Storing melden</a>
+        </div>
+        <div class="feiten">
+          <div><strong>1997</strong><span>opgericht in Soest</span></div>
+          <div><strong>EVI</strong><span>erkend gas en water</span></div>
+          <div><strong>2006</strong><span>verder als B.V.</span></div>
+        </div>
+      </div>
+      <div class="hero-foto">
+        <img src="/showcase/herman-jansen/cv1.webp" alt="Cv-installatie met ketel, boiler en expansievat, aangelegd door Herman Jansen" width="1200" height="900" fetchpriority="high">
+        <div class="kaartje">
+          <span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+          <div><strong>Jaarlijks onderhoud</strong><span>Veilig, zuinig en langer mee</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="kader feiten-los" aria-hidden="true">
+    <div><strong>1997</strong><span>opgericht in Soest</span></div>
+    <div><strong>EVI</strong><span>erkend gas en water</span></div>
+    <div><strong>2006</strong><span>verder als B.V.</span></div>
+  </div>
+
+  <section class="sectie" id="diensten">
+    <div class="kader">
+      <div class="twee in">
+        <h2 class="kop h2">Waar we je<br>mee helpen.</h2>
+        <p class="inleiding">Van een lekkende kraan tot een complete cv-installatie. We doen het allemaal zelf, met eigen gecertificeerde monteurs.</p>
+      </div>
+      <div class="diensten">
+        <a class="dienst in" href="#contact"><span class="nr">01</span><h3>Jaarlijks onderhoud</h3><p>We controleren je ketel op veiligheid, verbruik en slijtage, zodat hij zuinig blijft en langer meegaat.</p><span class="meer">Meer weten <span aria-hidden="true">&rarr;</span></span></a>
+        <a class="dienst in" href="#contact"><span class="nr">02</span><h3>Storing verhelpen</h3><p>Geen warm water of een foutcode? We komen langs en lossen het snel op.</p><span class="meer">Meer weten <span aria-hidden="true">&rarr;</span></span></a>
+        <a class="dienst in" href="#contact"><span class="nr">03</span><h3>Advies en upgrades</h3><p>Zuiniger stoken of je installatie vernieuwen? Eerlijk advies over wat bij je huis past.</p><span class="meer">Meer weten <span aria-hidden="true">&rarr;</span></span></a>
+        <a class="dienst in" href="#contact"><span class="nr">04</span><h3>Loodgieterswerk</h3><p>Kranen, leidingen, geisers en badkamers. Voor renovatie en nieuwbouw.</p><span class="meer">Meer weten <span aria-hidden="true">&rarr;</span></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="vlak werk" id="werk">
+    <div class="kader">
+      <div class="twee in">
+        <h2 class="kop h2">Recent werk.</h2>
+        <p class="inleiding">Installaties die we zelf hebben aangelegd en onderhouden.</p>
+      </div>
+      <div class="fotos">
+        <figure class="in"><img src="/showcase/herman-jansen/cv1.webp" alt="Cv-installatie met boiler" width="1200" height="900" loading="lazy"><figcaption><strong>Cv-installatie met boiler</strong><span>Ketel, expansievat en leidingwerk</span></figcaption></figure>
+        <figure class="in"><img src="/showcase/herman-jansen/cv2.webp" alt="Cv-ketel op een zolder" width="640" height="480" loading="lazy"><figcaption><strong>Ketel op zolder</strong><span>Vervanging in een bestaande woning</span></figcaption></figure>
+        <figure class="in"><img src="/showcase/herman-jansen/cv3.webp" alt="Verdeler van vloerverwarming" width="750" height="500" loading="lazy"><figcaption><strong>Vloerverwarming</strong><span>Verdeler met groepen per ruimte</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie" id="over">
+    <div class="kader twee">
+      <div class="over in">
+        <p class="label">SINDS 1997</p>
+        <h2 class="kop h2" style="margin-top:14px">Hetzelfde bedrijf,<br>dezelfde aanpak.</h2>
+        <p>Herman Jansen begon in 1997 als loodgieter in Soest, sinds 2006 als B.V. We zijn een allround loodgietersbedrijf: of het nu gaat om een lekkende kraan, het onderhoud van je cv-ketel of een complete renovatie, het maakt voor ons geen verschil.</p>
+      </div>
+      <ul class="erkend in">
+        <li><span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><strong>Erkend gasinstallateur</strong><span>EVI, registratienummer G-18262</span></div></li>
+        <li><span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><strong>Erkend waterinstallateur</strong><span>EVI, registratienummer W-18262</span></div></li>
+        <li><span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><strong>Lid van Techniek Nederland</strong><span>De branchevereniging voor installateurs</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sectie" id="werkwijze" style="padding-top:0">
+    <div class="kader">
+      <h2 class="kop h2 in">Zo werken we.</h2>
+      <div class="stappen">
+        <div class="stap in"><b>1</b><h3>Bel of mail</h3><p>Vertel wat er speelt. We plannen een moment dat jou uitkomt.</p></div>
+        <div class="stap in"><b>2</b><h3>We komen langs</h3><p>Een monteur bekijkt de installatie en legt uit wat er nodig is.</p></div>
+        <div class="stap in"><b>3</b><h3>Duidelijk vooraf</h3><p>Je weet wat het kost voordat we beginnen. Geen verrassingen achteraf.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vlak contact" id="contact">
+    <div class="kader twee">
+      <div>
+        <h2 class="kop">Storing of<br>onderhoud nodig?</h2>
+        <p class="sub">Bel of mail ons, we helpen je graag verder.</p>
+        <a class="groot-tel" href="tel:+31651358894">06 51 35 88 94</a>
+        <div class="adres"><a href="mailto:info@jansenloodgieter.nl">info@jansenloodgieter.nl</a><span>Kerkstraat 32a, 3764 CT Soest</span></div>
+      </div>
+      <form id="aanvraag" novalidate>
+        <h3>Of plan direct je onderhoud</h3>
+        <label><span>Naam</span><input name="naam" placeholder="Naam" autocomplete="name"></label>
+        <label><span>Telefoonnummer</span><input name="telefoon" placeholder="Telefoonnummer" inputmode="tel" autocomplete="tel"></label>
+        <label><span>Adres en postcode</span><input name="adres" placeholder="Adres en postcode" autocomplete="street-address"></label>
+        <label><span>Waar kunnen we mee helpen?</span><textarea name="bericht" placeholder="Waar kunnen we mee helpen?"></textarea></label>
+        <button class="knop knop-geel" type="submit">Verstuur aanvraag <span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></button>
+        <p class="melding" role="status">Dit is een ontwerpvoorstel, het formulier verstuurt nog niets. Op de echte site komt je aanvraag hier direct binnen.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="vlak">
+  <div class="kader voet">
+    <div><strong>Herman Jansen Loodgieterswerken B.V.</strong><br>Kerkstraat 32a, 3764 CT Soest &nbsp;&bull;&nbsp; <a href="tel:+31651358894">06 51 35 88 94</a> &nbsp;&bull;&nbsp; <a href="mailto:info@jansenloodgieter.nl">info@jansenloodgieter.nl</a></div>
+    <nav aria-label="Voettekst"><a href="#diensten">Diensten</a><a href="#werk">Ons werk</a><a href="#over">Over ons</a><a href="#top">Algemene voorwaarden</a></nav>
+  </div>
+  <div class="woordmerk" aria-hidden="true">HERMAN JANSEN</div>
+</footer>
+
+<a class="belbalk" href="tel:+31651358894">Bel 06 51 35 88 94 <span class="pijl"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
+
+<script>
+// Rustig binnenkomen bij scrollen
+(function () {
+  var items = document.querySelectorAll(".in");
+  if (!("IntersectionObserver" in window)) { items.forEach(function (e) { e.classList.add("zichtbaar"); }); return; }
+  var io = new IntersectionObserver(function (lijst) {
+    lijst.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("zichtbaar"); io.unobserve(x.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (e) { io.observe(e); });
+})();
+// Belbalk verbergen zodra het contactblok in beeld is (daar staat het nummer al groot)
+(function () {
+  var balk = document.querySelector(".belbalk"), contact = document.getElementById("contact");
+  if (!("IntersectionObserver" in window)) return;
+  new IntersectionObserver(function (l) { balk.classList.toggle("weg", l[0].isIntersecting); }, { threshold: 0.2 }).observe(contact);
+})();
+// Demoformulier: niets versturen, wel laten zien wat er zou gebeuren
+document.getElementById("aanvraag").addEventListener("submit", function (e) {
+  e.preventDefault();
+  this.querySelector(".melding").style.display = "block";
+});
+</script>
+</body>
+</html>
