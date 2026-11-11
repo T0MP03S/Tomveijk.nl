@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#231F20">
 <link rel="preload" as="font" type="font/woff2" href="/showcase/odink-verbouw/assets/figtree.woff2" crossorigin>
 <link rel="stylesheet" href="/showcase/odink-verbouw/assets/odink.css">
-<link rel="preload" as="image" href="/showcase/odink-verbouw/held/badkamer-tekening.webp">
+
 </head>
 <body>
 <div class="concept">Ontwerpvoorstel voor Odink Verbouw &amp; Onderhoud, gemaakt door <a href="https://tomveijk.nl" target="_blank" rel="noopener">Tom van Eijk</a>. Dit is nog niet de echte website.</div>
@@ -22,25 +22,34 @@
 <div class="mobielmenu" hidden><nav aria-label="Menu"><a href="/showcase/odink-verbouw/index.html" aria-current="page">Home</a><a href="/showcase/odink-verbouw/diensten.html">Diensten</a><a href="/showcase/odink-verbouw/projecten.html">Projecten</a><a href="/showcase/odink-verbouw/contact.html">Contact</a><a href="tel:+31681561014">Bel 06 81 56 10 14</a></nav></div>
 <main id="inhoud">
 
-<section class="vlak hero">
-  <div class="kader hero-raster">
-    <div class="hero-tekst">
-      <p class="label">Verbouw, renovatie en onderhoud</p>
-      <h1 class="kop">Verbouwen?<br><span class="balk">Dan Odink.</span></h1>
-      <p class="hero-sub">Voor particulieren en bedrijven in de regio Eemland. Van slopen en strippen tot de laatste laag verf: wij begeleiden uw verbouwing van begin tot eind.</p>
-      <div class="knoppen"><a class="knop knop-blauw" href="/showcase/odink-verbouw/contact.html">Vrijblijvende offerte<span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a><a class="knop knop-rand" href="/showcase/odink-verbouw/projecten.html">Bekijk ons werk</a></div>
-      <ul class="feiten"><li><strong>20+</strong>jaar ervaring</li><li><strong>VCA</strong>veilig werken</li><li><strong>Erkend</strong>leerbedrijf</li></ul>
-    </div>
-    <figure class="tekenvak" data-projecten='[{"t": "/showcase/odink-verbouw/held/badkamer-tekening.webp", "f": "/showcase/odink-verbouw/held/badkamer-foto.webp", "n": "Badkamer met ledspiegel", "h": "/showcase/odink-verbouw/dienst-badkamers-en-sanitair.html"}, {"t": "/showcase/odink-verbouw/held/bbq-tekening.webp", "f": "/showcase/odink-verbouw/held/bbq-foto.webp", "n": "Bbq-meubel van steigerhout", "h": "/showcase/odink-verbouw/dienst-tuinmeubels.html"}, {"t": "/showcase/odink-verbouw/held/toilet-tekening.webp", "f": "/showcase/odink-verbouw/held/toilet-foto.webp", "n": "Toilet met inbouwreservoir", "h": "/showcase/odink-verbouw/dienst-badkamers-en-sanitair.html"}, {"t": "/showcase/odink-verbouw/held/gevel-tekening.webp", "f": "/showcase/odink-verbouw/held/gevel-foto.webp", "n": "Nieuwe gevelbekleding", "h": "/showcase/odink-verbouw/dienst-timmerwerk.html"}]'>
-      <div class="tv-beeld">
-        <img class="tv-tekening" src="/showcase/odink-verbouw/held/badkamer-tekening.webp" alt="" width="1000" height="1250">
-        <img class="tv-foto" src="/showcase/odink-verbouw/held/badkamer-foto.webp" alt="Badkamer met ledspiegel, door Odink verbouwd" width="1000" height="1250" fetchpriority="high">
-        <div class="tv-lijn" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
-        <input class="tv-schuif" type="range" min="0" max="100" value="100" aria-label="Schuif tussen bouwtekening en foto">
-        <span class="tv-tag tv-tag-l">Tekening</span><span class="tv-tag tv-tag-r">Resultaat</span>
+<section class="film" id="film" data-pad="/showcase/odink-verbouw/film/" aria-label="Van tekening tot huis: zo verbouwen wij">
+  <div class="film-plak">
+    <canvas class="film-doek" aria-hidden="true"></canvas>
+    <picture class="film-tekening" aria-hidden="true">
+      <source media="(max-aspect-ratio: 1/1)" srcset="/showcase/odink-verbouw/film/tekening-tel.webp">
+      <img src="/showcase/odink-verbouw/film/tekening-breed.webp" alt="" width="1920" height="1080" fetchpriority="high">
+    </picture>
+    <div class="film-waas d" aria-hidden="true"></div><div class="film-waas n" aria-hidden="true"></div>
+    <div class="film-tekst">
+      <div class="hfst aan" data-hfst="0">
+        <p class="label">Verbouw, renovatie en onderhoud</p>
+        <h1 class="kop">Verbouwen?<br><span class="balk">Dan Odink.</span></h1>
+        <p class="hfst-sub">Van de eerste tekening tot de laatste laag verf. Scroll en zie hoe wij uw verbouwing aanpakken.</p>
+        <div class="knoppen"><a class="knop knop-blauw" href="/showcase/odink-verbouw/contact.html">Vrijblijvende offerte<span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a></div>
+        <ul class="feiten"><li><strong>20+</strong>jaar ervaring</li><li><strong>VCA</strong>veilig werken</li><li><strong>Erkend</strong>leerbedrijf</li></ul>
       </div>
-      <figcaption><span class="tv-naam">Badkamer met ledspiegel</span><span class="tv-punten"><button type="button" aria-label="Project 1: Badkamer met ledspiegel"></button><button type="button" aria-label="Project 2: Bbq-meubel van steigerhout"></button><button type="button" aria-label="Project 3: Toilet met inbouwreservoir"></button><button type="button" aria-label="Project 4: Nieuwe gevelbekleding"></button></span></figcaption>
-    </figure>
+      <div class="hfst" data-hfst="1"><p class="label">Het begin</p><h2 class="kop">Uw huis,<br>zoals het nu is.</h2><p class="hfst-sub">Wij komen langs, bekijken wat er kan en maken een plan. Dan rijdt de bus voor.</p></div>
+      <div class="hfst" data-hfst="2"><p class="label">01 Slopen &nbsp;&middot;&nbsp; 02 Strippen</p><h2 class="kop">We beginnen<br>bij het begin.</h2><p class="hfst-sub">Eerst slopen en strippen we alles wat weg moet. Het oude schuurtje gaat eruit en de zijgevel krijgt een doorbraak.</p></div>
+      <div class="hfst" data-hfst="3"><p class="label">03 Opbouwen</p><h2 class="kop">Maatwerk<br>in hout.</h2><p class="hfst-sub">Vloer, houtskelet en dakbalken: ons team van vakmensen bouwt het op.</p></div>
+      <div class="hfst" data-hfst="4"><p class="label">07 Gas, water en elektra</p><h2 class="kop">Ook de leidingen<br>doen we zelf.</h2><p class="hfst-sub">Water, verwarming en elektra: we leggen het aan voordat de wanden dichtgaan, door het hele huis.</p></div>
+      <div class="hfst" data-hfst="5"><p class="label">04 Timmerwerk</p><h2 class="kop">Wanden, dak<br>en een dakkapel.</h2><p class="hfst-sub">De aanbouw gaat dicht, de keuken komt erin en op het dak bouwen we een dakkapel. Al het timmerwerk in eigen hand.</p></div>
+      <div class="hfst" data-hfst="6"><p class="label">05 Stucwerk &nbsp;&middot;&nbsp; 06 Schilderwerk</p><h2 class="kop">Tot de laatste<br>laag verf.</h2><p class="hfst-sub">Met professionele materialen, en met garantie op ons schilderwerk.</p></div>
+      <div class="hfst" data-hfst="7"><p class="label">Opgeleverd</p><h2 class="kop">Zin in een<br>mooie klus?</h2><p class="hfst-sub">Vertel ons over uw plannen. We maken graag een vrijblijvende offerte.</p><div class="knoppen"><a class="knop knop-blauw" href="/showcase/odink-verbouw/contact.html">Vraag een offerte aan<span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a></div></div>
+    </div>
+    <div class="film-voet">
+      <ol class="film-stappen" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ol>
+      <a class="film-over" href="#video">Sla over <span aria-hidden="true">&darr;</span></a>
+    </div>
   </div>
 </section>
 
@@ -59,16 +68,9 @@
   </div>
 </section>
 
-<section class="sectie k-zacht" id="werkwijze">
-  <div class="kader">
-    <div class="twee in"><h2 class="kop h2">Van begin<br>tot eind.</h2><p class="inleiding">Wij begeleiden uw bouwproject van begin tot eind. Ons team van vakmensen maakt van elke verbouwing of renovatie een succes.</p></div>
-    <ol class="stappen"><li class="in"><span>01</span>Slopen</li><li class="in"><span>02</span>Strippen</li><li class="in"><span>03</span>Opbouwen</li><li class="in"><span>04</span>Timmerwerk</li><li class="in"><span>05</span>Stucwerk</li><li class="in"><span>06</span>Schilderwerk</li><li class="in"><span>07</span>Gas, water en elektra</li></ol>
-  </div>
-</section>
-
 <section class="sectie k-licht" id="diensten">
   <div class="kader">
-    <div class="twee in"><h2 class="kop h2">Wat we doen.</h2><p class="inleiding">Veelzijdig, en altijd met de beste materialen. <a class="tekstlink" href="/showcase/odink-verbouw/diensten.html">Alle diensten</a></p></div>
+    <div class="twee in"><h2 class="kop h2">Wat we doen.</h2><p class="inleiding">Van badkamer tot busbetimmering: alles in eigen hand. <a class="tekstlink" href="/showcase/odink-verbouw/diensten.html">Alle diensten</a></p></div>
     <div class="diensten"><a class="dienst dienst-breed in" href="/showcase/odink-verbouw/dienst-verbouw-en-renovatie.html"><span class="dienst-foto"><img src="/showcase/odink-verbouw/img/70-k.webp" alt="" loading="lazy"></span><span class="dienst-tekst"><strong>Verbouw en renovatie</strong><span>Van een complete verbouwing tot het vervangen van slechte kozijnen.</span></span><span class="rondpijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a><a class="dienst in" href="/showcase/odink-verbouw/dienst-badkamers-en-sanitair.html"><span class="dienst-foto"><img src="/showcase/odink-verbouw/img/08-k.webp" alt="" width="480" height="640" loading="lazy"></span><span class="dienst-tekst"><strong>Badkamers en sanitair</strong><span>Complete badkamers en inbouwtoiletten. Geberit-gecertificeerd.</span></span><span class="rondpijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a><a class="dienst in" href="/showcase/odink-verbouw/dienst-timmerwerk.html"><span class="dienst-foto"><img src="/showcase/odink-verbouw/img/64-k.webp" alt="" width="480" height="640" loading="lazy"></span><span class="dienst-tekst"><strong>Timmerwerk</strong><span>Van een inbouwkast onder de trap tot een tuinhuis op maat.</span></span><span class="rondpijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a><a class="dienst in" href="/showcase/odink-verbouw/dienst-schilderwerk.html"><span class="dienst-foto"><img src="/showcase/odink-verbouw/img/35-k.webp" alt="" width="640" height="480" loading="lazy"></span><span class="dienst-tekst"><strong>Schilderwerk</strong><span>Uitgevoerd met professionele materialen, en met garantie.</span></span><span class="rondpijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a><a class="dienst in" href="/showcase/odink-verbouw/dienst-meubels-op-maat.html"><span class="dienst-foto"><img src="/showcase/odink-verbouw/img/53-k.webp" alt="" width="640" height="480" loading="lazy"></span><span class="dienst-tekst"><strong>Meubels op maat</strong><span>Een bijzonder meubel voor in huis, of zelfs een dj-booth.</span></span><span class="rondpijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a><a class="dienst in" href="/showcase/odink-verbouw/dienst-tuinmeubels.html"><span class="dienst-foto"><img src="/showcase/odink-verbouw/img/31-k.webp" alt="" width="640" height="480" loading="lazy"></span><span class="dienst-tekst"><strong>Tuinmeubels</strong><span>Bbq-meubels, buitentafels, statafels en tuinbanken.</span></span><span class="rondpijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a><a class="dienst in" href="/showcase/odink-verbouw/dienst-busbetimmering.html"><span class="dienst-foto"><img src="/showcase/odink-verbouw/img/21-k.webp" alt="" width="640" height="480" loading="lazy"></span><span class="dienst-tekst"><strong>Busbetimmering</strong><span>Kasten en schappen op maat in uw bedrijfsbus.</span></span><span class="rondpijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a><a class="dienst dienst-vraag in" href="/showcase/odink-verbouw/contact.html"><span><strong>Iets anders<br>in gedachten?</strong><p>Vraag het gerust. We denken graag met u mee en maken een vrijblijvende offerte.</p></span><span class="rondpijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a></div>
   </div>
 </section>
@@ -80,7 +82,7 @@
       <li class="in"><span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><strong>Heldere communicatie</strong>Gerichte adviezen, en u weet altijd waar u aan toe bent.</li>
       <li class="in"><span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><strong>Duidelijke prijzen</strong>Geen verrassingen achteraf.</li>
       <li class="in"><span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><strong>Netjes opgelost</strong>Eventuele problemen lossen we altijd netjes op.</li>
-      <li class="in"><span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><strong>Veilig en erkend</strong>VCA-gecertificeerd en erkend leerbedrijf.</li>
+      <li class="in"><span class="vink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><strong>Met garantie</strong>Op ons schilderwerk krijgt u garantie.</li>
     </ul>
   </div>
 </section>
@@ -127,7 +129,7 @@
     <div><h4>Odink</h4><a href="/showcase/odink-verbouw/projecten.html">Projecten</a><a href="/showcase/odink-verbouw/index.html#video">Videoportret</a><a href="/showcase/odink-verbouw/contact.html">Contact</a></div>
     <div><h4>Contact</h4><a href="tel:+31681561014">06 81 56 10 14</a><a href="mailto:info@odinkverbouw.nl">info@odinkverbouw.nl</a><span>Zuidereind 21, 3741 LG Baarn</span></div>
   </div>
-  <div class="voet-onder"><span>&copy; Odink Verbouw &amp; Onderhoud</span><span>KvK 83226214</span></div>
+  <div class="voet-onder"><span>&copy; Odink Verbouw &amp; Onderhoud &nbsp;&bull;&nbsp; KvK 83226214</span><span>3D-model bus: <a href="https://sketchfab.com/3d-models/mercedes-benz-sprinter-2006-f69de1315bb049c8946d57f6006acd73" target="_blank" rel="noopener">Max via Sketchfab</a>, CC BY 4.0</span></div>
 </footer>
 <a class="belbalk" href="tel:+31681561014">Bel 06 81 56 10 14<span class="pijl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
 <dialog class="lichtbak" aria-label="Foto bekijken"><button class="lb-dicht" type="button" aria-label="Sluiten">&times;</button><button class="lb-vorige" type="button" aria-label="Vorige foto">&lsaquo;</button><img alt=""><button class="lb-volgende" type="button" aria-label="Volgende foto">&rsaquo;</button><p class="lb-tekst"></p></dialog>

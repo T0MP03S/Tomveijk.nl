@@ -1,6 +1,84 @@
 (function () {
   var rustig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // ---------- Scrollfilm: van tekening tot huis (170 frames uit Blender, aangestuurd door scrollen)
+  var film = document.querySelector(".film");
+  if (film) {
+    var AANTAL = 170, PAD = film.getAttribute("data-pad");
+    var doek = film.querySelector(".film-doek"), ctx = doek.getContext("2d");
+    var tek = film.querySelector(".film-tekening"), hfst = film.querySelectorAll(".hfst"), stap = film.querySelectorAll(".film-stappen li");
+    var set = null, ext = "webp", frames = [], doelP = 0, p = 0, actief = 0, loopt = false;
+    // hoofdstukken: vanaf welke scrollpositie (0-1) een tekst aan gaat, en hoeveel stapjes dan vol zijn
+    var HFST = [0, 0.055, 0.105, 0.25, 0.42, 0.57, 0.73, 0.795];
+    var VOL = [0, 0, 2, 3, 4, 5, 6, 7];
+    function glad(t) { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); }
+    function frameVan(q) { return 1 + (AANTAL - 1) * Math.max(0, Math.min(1, (q - 0.05) / 0.88)); }
+    function laad() {
+      frames = [];
+      var volgorde = [1, AANTAL], i;
+      for (i = 10; i < AANTAL; i += 10) volgorde.push(i);
+      for (i = 2; i < AANTAL; i++) if (volgorde.indexOf(i) < 0) volgorde.push(i);
+      var mijnSet = set, pos = 0;
+      function volgende() {
+        if (mijnSet !== set || pos >= volgorde.length) return;
+        var nr = volgorde[pos++], im = new Image();
+        im.onload = im.onerror = function () { if (mijnSet === set) { frames[nr] = im.naturalWidth ? im : null; teken(); } volgende(); };
+        im.src = PAD + set + "/f" + String(nr).padStart(3, "0") + "." + ext;
+      }
+      for (var k = 0; k < 6; k++) volgende();
+    }
+    function kiesSet() {
+      var s = window.innerWidth / window.innerHeight < 1 ? "tel" : "breed";
+      if (s !== set) { set = s; laad(); }
+    }
+    function maat() {
+      var dpr = Math.min(2, window.devicePixelRatio || 1);
+      doek.width = Math.round(doek.clientWidth * dpr); doek.height = Math.round(doek.clientHeight * dpr);
+      teken();
+    }
+    function teken() {
+      var cw = doek.width, ch = doek.height; if (!cw) return;
+      var fi = Math.round(frameVan(p)), im = null;
+      for (var d = 0; d < AANTAL && !im; d++) im = frames[fi - d] || frames[fi + d] || null;
+      if (!im) return;
+      var s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
+      var x = set === "breed" ? cw - w : (cw - w) / 2;      // breed: rechts uitlijnen, zodat het huis in beeld blijft
+      var y = set === "tel" ? ch - h : (ch - h) / 2;        // telefoon: onderin uitlijnen
+      ctx.clearRect(0, 0, cw, ch); ctx.drawImage(im, x, y, w, h);
+    }
+    function werk() {
+      p += (doelP - p) * (rustig ? 1 : 0.18);
+      if (Math.abs(doelP - p) < 0.0005) p = doelP;
+      tek.style.opacity = String(1 - glad((p - 0.015) / 0.05));
+      teken();
+      var h = 0; for (var i = 0; i < HFST.length; i++) if (p >= HFST[i]) h = i;
+      if (h !== actief) { hfst[actief].classList.remove("aan"); hfst[h].classList.add("aan"); actief = h; }
+      for (var j = 0; j < stap.length; j++) stap[j].classList.toggle("klaar", j < VOL[h]);
+      film.classList.toggle("nacht", frameVan(p) >= 152);
+      if (p !== doelP) requestAnimationFrame(werk); else loopt = false;
+    }
+    var menu = document.querySelector(".menu");
+    function menuHoogte() { document.documentElement.style.setProperty("--menu-h", menu.offsetHeight + "px"); }
+    menuHoogte(); window.addEventListener("resize", menuHoogte);
+    function scrol() {
+      var r = film.getBoundingClientRect(), mh = menu.offsetHeight, totaal = film.offsetHeight - (window.innerHeight - mh);
+      document.body.classList.toggle("in-film", r.bottom > window.innerHeight * 0.98);
+      doelP = Math.max(0, Math.min(1, (mh - r.top) / totaal));
+      if (!loopt) { loopt = true; requestAnimationFrame(werk); }
+    }
+    var test = new Image();
+    test.onload = function () { if (test.width > 0) ext = "avif"; start(); };
+    test.onerror = start;
+    test.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB9tZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+    var gestart = false;
+    function start() {
+      if (gestart) return; gestart = true;
+      kiesSet(); maat(); scrol();
+      window.addEventListener("scroll", scrol, { passive: true });
+      window.addEventListener("resize", function () { kiesSet(); maat(); scrol(); });
+    }
+  }
+
   // ---------- Van bouwtekening naar foto
   var vak = document.querySelector(".tekenvak");
   if (vak) {
