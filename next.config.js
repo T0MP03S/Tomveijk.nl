@@ -22,6 +22,15 @@ const nextConfig = {
       },
     ],
   },
+  // Statische export van het HuisMust-concept in public/showcase/huismust. Next serveert
+  // geen index.html of pakket.html bij een kale URL, dus die verwijzing doen we hier. Bestaande bestanden
+  // gaan voor (afterFiles), dus scripts en beelden worden gewoon direct geleverd.
+  async rewrites() {
+    return [
+      { source: '/showcase/huismust', destination: '/showcase/huismust/index.html' },
+      { source: '/showcase/huismust/:pagina', destination: '/showcase/huismust/:pagina.html' },
+    ]
+  },
   async headers() {
     return [
       {

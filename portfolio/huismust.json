@@ -1,0 +1,25 @@
+{
+  "titel": "HuisMust (concept)",
+  "type": "WEBSITE",
+  "embedUrl": "/showcase/huismust",
+  "omschrijving": "Merk en webshop voor een maandelijkse box met huishoudspullen. Logo, kleuren, 3D-animatie en de hele site zelf gemaakt. Het bedrijf is er nooit gekomen, de site wel.",
+  "thumbnail": "/assets/images/huismust-concept.png",
+  "gepubliceerd": true,
+  "volgorde": 23,
+  "projectdatum": "2026-10-27",
+  "blokken": [
+    {
+      "type": "WEBSITE",
+      "inhoud": {
+        "url": "/showcase/huismust",
+        "type": "embed"
+      }
+    },
+    {
+      "type": "TEXT",
+      "inhoud": {
+        "text": "HuisMust was een idee voor een abonnement op de huishoudspullen die je altijd vergeet: sponzen, doekjes, wasmiddel, vaatwastabs. Ik heb het merk ontworpen (een hart dat half huis en half mus is), de kleuren en letters gekozen en de site zelf gebouwd. Bovenaan speelt een 3D-animatie die ik in Blender heb gemaakt en die meeloopt met het scrollen: een pallet vol dozen die openspringt, waarna je je eigen box samenstelt. Het bedrijf is uiteindelijk niet van de grond gekomen. Afrekenen en inloggen werken in dit voorbeeld dus niet, maar je kunt wel rondklikken en een box samenstellen."
+      }
+    }
+  ]
+}

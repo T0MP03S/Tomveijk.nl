@@ -1,0 +1,30 @@
+1:"$Sreact.fragment"
+2:"/showcase/huismust/_next/static/chunks/0umf92h1sb77c.js"
+3:I[39756,["$2"],"default"]
+4:I[37457,["$2"],"default"]
+b:"/showcase/huismust/_next/static/chunks/2n5qeheznvl4u.js"
+c:I[22016,["$2","$b"],""]
+d:I[97367,["$2"],"OutletBoundary"]
+e:"$Sreact.suspense"
+11:"ViewportBoundary"
+12:I[97367,["$2"],"$11"]
+13:"MetadataBoundary"
+14:I[97367,["$2"],"$13"]
+15:I[27201,["$2"],"IconMark"]
+:HL["/showcase/huismust/_next/static/chunks/03syr5vk397ys.css","style"]
+:HL["/showcase/huismust/merk/tom-icoon-inkt.svg","image"]
+6:X
+9:X
+9:C
+a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"className":"grid min-h-dvh place-items-center bg-basis px-5","children":["$","div",null,{"className":"max-w-md text-center","children":[["$","$Lc",null,{"href":"/","className":"inline-block text-[1.9rem]","children":["$","span",null,{"className":"kop inline-flex items-baseline gap-[0.14em] whitespace-nowrap ","aria-label":"HuisMust","children":[["$","span",null,{"aria-hidden":"true","children":"Huis"}],["$","img",null,{"src":"/showcase/huismust/merk/tom-icoon-inkt.svg","alt":"","aria-hidden":"true","width":930,"height":705,"className":"inline-block h-[1.15em] w-auto translate-y-[0.1em] self-center"}],["$","span",null,{"aria-hidden":"true","children":"Must"}]]}]}],["$","h1",null,{"className":"kop mt-10 text-[2.4rem] leading-tight","children":"Hier stopt de rondleiding."}],["$","p",null,{"className":"mt-4 text-grijs","children":"HuisMust was een idee voor een maandelijkse box met huishoudspullen. Het is er nooit van gekomen, dus afrekenen en inloggen werken in dit voorbeeld niet. Ontwerp en website zijn van Tom van Eijk."}],["$","$Lc",null,{"href":"/","className":"mt-8 inline-block rounded-full bg-dooier px-6 py-3 font-semibold text-inkt","children":"Terug naar de start"}],["$","a",null,{"href":"https://tomveijk.nl/#portfolio","target":"_top","className":"mt-4 block text-sm font-semibold text-zee hover:underline","children":"Meer werk van Tom"}]]}]}],[["$","script","script-0",{"src":"/showcase/huismust/_next/static/chunks/2n5qeheznvl4u.js","async":true}]],["$","$Ld",null,{"children":["$","$e",null,{"name":"Next.MetadataOutlet","children":"$@f"}]}]]}],"p":"$@10","v":null,"s":"$6"}}]]
+7:[["children",{"s":"concept","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}]}]]}],"p":"$@8","v":"$9","s":"$6"},"c":"$Qa"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/showcase/huismust/_next/static/chunks/03syr5vk397ys.css","precedence":"next"}],["$","script","script-0",{"src":"/showcase/huismust/_next/static/chunks/0umf92h1sb77c.js","async":true}]],["$","html",null,{"lang":"nl","className":"Iiw5ra_variable LINzvG_variable vGkobG_variable h-full antialiased","children":["$","body",null,{"className":"min-h-full","children":["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]}]}]]}],"p":"$@5","v":null,"s":"$6"},"c":"$Q7"},"h":{"r":["$","$1","h",{"children":[null,["$","$L12",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#9ee5c4"}]]}],["$","$L14",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$e",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Concept | HuisMust"}],["$","meta","1",{"name":"description","content":"Sponzen, doekjes, wasmiddel en vaatwastabs in een maandelijkse box aan je deur. Jij kiest de varianten. Overslaan, pauzeren en opzeggen met één klik."}],["$","link","2",{"rel":"icon","href":"/showcase/huismust/icon.png?icon.1m68s8jp59kls.png","sizes":"512x512","type":"image/png"}],["$","link","3",{"rel":"apple-touch-icon","href":"/showcase/huismust/apple-icon.png?apple-icon.1-2oez0gob3vd.png","sizes":"180x180","type":"image/png"}],["$","$L15","4",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@16","v":null,"s":"$6"}},"a":"$@17","u":"$@18","b":"Fqmp2Ff7ZIDP7UeuUGnbp"}
+f:null
+6:300
+18:true
+6:C
+17:0
+8:"$undefined"
+5:"$undefined"
+16:"$undefined"
+10:"$undefined"
