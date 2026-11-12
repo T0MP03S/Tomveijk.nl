@@ -1,27 +1,43 @@
 (function () {
   var rustig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---------- Scrollfilm: van tekening tot huis (170 frames uit Blender, aangestuurd door scrollen)
+  // ---------- Scrollfilm: van tekening tot huis (170 frames uit Blender)
+  // De film staat stil bij elk hoofdstuk (rustpunt). Scrollen speelt het stuk tot het volgende rustpunt af;
+  // met scroll-snap kun je geen rustpunt overslaan, hoe snel je ook scrolt.
   var film = document.querySelector(".film");
   if (film) {
     var AANTAL = 170, PAD = film.getAttribute("data-pad");
+    var RUST = [1, 16, 37, 72, 86, 135, 145, 170];      // frame per hoofdstuk; hoofdstuk 0 is de bouwtekening
+    var N = RUST.length, HOUD = 0.32;                    // deel van elk stuk waarin het beeld stilstaat
     var doek = film.querySelector(".film-doek"), ctx = doek.getContext("2d");
     var tek = film.querySelector(".film-tekening"), hfst = film.querySelectorAll(".hfst"), stap = film.querySelectorAll(".film-stappen li");
-    var set = null, ext = "webp", frames = [], doelP = 0, p = 0, actief = 0, loopt = false;
-    // hoofdstukken: vanaf welke scrollpositie (0-1) een tekst aan gaat, en hoeveel stapjes dan vol zijn
-    var HFST = [0, 0.055, 0.105, 0.25, 0.42, 0.57, 0.73, 0.795];
-    var VOL = [0, 0, 2, 3, 4, 5, 6, 7];
+    var menu = document.querySelector(".menu");
+    var set = null, ext = "webp", frames = [], doelP = 0, p = 0, actief = 0, loopt = false, mh = 0, totaal = 1;
     function glad(t) { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); }
-    function frameVan(q) { return 1 + (AANTAL - 1) * Math.max(0, Math.min(1, (q - 0.05) / 0.88)); }
+    // q (0-1 door de film) -> positie in hoofdstukken (0..N-1), met stilstand rond elk rustpunt
+    function stand(q) {
+      var x = Math.max(0, Math.min(1, q)) * (N - 1), i = Math.floor(x), f = x - i;
+      if (i >= N - 1) return N - 1;
+      var h = HOUD / 2;
+      if (f < h) return i;
+      if (f > 1 - h) return i + 1;
+      return i + glad((f - h) / (1 - 2 * h));
+    }
+    function frameVan(q) {
+      var st = stand(q), i = Math.floor(st), f = st - i;
+      if (i >= N - 1) return RUST[N - 1];
+      return RUST[i] + (RUST[i + 1] - RUST[i]) * f;
+    }
     function laad() {
       frames = [];
-      var volgorde = [1, AANTAL], i;
-      for (i = 10; i < AANTAL; i += 10) volgorde.push(i);
+      var volgorde = RUST.slice(), i;
+      for (i = 5; i < AANTAL; i += 5) if (volgorde.indexOf(i) < 0) volgorde.push(i);
       for (i = 2; i < AANTAL; i++) if (volgorde.indexOf(i) < 0) volgorde.push(i);
       var mijnSet = set, pos = 0;
       function volgende() {
         if (mijnSet !== set || pos >= volgorde.length) return;
         var nr = volgorde[pos++], im = new Image();
+        im.decoding = "async";
         im.onload = im.onerror = function () { if (mijnSet === set) { frames[nr] = im.naturalWidth ? im : null; teken(); } volgende(); };
         im.src = PAD + set + "/f" + String(nr).padStart(3, "0") + "." + ext;
       }
@@ -34,6 +50,12 @@
     function maat() {
       var dpr = Math.min(2, window.devicePixelRatio || 1);
       doek.width = Math.round(doek.clientWidth * dpr); doek.height = Math.round(doek.clientHeight * dpr);
+      mh = menu.offsetHeight;
+      document.documentElement.style.setProperty("--menu-h", mh + "px");
+      totaal = film.offsetHeight - (window.innerHeight - mh);
+      // snappunten op de rustpunten
+      var punten = film.querySelectorAll(".film-punt");
+      for (var i = 0; i < punten.length; i++) punten[i].style.top = Math.round(totaal * i / (N - 1)) + "px";
       teken();
     }
     function teken() {
@@ -42,30 +64,81 @@
       for (var d = 0; d < AANTAL && !im; d++) im = frames[fi - d] || frames[fi + d] || null;
       if (!im) return;
       var s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
-      var x = set === "breed" ? cw - w : (cw - w) / 2;      // breed: rechts uitlijnen, zodat het huis in beeld blijft
-      var y = set === "tel" ? ch - h : (ch - h) / 2;        // telefoon: onderin uitlijnen
+      var x = set === "breed" ? cw - w : (cw - w) / 2;
+      var y = set === "tel" ? ch - h : (ch - h) / 2;
+      ctx.imageSmoothingQuality = "high";
       ctx.clearRect(0, 0, cw, ch); ctx.drawImage(im, x, y, w, h);
     }
     function werk() {
-      p += (doelP - p) * (rustig ? 1 : 0.18);
-      if (Math.abs(doelP - p) < 0.0005) p = doelP;
-      tek.style.opacity = String(1 - glad((p - 0.015) / 0.05));
+      p += (doelP - p) * (rustig ? 1 : 0.2);
+      if (Math.abs(doelP - p) < 0.0004) p = doelP;
+      var st = stand(p);
+      tek.style.opacity = String(1 - glad(st / 0.6));
       teken();
-      var h = 0; for (var i = 0; i < HFST.length; i++) if (p >= HFST[i]) h = i;
+      var h = Math.round(st);
       if (h !== actief) { hfst[actief].classList.remove("aan"); hfst[h].classList.add("aan"); actief = h; }
-      for (var j = 0; j < stap.length; j++) stap[j].classList.toggle("klaar", j < VOL[h]);
+      for (var j = 0; j < stap.length; j++) stap[j].classList.toggle("klaar", j < h);
       film.classList.toggle("nacht", frameVan(p) >= 152);
       if (p !== doelP) requestAnimationFrame(werk); else loopt = false;
     }
-    var menu = document.querySelector(".menu");
-    function menuHoogte() { document.documentElement.style.setProperty("--menu-h", menu.offsetHeight + "px"); }
-    menuHoogte(); window.addEventListener("resize", menuHoogte);
     function scrol() {
-      var r = film.getBoundingClientRect(), mh = menu.offsetHeight, totaal = film.offsetHeight - (window.innerHeight - mh);
+      var r = film.getBoundingClientRect();
+      // snappen alleen zolang je in de film bent; daarna scrolt de pagina vrij
+      var binnen = r.bottom >= window.innerHeight - 2;
       document.body.classList.toggle("in-film", r.bottom > window.innerHeight * 0.98);
       doelP = Math.max(0, Math.min(1, (mh - r.top) / totaal));
       if (!loopt) { loopt = true; requestAnimationFrame(werk); }
     }
+    // ---- een hoofdstuk per scrollbeweging: de film stopt bij elk rustpunt, inertie wordt genegeerd
+    var bezig = false, slot = 0, veegY = null;
+    function stopY(i) { return film.getBoundingClientRect().top + window.scrollY - mh + totaal * i / (N - 1); }
+    function doel(dir) {
+      var y = window.scrollY, i;
+      if (dir > 0) { for (i = 0; i < N; i++) if (stopY(i) > y + 6) return i; }
+      else { for (i = N - 1; i >= 0; i--) if (stopY(i) < y - 6) return i; }
+      return -1;
+    }
+    function inZone() { var r = film.getBoundingClientRect(); return r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight - 4; }
+    function naar(i) {
+      var van = window.scrollY, tot = stopY(i), t0 = null, duur = rustig ? 0 : Math.min(1000, 450 + Math.abs(tot - van) * 0.5);
+      bezig = true;
+      document.documentElement.style.scrollBehavior = "auto";
+      function stapje(ts) {
+        if (t0 === null) t0 = ts;
+        var t = duur ? Math.min(1, (ts - t0) / duur) : 1, e = t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        window.scrollTo(0, van + (tot - van) * e);
+        if (t < 1) requestAnimationFrame(stapje); else { bezig = false; slot = performance.now() + 180; document.documentElement.style.scrollBehavior = ""; }
+      }
+      requestAnimationFrame(stapje);
+    }
+    // geeft true als de beweging is afgevangen
+    function richting(dir, ev) {
+      if (!inZone()) return false;
+      var i = doel(dir);
+      if (i < 0) return false;                              // geen stop meer in deze richting: gewoon scrollen
+      if (ev) ev.preventDefault();
+      if (bezig || performance.now() < slot) { slot = Math.max(slot, performance.now() + 200); return true; }
+      naar(i); return true;
+    }
+    window.addEventListener("wheel", function (ev) {
+      if (Math.abs(ev.deltaY) < 4) return;
+      richting(ev.deltaY > 0 ? 1 : -1, ev);
+    }, { passive: false });
+    window.addEventListener("touchstart", function (ev) { veegY = ev.touches[0].clientY; }, { passive: true });
+    window.addEventListener("touchmove", function (ev) {
+      if (veegY === null || !inZone()) return;
+      var d = veegY - ev.touches[0].clientY;
+      if (doel(d > 0 ? 1 : -1) < 0) return;
+      ev.preventDefault();
+      if (Math.abs(d) > 30) { richting(d > 0 ? 1 : -1, null); veegY = null; }
+    }, { passive: false });
+    window.addEventListener("touchend", function () { veegY = null; }, { passive: true });
+    window.addEventListener("keydown", function (ev) {
+      var k = ev.key, dir = (k === "ArrowDown" || k === "PageDown" || (k === " " && !ev.shiftKey)) ? 1 : (k === "ArrowUp" || k === "PageUp" || (k === " " && ev.shiftKey)) ? -1 : 0;
+      if (dir && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) richting(dir, ev);
+    });
+    // snappunten aanmaken
+    for (var sp = 0; sp < N; sp++) { var d = document.createElement("div"); d.className = "film-punt"; d.setAttribute("aria-hidden", "true"); film.appendChild(d); }
     var test = new Image();
     test.onload = function () { if (test.width > 0) ext = "avif"; start(); };
     test.onerror = start;

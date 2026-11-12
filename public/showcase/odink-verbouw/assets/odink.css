@@ -434,3 +434,11 @@ body:has(.film) .film{margin-top:0;border-radius:0 0 32px 32px}
   .film-waas{width:100%;height:52%;bottom:auto;background:linear-gradient(180deg,rgba(233,230,225,.95) 0%,rgba(233,230,225,.85) 60%,rgba(233,230,225,0) 100%)}
   .film-waas.n{background:linear-gradient(180deg,rgba(38,50,74,.92) 0%,rgba(38,50,74,.75) 60%,rgba(38,50,74,0) 100%)}
 }
+
+/* rustpunten: scroll-snap alleen binnen de film; scroll-snap-stop voorkomt dat je hoofdstukken overslaat */
+html.film-snap{scroll-snap-type:y mandatory;scroll-padding-top:var(--menu-h,110px)}
+.film-punt{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;scroll-snap-stop:always;pointer-events:none}
+.film{height:760vh}
+@media (max-aspect-ratio:1/1){.film{height:700vh}}
+html.film-snap #video{scroll-snap-align:start}
+html.film-snap{scroll-snap-type:none}
