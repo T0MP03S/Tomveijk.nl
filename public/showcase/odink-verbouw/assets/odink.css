@@ -513,3 +513,62 @@ body.in-film .belbalk{transform:translateY(90px);opacity:0;pointer-events:none}
 /* even wachten tot de frames van het volgende stuk binnen zijn */
 .film.laadt .film-stappen{animation:laadpuls .9s ease-in-out infinite alternate}
 @keyframes laadpuls{to{opacity:.35}}
+
+/* ---------------------------------------------------------------- vrij scrollen: voortgang, hoofdstukbalk en hint */
+.film-stappen{gap:6px}
+.film-stappen li{flex:1;height:auto;background:none;border-radius:0}
+.film-stappen button{display:block;width:100%;height:18px;position:relative;cursor:pointer}
+.film-stappen button::before{content:"";position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;
+  background:linear-gradient(90deg,var(--blauw) calc(var(--v,0)*100%),rgba(35,31,32,.15) 0)}
+.film.nacht .film-stappen button::before{background:linear-gradient(90deg,var(--blauw-l) calc(var(--v,0)*100%),rgba(255,255,255,.22) 0)}
+.film-stappen li,.film.nacht .film-stappen li,.film-stappen li.klaar{background:none}
+
+.film-rail{position:absolute;z-index:3;right:calc(var(--zij) - var(--rand) - 12px);top:50%;transform:translateY(-50%)}
+.film-rail ol{list-style:none;display:flex;flex-direction:column;gap:2px;padding:10px;border-radius:24px;
+  background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(35,31,32,.08)}
+.film-rail button{display:flex;align-items:center;justify-content:flex-end;gap:12px;width:100%;padding:7px 10px;border-radius:14px;color:var(--grijs);font-size:14px;font-weight:600;transition:background .2s ease,color .2s ease}
+.film-rail .rail-nr{order:2;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;font-size:12px;font-variant-numeric:tabular-nums;background:rgba(35,31,32,.07);transition:background .25s ease,color .25s ease}
+.film-rail .rail-naam{order:1;white-space:nowrap;max-width:0;overflow:hidden;opacity:0;transition:max-width .35s ease,opacity .25s ease}
+.film-rail:hover .rail-naam,.film-rail button[aria-current] .rail-naam{max-width:180px;opacity:1}
+.film-rail button:hover{background:rgba(35,31,32,.06);color:var(--antr)}
+.film-rail button[aria-current]{color:var(--antr)}
+.film-rail button[aria-current] .rail-nr{background:var(--blauw);color:var(--wit)}
+.film.nacht .film-rail ol{background:rgba(20,28,45,.55)}
+.film.nacht .film-rail button{color:#AEB8CA}
+.film.nacht .film-rail button[aria-current],.film.nacht .film-rail button:hover{color:var(--wit);background:rgba(255,255,255,.06)}
+.film.nacht .film-rail .rail-nr{background:rgba(255,255,255,.1)}
+.film.nacht .film-rail button[aria-current] .rail-nr{background:var(--blauw-l);color:var(--antr)}
+
+.film-hint{position:absolute;z-index:3;left:50%;bottom:84px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;
+  padding:10px 12px 10px 20px;border-radius:999px;background:var(--antr);color:var(--wit);font-size:14px;font-weight:600;white-space:nowrap;
+  box-shadow:0 12px 30px rgba(35,31,32,.25);transition:opacity .4s ease,transform .4s ease}
+.film-hint i{position:relative;width:22px;height:32px;border:2px solid rgba(255,255,255,.7);border-radius:12px}
+.film-hint i::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--wit);animation:hintwiel 1.6s ease-in-out infinite}
+@keyframes hintwiel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:0}}
+.film-hint.weg{opacity:0;transform:translate(-50%,12px);pointer-events:none}
+
+@media (max-width:1080px),(max-aspect-ratio:1/1){.film-rail{display:none}}
+@media (max-aspect-ratio:1/1){
+  .film-stappen{width:62%}
+  .film-hint{bottom:68px;font-size:13px;padding:8px 10px 8px 16px}
+  .film-hint i{width:18px;height:26px}
+}
+@media (prefers-reduced-motion:reduce){.film-hint i::after{animation:none}}
+@media (hover:none){
+  .film-hint i{border:0;width:16px;height:20px}
+  .film-hint i::after{top:0;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:0;background:none;border-right:2.5px solid var(--wit);border-bottom:2.5px solid var(--wit);transform:rotate(45deg);animation:hintpijl 1.4s ease-in-out infinite}
+  @keyframes hintpijl{0%,100%{transform:translateY(0) rotate(45deg)}50%{transform:translateY(6px) rotate(45deg)}}
+}
+/* hoofdstukbalk met bolletjes in plaats van nummers */
+.film-rail ol{padding:8px;gap:0;background:rgba(255,255,255,.5)}
+.film-rail button{padding:6px 8px;gap:10px;font-size:13px}
+.film-rail .rail-nr{width:22px;height:22px;background:none;position:relative}
+.film-rail .rail-nr::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:rgba(35,31,32,.28);transition:transform .25s ease,background .25s ease}
+.film-rail button[aria-current] .rail-nr{background:none}
+.film-rail button[aria-current] .rail-nr::after{background:var(--blauw);transform:scale(1.5);box-shadow:0 0 0 4px rgba(0,83,160,.15)}
+.film.nacht .film-rail .rail-nr,.film.nacht .film-rail button[aria-current] .rail-nr{background:none}
+.film.nacht .film-rail .rail-nr::after{background:rgba(255,255,255,.35)}
+.film.nacht .film-rail button[aria-current] .rail-nr::after{background:var(--blauw-l);box-shadow:0 0 0 4px rgba(90,163,236,.2)}
+.film-rail ol,.film.nacht .film-rail ol{background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.film-rail button[aria-current],.film-rail button:hover{background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.film.nacht .film-rail button[aria-current],.film.nacht .film-rail button:hover{background:rgba(20,28,45,.6)}
