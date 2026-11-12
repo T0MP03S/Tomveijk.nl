@@ -350,7 +350,6 @@ section{scroll-margin-top:24px}
 
 /* ---------------------------------------------------------------- scrollfilm: van tekening tot huis
    Het blok is ruim zes schermen hoog; de binnenkant blijft staan (sticky) en de film loopt mee met het scrollen. */
-body:has(.film) .menu{border-radius:32px;padding-bottom:28px}
 .film{position:relative;height:620vh;margin:16px var(--rand) 0;border-radius:32px;background:#E9E6E1;transition:background .6s ease}
 .film.nacht{background:#26324A}
 .film-plak{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;border-radius:32px}
@@ -392,7 +391,6 @@ body:has(.film) .menu{border-radius:32px;padding-bottom:28px}
 }
 @media (max-width:720px){
   .film,.film-plak{border-radius:26px}
-  body:has(.film) .menu{border-radius:26px;padding-bottom:20px}
   .film-voet{bottom:96px}
 }
 
@@ -411,16 +409,6 @@ body:has(.film) .menu{border-radius:32px;padding-bottom:28px}
 .lopend .klein-kop{margin-top:36px}
 .werk-tekst{color:var(--grijs);margin-top:10px;max-width:460px}
 .contact + .sectie[class*="k-"]{margin-top:16px}
-
-/* storyboard: het menu blijft tijdens de film bovenaan staan, vast aan het filmscherm */
-body:has(.film) .menu{position:sticky;top:0;z-index:20;margin-top:0;border-radius:0 0 32px 32px;padding-bottom:22px;transition:border-radius .3s ease}
-body:has(.film).in-film .menu{border-radius:0}
-body:has(.film) .film{margin-top:0;border-radius:0 0 32px 32px}
-.film-plak{top:var(--menu-h,110px);height:calc(100vh - var(--menu-h,110px));height:calc(100svh - var(--menu-h,110px));border-radius:0 0 32px 32px}
-@media (max-width:720px){
-  body:has(.film) .menu{border-radius:0 0 26px 26px}
-  .film-plak,body:has(.film) .film{border-radius:0 0 26px 26px}
-}
 
 /* zachte waas achter de tekst, zodat die altijd leesbaar is boven het gras en de bus */
 .film-tekst{z-index:2}
@@ -442,3 +430,82 @@ html.film-snap{scroll-snap-type:y mandatory;scroll-padding-top:var(--menu-h,110p
 @media (max-aspect-ratio:1/1){.film{height:700vh}}
 html.film-snap #video{scroll-snap-align:start}
 html.film-snap{scroll-snap-type:none}
+
+/* ---------------------------------------------------------------- menu als zwevende pil
+   Het menu zweeft los boven de pagina en blijft bovenaan staan. De film loopt er volledig onder door,
+   zonder randen aan de zijkant. */
+:root{--pil:72px;--pil-m:12px}
+.concept .tel-only{display:none}
+.menu{position:sticky;top:var(--pil-m);z-index:20;height:var(--pil);width:calc(100% - 2*var(--pil-m));max-width:1360px;
+  margin:var(--pil-m) auto calc(-1*(var(--pil) + var(--pil-m)));padding:0 10px 0 26px;gap:28px;border-radius:999px;
+  background:rgba(35,31,32,.95);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
+  box-shadow:0 12px 32px rgba(20,17,18,.16),inset 0 0 0 1px rgba(255,255,255,.06)}
+.menu .logo img{height:40px;width:auto;margin:0}
+.menu nav{gap:6px;font-size:15px}
+.menu nav a{padding:10px 16px;border-radius:999px;transition:background .2s ease}
+.menu nav a::after{display:none}
+.menu nav a:hover{background:rgba(255,255,255,.08)}
+.menu nav a[aria-current]{background:rgba(255,255,255,.12)}
+.menu .tel{height:52px;padding:0 24px;font-size:15px}
+.menuknop[aria-expanded="true"]{top:calc(var(--pil-m) + 11px);right:calc(var(--pil-m) + 10px)}
+
+/* de eerste kaart van elke pagina begint onder de pil */
+.paginakop{margin-top:var(--rand);border-radius:32px;padding-top:calc(var(--pil) + 80px)}
+.dienstkop{padding-top:calc(var(--pil) + 64px)}
+body:not(:has(.film)) .menu{margin-top:calc(var(--rand) + 12px);margin-bottom:calc(-1*(var(--pil) + var(--rand) + 12px))}
+
+/* film: volle breedte, het menu zweeft erboven */
+body:has(.film) .menu{background:rgba(35,31,32,.93)}
+.film,body:has(.film) .film{margin:0;border-radius:0 0 32px 32px}
+.film-plak{top:0;height:100vh;height:100svh;border-radius:0 0 32px 32px}
+body.in-film .belbalk{transform:translateY(90px);opacity:0;pointer-events:none}
+
+/* beloftes: eigen iconen */
+.beloftes .icoon{display:grid;place-items:center;width:58px;height:58px;border-radius:18px;background:var(--blauw);color:var(--wit)}
+.beloftes .icoon svg{width:28px;height:28px}
+.beloftes li{transition:background .25s ease}
+.beloftes li:hover{background:var(--antr-3)}
+
+/* recent werk: een band die rustig vanzelf doorloopt, stil bij aanwijzen */
+.strook{display:block;overflow:hidden;padding:56px 0 8px;scroll-snap-type:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.sectie .strook{padding-left:0;padding-right:0}
+.strook-band{display:flex;gap:16px;width:max-content;animation:band 60s linear infinite}
+.strook-band .tegel{margin-right:0}
+.strook:hover .strook-band,.strook:focus-within .strook-band{animation-play-state:paused}
+@keyframes band{to{transform:translateX(calc(-50% - 8px))}}
+@media (prefers-reduced-motion:reduce){.strook{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.strook-band{animation:none}.strook-band [data-kopie]{display:none}}
+
+/* telefoon */
+@media (max-width:720px){
+  :root{--pil:58px;--pil-m:8px;--rand:0px}
+  .concept{font-size:12px;padding:7px 12px}
+  .concept .niet-tel{display:none}
+  .concept .tel-only{display:inline}
+  .menu{padding:0 8px 0 18px}
+  .menu .logo img{height:30px}
+  .menuknop{width:42px;height:42px}
+  .menuknop i{width:18px}
+  .menuknop[aria-expanded="true"]{top:calc(var(--pil-m) + 8px);right:calc(var(--pil-m) + 8px)}
+  .sectie[class*="k-"],.donker,.contact{margin-top:8px}
+  .vlak,.sectie[class*="k-"],.voet{border-radius:26px}
+  .paginakop{border-radius:0 0 26px 26px;margin-top:0;padding-top:calc(var(--pil) + 52px)}
+  body:not(:has(.film)) .menu{margin-top:var(--pil-m);margin-bottom:calc(-1*(var(--pil) + var(--pil-m)))}
+  .film,body:has(.film) .film,.film-plak{border-radius:0 0 26px 26px}
+  .hfst-sub .niet-tel{display:none}
+  .film-voet{bottom:22px}
+  .beloftes .icoon{width:46px;height:46px;border-radius:14px;grid-row:span 2}
+  .beloftes .icoon svg{width:24px;height:24px}
+  .strook{padding-top:28px}
+  .strook-band{gap:10px;animation-duration:45s}
+  @keyframes band{to{transform:translateX(calc(-50% - 5px))}}
+}
+@media (max-aspect-ratio:1/1){
+  .film-tekst{top:calc(var(--pil) + 2*var(--pil-m) + 14px)}
+  .hfst h1{font-size:42px}
+  .hfst h2{font-size:34px}
+  .hfst-sub{font-size:15px;margin-top:12px}
+  .hfst .knoppen{margin-top:18px}
+  .hfst .knop{height:52px;font-size:15px}
+  .hfst .knop .pijl{width:40px;height:40px}
+}

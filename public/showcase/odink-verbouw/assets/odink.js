@@ -50,8 +50,8 @@
     function maat() {
       var dpr = Math.min(2, window.devicePixelRatio || 1);
       doek.width = Math.round(doek.clientWidth * dpr); doek.height = Math.round(doek.clientHeight * dpr);
-      mh = menu.offsetHeight;
-      document.documentElement.style.setProperty("--menu-h", mh + "px");
+      // het menu zweeft boven de film; het filmscherm begint bovenaan (top van .film-plak)
+      mh = parseFloat(getComputedStyle(film.querySelector(".film-plak")).top) || 0;
       totaal = film.offsetHeight - (window.innerHeight - mh);
       // snappunten op de rustpunten
       var punten = film.querySelectorAll(".film-punt");
@@ -100,12 +100,16 @@
     }
     function inZone() { var r = film.getBoundingClientRect(); return r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight - 4; }
     function naar(i) {
-      var van = window.scrollY, tot = stopY(i), t0 = null, duur = rustig ? 0 : Math.min(1000, 450 + Math.abs(tot - van) * 0.5);
+      // duur volgt het aantal frames tussen de stops, zodat het stuk rustig als film afspeelt
+      var van = window.scrollY, tot = stopY(i), t0 = null, stuk = totaal / (N - 1);
+      var j = Math.max(0, Math.min(N - 1, Math.round((van - stopY(0)) / stuk)));
+      var frames = Math.abs(RUST[i] - RUST[j]) || 6;
+      var duur = rustig ? 0 : Math.max(1500, Math.min(4000, 900 + frames * 60));
       bezig = true;
       document.documentElement.style.scrollBehavior = "auto";
       function stapje(ts) {
         if (t0 === null) t0 = ts;
-        var t = duur ? Math.min(1, (ts - t0) / duur) : 1, e = t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        var t = duur ? Math.min(1, (ts - t0) / duur) : 1, e = -(Math.cos(Math.PI * t) - 1) / 2;
         window.scrollTo(0, van + (tot - van) * e);
         if (t < 1) requestAnimationFrame(stapje); else { bezig = false; slot = performance.now() + 180; document.documentElement.style.scrollBehavior = ""; }
       }
@@ -124,15 +128,23 @@
       if (Math.abs(ev.deltaY) < 4) return;
       richting(ev.deltaY > 0 ? 1 : -1, ev);
     }, { passive: false });
-    window.addEventListener("touchstart", function (ev) { veegY = ev.touches[0].clientY; }, { passive: true });
+    // vegen: een veeg is precies een stap. Zolang de vinger op het scherm ligt na de stap, vangen we
+    // alle bewegingen af, anders scrolt de telefoon zelf door (met vaart) en sla je hoofdstukken over.
+    var gevangen = false, gestapt = false;
+    window.addEventListener("touchstart", function (ev) { veegY = ev.touches[0].clientY; gevangen = false; gestapt = false; }, { passive: true });
     window.addEventListener("touchmove", function (ev) {
-      if (veegY === null || !inZone()) return;
+      if (veegY === null) return;
+      if (gevangen || bezig) { ev.preventDefault(); if (gestapt || bezig) return; }
       var d = veegY - ev.touches[0].clientY;
-      if (doel(d > 0 ? 1 : -1) < 0) return;
+      if (!gevangen) {
+        if (!inZone() || doel(d > 0 ? 1 : -1) < 0) return;
+        gevangen = true;
+      }
       ev.preventDefault();
-      if (Math.abs(d) > 30) { richting(d > 0 ? 1 : -1, null); veegY = null; }
+      if (Math.abs(d) > 24) { richting(d > 0 ? 1 : -1, null); gestapt = true; }
     }, { passive: false });
-    window.addEventListener("touchend", function () { veegY = null; }, { passive: true });
+    window.addEventListener("touchend", function () { veegY = null; gevangen = false; gestapt = false; }, { passive: true });
+    window.addEventListener("touchcancel", function () { veegY = null; gevangen = false; gestapt = false; }, { passive: true });
     window.addEventListener("keydown", function (ev) {
       var k = ev.key, dir = (k === "ArrowDown" || k === "PageDown" || (k === " " && !ev.shiftKey)) ? 1 : (k === "ArrowUp" || k === "PageUp" || (k === " " && ev.shiftKey)) ? -1 : 0;
       if (dir && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) richting(dir, ev);
@@ -249,8 +261,10 @@
       var t = ev.target.closest(".tegel");
       if (!t) return;
       var groep = t.parentElement;
-      lijst = Array.prototype.filter.call(groep.querySelectorAll(".tegel"), function (x) { return !x.classList.contains("weg"); });
-      open(lijst.indexOf(t));
+      lijst = Array.prototype.filter.call(groep.querySelectorAll(".tegel"), function (x) { return !x.classList.contains("weg") && !x.hasAttribute("data-kopie"); });
+      var i = lijst.indexOf(t);
+      if (i < 0) for (var k = 0; k < lijst.length; k++) if (lijst[k].getAttribute("data-groot") === t.getAttribute("data-groot")) i = k;
+      open(Math.max(0, i));
     });
     lb.querySelector(".lb-dicht").addEventListener("click", function () { lb.close(); });
     lb.querySelector(".lb-vorige").addEventListener("click", function () { open(idx - 1); });
