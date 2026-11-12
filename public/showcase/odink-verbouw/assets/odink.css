@@ -509,3 +509,7 @@ body.in-film .belbalk{transform:translateY(90px);opacity:0;pointer-events:none}
   .hfst .knop{height:52px;font-size:15px}
   .hfst .knop .pijl{width:40px;height:40px}
 }
+
+/* even wachten tot de frames van het volgende stuk binnen zijn */
+.film.laadt .film-stappen{animation:laadpuls .9s ease-in-out infinite alternate}
+@keyframes laadpuls{to{opacity:.35}}

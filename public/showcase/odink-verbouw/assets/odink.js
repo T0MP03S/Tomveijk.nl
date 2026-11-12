@@ -8,7 +8,7 @@
   if (film) {
     var AANTAL = 170, PAD = film.getAttribute("data-pad");
     var RUST = [1, 16, 37, 72, 86, 135, 145, 170];      // frame per hoofdstuk; hoofdstuk 0 is de bouwtekening
-    var N = RUST.length, HOUD = 0.32;                    // deel van elk stuk waarin het beeld stilstaat
+    var N = RUST.length, HOUD = 0.1;                     // deel van elk stuk waarin het beeld stilstaat
     var doek = film.querySelector(".film-doek"), ctx = doek.getContext("2d");
     var tek = film.querySelector(".film-tekening"), hfst = film.querySelectorAll(".hfst"), stap = film.querySelectorAll(".film-stappen li");
     var menu = document.querySelector(".menu");
@@ -28,20 +28,35 @@
       if (i >= N - 1) return RUST[N - 1];
       return RUST[i] + (RUST[i + 1] - RUST[i]) * f;
     }
+    // laadrij: eerst de rustpunten, dan elk vijfde frame, dan de rest. voorrang() zet een stuk film vooraan.
+    var rij = [], gevraagd = {};
     function laad() {
-      frames = [];
-      var volgorde = RUST.slice(), i;
-      for (i = 5; i < AANTAL; i += 5) if (volgorde.indexOf(i) < 0) volgorde.push(i);
-      for (i = 2; i < AANTAL; i++) if (volgorde.indexOf(i) < 0) volgorde.push(i);
-      var mijnSet = set, pos = 0;
+      frames = []; gevraagd = {};
+      var i; rij = RUST.slice();
+      for (i = 5; i < AANTAL; i += 5) if (rij.indexOf(i) < 0) rij.push(i);
+      for (i = 2; i < AANTAL; i++) if (rij.indexOf(i) < 0) rij.push(i);
+      var mijnSet = set;
       function volgende() {
-        if (mijnSet !== set || pos >= volgorde.length) return;
-        var nr = volgorde[pos++], im = new Image();
+        if (mijnSet !== set) return;
+        var nr; do { nr = rij.shift(); } while (nr !== undefined && gevraagd[nr]);
+        if (nr === undefined) return;
+        gevraagd[nr] = true;
+        var im = new Image();
         im.decoding = "async";
-        im.onload = im.onerror = function () { if (mijnSet === set) { frames[nr] = im.naturalWidth ? im : null; teken(); } volgende(); };
+        im.onload = im.onerror = function () { if (mijnSet === set) { frames[nr] = im.naturalWidth ? im : false; teken(); } volgende(); };
         im.src = PAD + set + "/f" + String(nr).padStart(3, "0") + "." + ext;
       }
       for (var k = 0; k < 6; k++) volgende();
+    }
+    function voorrang(a, b) {
+      var lo = Math.min(a, b), hi = Math.max(a, b), voor = [];
+      for (var f = lo; f <= hi; f++) if (!gevraagd[f]) voor.push(f);
+      rij = voor.concat(rij);
+    }
+    function geladen(a, b) {
+      var lo = Math.min(a, b), hi = Math.max(a, b), n = 0;
+      for (var f = lo; f <= hi; f++) if (frames[f] !== undefined) n++;
+      return n / (hi - lo + 1);
     }
     function kiesSet() {
       var s = window.innerWidth / window.innerHeight < 1 ? "tel" : "breed";
@@ -70,7 +85,7 @@
       ctx.clearRect(0, 0, cw, ch); ctx.drawImage(im, x, y, w, h);
     }
     function werk() {
-      p += (doelP - p) * (rustig ? 1 : 0.2);
+      p += (doelP - p) * 0.3;
       if (Math.abs(doelP - p) < 0.0004) p = doelP;
       var st = stand(p);
       tek.style.opacity = String(1 - glad(st / 0.6));
@@ -83,6 +98,7 @@
     }
     function scrol() {
       var r = film.getBoundingClientRect();
+      if (bezig) return;
       // snappen alleen zolang je in de film bent; daarna scrolt de pagina vrij
       var binnen = r.bottom >= window.innerHeight - 2;
       document.body.classList.toggle("in-film", r.bottom > window.innerHeight * 0.98);
@@ -104,16 +120,27 @@
       var van = window.scrollY, tot = stopY(i), t0 = null, stuk = totaal / (N - 1);
       var j = Math.max(0, Math.min(N - 1, Math.round((van - stopY(0)) / stuk)));
       var frames = Math.abs(RUST[i] - RUST[j]) || 6;
-      var duur = rustig ? 0 : Math.max(1500, Math.min(4000, 900 + frames * 60));
+      var duur = Math.max(1500, Math.min(4000, 900 + frames * 60));
       bezig = true;
       document.documentElement.style.scrollBehavior = "auto";
+      // eerst de frames van dit stuk binnenhalen, anders springt het beeld van stop naar stop
+      voorrang(RUST[j], RUST[i]);
+      var wachtTot = performance.now() + 2500;
+      film.classList.add("laadt");
+      (function klaarOmTeSpelen() {
+        if (geladen(RUST[j], RUST[i]) >= 0.9 || performance.now() > wachtTot) { film.classList.remove("laadt"); requestAnimationFrame(stapje); }
+        else setTimeout(klaarOmTeSpelen, 60);
+      })();
       function stapje(ts) {
         if (t0 === null) t0 = ts;
         var t = duur ? Math.min(1, (ts - t0) / duur) : 1, e = -(Math.cos(Math.PI * t) - 1) / 2;
-        window.scrollTo(0, van + (tot - van) * e);
-        if (t < 1) requestAnimationFrame(stapje); else { bezig = false; slot = performance.now() + 180; document.documentElement.style.scrollBehavior = ""; }
+        var y = van + (tot - van) * e;
+        window.scrollTo(0, y);
+        // de film volgt de tijd, niet de scrollpositie: zo speelt hij ook af als de browser het scrollen even inhoudt
+        doelP = p = Math.max(0, Math.min(1, (y - stopY(0)) / totaal));
+        if (!loopt) { loopt = true; requestAnimationFrame(werk); }
+        if (t < 1) requestAnimationFrame(stapje); else { bezig = false; slot = performance.now() + 180; document.documentElement.style.scrollBehavior = ""; scrol(); }
       }
-      requestAnimationFrame(stapje);
     }
     // geeft true als de beweging is afgevangen
     function richting(dir, ev) {
