@@ -44,7 +44,7 @@
         var im = new Image();
         im.decoding = "async";
         im.onload = im.onerror = function () { if (mijnSet === set) { frames[nr] = im.naturalWidth ? im : false; teken(); } volgende(); };
-        im.src = PAD + set + "/f" + String(nr).padStart(3, "0") + "." + ext;
+        im.src = PAD + set + "/f" + String(nr).padStart(3, "0") + "." + ext + "?r=2";
       }
       for (var k = 0; k < 6; k++) volgende();
     }
